@@ -17,7 +17,7 @@ module.exports = {
       itemId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Items',
+          model: 'MenuItems',
           key: 'id',
       },
       onDelete: 'cascade'
