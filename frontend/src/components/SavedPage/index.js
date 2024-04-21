@@ -137,7 +137,13 @@ function SavedPage({ isLoaded }) {
     <div id="results">
          <div><h1 style={{ fontSize: "32px"}}>Saved Stores</h1></div>
     </div>
-    <div className="restaurants">
+    { saved.length == 0 ? <div id="no-results">
+            <img style={{ width: "200px", height: "200px" }} src="https://img.cdn4dd.com/s/managed/consumer/discovery/save_for_later/heart_empty_state.svg"></img>
+            <h1 style={{ margin: "0px 4px", fontSize: "32px"}}>You don't have any saved stores</h1>
+            <p style={{ marginBottom: "10px", gap: "15px", fontSize: "14px", display: "flex", alignItems: "center"}} ><i style={{ color: "#66a09b", fontSize: "20px", width: "20px", height: "20px"}} class="fi fi-rr-store-alt"></i>Saving stores lets you quickly access them whenever you want.</p>
+            <p style={{ marginBottom: "10px", gap: "15px", fontSize: "14px", display: "flex", alignItems: "center"}}><i style={{ color: "#66a09b", fontSize: "20px", width: "20px", height: "20px"}} class="fi fi-br-user"></i>We’ll also use the stores you save to personalize your experience</p>
+            <button style={{ marginTop: "10px"}} id="browse-again" onClick={(() => history.push('/home'))}>Browse Stores</button>
+        </div> : <div className="restaurants">
         {saved.map((f, id) =>
         <>
             <div onClick={(() => history.push(`/restaurant/${f.id}`))} className="restaurant" id={`r-${id}`}>
@@ -168,7 +174,7 @@ function SavedPage({ isLoaded }) {
             </div>
         </>
     )}
-    </div>
+    </div>}
     </div>
     </div>
     <HomeFoot />
