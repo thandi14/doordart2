@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     restaurantId: DataTypes.INTEGER,
     item: DataTypes.STRING,
     description: DataTypes.STRING,
-    price: DataTypes.NUMBER,
+    price: DataTypes.DECIMAL,
     cals: DataTypes.STRING,
     category: DataTypes.STRING,
     imgUrl: DataTypes.TEXT

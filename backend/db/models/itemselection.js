@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     optionId: DataTypes.INTEGER,
     selection: DataTypes.STRING,
     cals: DataTypes.STRING,
-    price: DataTypes.NUMBER
+    price: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'ItemSelection',

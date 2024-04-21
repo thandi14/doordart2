@@ -37,12 +37,12 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     offerId: DataTypes.INTEGER,
     dealId: DataTypes.INTEGER,
-    tip: DataTypes.NUMBER,
+    tip: DataTypes.DECIMAL,
     fees: DataTypes.STRING,
     gift: DataTypes.BOOLEAN,
     pickup: DataTypes.BOOLEAN,
     group: DataTypes.BOOLEAN,
-    price: DataTypes.NUMBER,
+    price: DataTypes.DECIMAL,
     status: DataTypes.STRING,
     sessionId: DataTypes.STRING
   }, {

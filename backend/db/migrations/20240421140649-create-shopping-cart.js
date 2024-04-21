@@ -48,7 +48,7 @@ module.exports = {
       onDelete: 'cascade'
       },
       tip: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       fees: {
         type: Sequelize.INTEGER
@@ -63,7 +63,7 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       price: {
-        type: Sequelize.NUMBER
+        type: Sequelize.DECIMAL
       },
       status: {
         type: Sequelize.STRING,
