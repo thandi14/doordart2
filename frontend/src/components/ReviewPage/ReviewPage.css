@@ -1,0 +1,83 @@
+
+
+
+.review-page {
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    padding: 0px 16px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 14%;
+    flex-direction: column;
+}
+
+#review-head {
+    display: flex;
+    gap: 8%;
+    padding-top: 16px;
+    flex-direction: column;
+}
+
+#rev-page {
+    gap: 8%;
+    display: flex;
+    /* justify-content: center; */
+    padding: 0px 4%;
+    width: 110vh;
+    padding-bottom: 4%;
+}
+
+#ro-one {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#ro-one > i {
+    display: flex;
+    width: 24px;
+    border-radius: 100%;
+    height: 24px;
+    justify-content: center;
+    color: rgb(231, 231, 231);
+    align-items: center;
+    background: black;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#ro-rating, #review-what, #ro-name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#review-what {
+    margin: 0px
+}
+
+#reviewed-one {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#reviewing-four {
+    border: 1px solid rgb(231, 231, 231);
+    padding: 16px;
+    width: 622px;
+    background-color: white;
+    /* padding: 0px 16px; */
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    gap: 10px;
+}
+
+#reviewed-two {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    /* margin-top: 110px; */
+}

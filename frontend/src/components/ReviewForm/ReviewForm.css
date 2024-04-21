@@ -1,0 +1,250 @@
+#review-form {
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+    position: relative;
+    background: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+    min-height: 0px;
+    max-height: calc(-32px + 100vh);
+    max-width: 560px;
+    width: calc(-32px + 100vw);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 4px;
+    line-height: 22px;
+}
+
+#reviewed-form {
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    position: relative;
+    background: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+    min-height: 0px;
+    max-height: calc(-32px + 100vh);
+    max-width: 560px;
+    width: calc(-32px + 100vw);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 20px;
+    line-height: 22px;
+}
+
+.reviewing {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#close-review > i {
+    width: 25px;
+    display: flex;
+    height: 25px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#close-reviewed > i {
+    width: 25px;
+    display: flex;
+    height: 25px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+#your-r {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+#your-r > p {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+}
+
+#re > textarea {
+    display: flex;
+    width: 100%;
+    /* position: absolute; */
+    margin: 0px;
+    /* top: 0px;
+    left: 0px; */
+    box-sizing: border-box;
+    background-color: transparent;
+    font-size: 16px;
+    bottom: 0px;
+    height: 100%;
+    overflow: hidden;
+    padding: 12px 0px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+
+}
+
+#re {
+    min-height: 112px;
+    display: flex;
+}
+
+#your-r > span {
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    gap: 6px;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 14px;
+    align-items: center;
+}
+
+#reviewing {
+    background-color: #f7f7f7ff;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    gap: 7px;
+}
+
+#reviewing-three {
+    background-color: white;
+    padding: 0px 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    gap: 20px;
+}
+
+#close-reviewed {
+    padding: 16px;
+    padding-bottom: 0px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#rating-three > p {
+    margin: 0px;
+    font-size: 14px;
+    color: #767676;
+}
+
+#rating-three {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+#reviewing-two {
+    background-color: white;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    gap: 2px;
+    box-shadow: rgb(0, 0, 0, 0.2) 0px 1px 4px;
+}
+
+#rating-two > i {
+    display: flex;
+}
+
+#guidelines {
+    padding: 0px 16px;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+#rating-two > p {
+    margin: 0px;
+    font-size: 12px;
+
+}
+
+
+#rating-two {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+#rating {
+    display: flex;
+    gap: 4px;
+    margin: 8px 0px;
+}
+
+#rating > i {
+    cursor: pointer;
+}
+
+#review-butt {
+    border-top: 1px solid rgb(231, 231, 231);
+    padding: 16px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#reviewed-butt {
+    border-top: 1px solid rgb(231, 231, 231);
+    padding: 16px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+
+#rating > i {
+    color: rgb(220, 219, 219)
+}
+
+#review-butt > button {
+    background-color: red;
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#reviewed-butt > button, #helpful {
+    background-color: #e7e7e7ff;
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: black;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#close-review {
+    padding: 16px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}

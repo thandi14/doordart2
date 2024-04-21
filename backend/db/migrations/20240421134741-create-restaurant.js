@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       deliveryFee: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       deliveryTime: {
         type: Sequelize.INTEGER

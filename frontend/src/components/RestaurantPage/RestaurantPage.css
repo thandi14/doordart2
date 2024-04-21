@@ -1,0 +1,1220 @@
+.navi-two {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+#my-address-two {
+    background-color: rgb(231, 231, 231);
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#restaurant-p {
+    position: relative;
+    /* width: fit-content; */
+}
+
+#cart {
+    background: red;
+    padding: 0px 2.5%;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    cursor: pointer;
+    position: relative;
+    color: white;
+    gap: 10px;
+}
+
+#rp-three {
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+    padding: 0% 6%;
+}
+
+#my-address-two > i {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+#rp-h-one {
+    width: 100%;
+    display: flex;
+}
+
+.rp-h {
+    flex-direction: column;
+}
+
+#mark-two {
+    background-color: black;
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    margin: 0px;
+    bottom: -1px;
+    border-radius: 8px;
+}
+
+#scroll-to > p {
+    cursor: pointer;
+}
+
+#cart-three {
+    background: rgb(231, 231, 231);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    margin: 0px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* #cart-two {
+    background: #f7f7f7;
+    width: 40px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+} */
+
+#rp-head {
+    display: flex;
+    position: sticky;
+    width: 100%;
+    height: 100%;
+    top: 64px;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    background-color: white;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0% 6%;
+    padding-top: 16px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+
+}
+
+
+#rp-head-two {
+    display: flex;
+    position: sticky;
+    width: 100%;
+    height: 100%;
+    top: 64px;
+    z-index: 3;
+    left: 0;
+    align-items: center;
+    right: 0;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 16px 6%;
+    border-bottom: 1px solid rgb(231, 231, 231);
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+
+}
+
+
+#c-menu {
+    display: flex;
+    flex-direction: column;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#cart-c {
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+#cart-pic {
+    display: flex;
+    width: 100%;
+}
+
+#c-menu > div > button {
+    background-color: #f7f7f7;
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#cart-m {
+    display: flex;
+    flex-direction: column;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    gap: 16px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#cart-menu {
+    background-color: white;
+    position: absolute;
+    max-height: 80vh;
+    overflow: hidden;
+    z-index: 12;
+    width: 250px;
+    top: 35px;
+    box-shadow: rgb(0, 0, 0, 0.2) 0px 8px 24px;
+    border-radius: 8px;
+}
+
+/* ksgkjbn */
+
+#more {
+    background-color: transparent;
+    height: 32px;
+    border-radius: 24px;
+    border: 1px solid rgb(231, 231, 231);
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+}
+
+#line-five{
+    background-color: rgb(231, 231, 231);
+    height: 1px;
+    width: 100%;
+    margin: 20px 0px;
+}
+
+#pages {
+    padding: 20px 0px;
+    font-size: 12px;
+    color: rgb(96, 96, 96);
+}
+
+#pages > span:not(:last-child) {
+    text-decoration: underline;
+}
+
+#io > p {
+    margin: 0px;
+}
+
+#io {
+    height: 14px
+
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-auto-rows: auto; /* Automatic row height */
+    grid-gap: 10px;
+}
+
+#more-reviews-two {
+    height: 32px;
+    border-radius: 24px;
+    display: flex;
+    border: 0;
+    gap: 5px;
+    font-size: 14px;
+    background-color: rgb(231, 231, 231);
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    align-items: center;
+    padding: 0px 12px;
+    white-space: nowrap;
+}
+
+#grid > div {
+    margin-bottom: 10px;
+}
+
+#more-ratings {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#other-rev {
+    width: 100%;
+    display: flex;
+    /* gap: 20px; */
+}
+
+#other-rev > div:not(#more-ratings) {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    width: 40%
+}
+
+#more-ratings > div {
+    max-width: 100%;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+#a-bar {
+    width: 100%;
+    border-radius: 16px;
+    height: 8px;
+    background-color: rgb(231, 231, 231);
+}
+
+#reviewing-five {
+    width: 622px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#reviewing-five:hover {
+    background-color: rgb(247, 247, 247);
+    cursor: pointer;
+}
+
+#r4 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#r4 > div {
+    padding: 16px;
+
+}
+
+#more-ratings {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* align-items: center; */
+    padding: 16px;
+}
+
+.group-two > span {
+    padding: 20px;
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+#line-thirteen {
+    background-color: rgb(231, 231, 231);
+    width: 1px;
+    height: 100%;
+    /* margin: 20px 0px; */
+}
+
+.rp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    position: sticky;
+    padding: 0% 6%;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+
+.rp > div {
+    width: 100%;
+}
+
+#rp-ban {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+}
+
+#rp-ban > img {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px;
+}
+
+#rp-save > button {
+    background-color: #ffffff;
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#rp-save > button > i {
+    height: 16px;
+    width: 16px;
+    font-size: 16px;
+    color: rgb(25, 25, 25);
+    display: flex;
+    align-items: center;
+}
+
+#rp-save {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 16px;
+}
+
+#rp-one {
+    border-radius: 0px 0px 16px 16px;
+    overflow: hidden;
+    width: 100%;
+    height: 210px;
+    display: flex;
+}
+
+#rp-two {
+    width: 100%;
+    box-sizing: border-box;
+    flex-grow: 0;
+    display: flex;
+    gap: 2%
+}
+
+
+#r-info {
+    width: 20%;
+    /* padding-right: 4%; */
+}
+
+#info-one {
+    width: 100%;
+}
+
+#info-one > p {
+    font-size: 12;
+    color: #767676;
+    white-space: nowrap;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+#info-two > span > p {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 2px 0px;
+    height: 34px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#hidden {
+    display: none
+}
+
+#mark {
+    background-color: black;
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    margin: 0px;
+    padding-right: 16px;
+    border-radius: 8px;
+    left: -14px;
+}
+
+#info-two {
+    width: 100%;
+    width: 100%;
+    position: sticky;
+    top: 160px;
+}
+
+#info-two > h1 {
+    display: flex;
+    align-items: center;
+    gap: 5px
+}
+
+#info-two > h1 > i {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+}
+
+/* #info-two > span > p {
+    height: 12px;
+} */
+
+#info-two > span {
+    display: flex;
+    flex-direction: column;
+}
+
+#item-search {
+    border-radius: 20px;
+    padding: 0px 20px;
+    background-color: rgb(247, 247, 247);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 35%;
+    height: 35px;
+    gap: 10px;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#item-search > input {
+    background-color: transparent;
+    border: 0px;
+    font-size: 16px;
+}
+
+#item-search > i {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    padding: 0px 2px;
+}
+
+#r-items {
+    width: 80%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#group > button {
+    background-color: rgb(231, 231, 231);
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#group > button:hover, #my-address-two:hover, #cart-three:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+#review-three {
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+#rp-save > button:hover {
+    background-color: rgb(247, 247, 247);
+    color: rgb(73, 73, 73)
+}
+
+/* #review-three > div {
+} */
+
+
+#group-butt {
+    background-color: rgb(231, 231, 231);
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#group {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 12px;
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#line-four {
+    background-color: rgb(231, 231, 231);
+    width: 1px;
+    height: 50px;
+}
+
+#group > div {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 35%;
+}
+
+#other-c {
+    border-radius: 8px;
+    border: 1px solid rgb(231, 231, 231);
+    padding: 16px;
+    background-color: rgb(255, 255, 255);
+}
+
+#other-carts {
+    background-color: rgb(247, 247, 247);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-top: 1px solid rgb(231, 231, 231);
+    padding: 12px 16px;
+}
+
+
+#each-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    gap: 2px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    color: rgb(118, 118, 118);
+}
+
+#rp-st {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    flex: 1 1;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 94%;
+    /* width: 110vh; */
+}
+
+.profile > span:hover {
+    background-color: rgb(231, 231, 231);
+}
+
+#cart-form {
+    padding: 26px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#r-ic {
+    border: 1px solid rgb(231, 231, 231);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px;
+}
+
+#other-carts > h1 {
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+
+#other-butts > button {
+    background-color: rgb(231, 231, 231);
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    justify-content: center;
+    width: 100%;
+    font-size: 14px;
+    margin: 8px 0px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#cart-two {
+    background: red;
+    width: 90px;
+    height: 30px;
+    gap: 10px;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    cursor: pointer;
+    position: relative;
+}
+
+#group > div > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow: hidden;
+}
+
+#review-one {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#review-one > div {
+    width: 50%;
+    display: flex;
+}
+
+#review-one > div:first-child {
+    flex-direction: column;
+    gap: 5px
+}
+
+#add-r > button {
+    background-color: rgb(231, 231, 231);
+    height: 32px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#add-r {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#review-two {
+    display: flex;
+    gap: 8px
+}
+
+#review-two > div {
+    background-color: #f7f7f7;
+    padding: 12px;
+    border-radius: 8px;
+    height: 151px;
+    flex-direction: column;
+    display: flex;
+    gap: 8px;
+
+}
+
+#profile-pic {
+    width: 38px;
+    height: 38px;
+    border-radius: 100%;
+    background-color: rgb(189, 136, 0);
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+#pp {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#comment {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    min-width: 308px;
+    font-size: 14px;
+    margin: 0px
+}
+
+#gotobutt-two {
+    display: flex;
+    width: 30px;
+    border-radius: 100%;
+    height: 30px;
+    justify-content: center;
+    color: rgb(231, 231, 231);
+    align-items: center;
+    background: black;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+#gotobutt-two:hover {
+    color: rgb(196, 196, 196)
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#progress {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    font-size: 150px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    transform: rotate(90deg);
+    color: #f7f7f7;
+    background: linear-gradient(to top, gold 50%, white 50%)
+}
+
+#more-reviews {
+    white-space: nowrap;
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+#p-info {
+    position: absolute;
+    text-align: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    top: 22%;
+}
+
+#progress-two {
+    height: 50px;
+    z-index: 2;
+    display: flex;
+    position: absolute;
+    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 50px;
+    padding: 12px;
+    margin: 0px;
+    color: gold;
+    transform: rotate(90deg);
+}
+
+#rt {
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    flex-direction: column;
+    display: flex;
+    gap: 8px;
+}
+
+#bar {
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    height: 151px;
+    flex-direction: column;
+    display: flex;
+    gap: 8px;
+}
+
+#add-r > span {
+    display: flex;
+    gap: 10px;
+    margin: 0% 1%
+}
+
+#menu-item {
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 12px;
+    height: 156px;
+    display: flex;
+    align-items: center;
+    width: calc(50% - 10px);
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+#menu-item-two {
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 12px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    /* height: 100%; */
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    width: fit-content;
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+
+#item {
+    padding-left: 16px;
+    flex: 1 1;
+    height: 100%;
+    box-sizing: border-box;
+    gap: 6px;
+    justify-content: center;
+    display: flex;
+    width: 156px;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+#i {
+    width: 30%;
+    height: 100%
+}
+
+#item > span {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    gap: 3px
+}
+
+#i-info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#item > span > p {
+    margin: 0px;
+}
+
+#i-info > p {
+    margin: 0px;
+}
+
+
+#i > img {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+#i {
+    position: relative;
+    min-width: 156px;
+    max-width: 156px;
+    flex: 2 1 0%;
+}
+
+.item {
+    flex-wrap: wrap;
+    display: flex;
+    gap: 15px
+}
+
+#item > h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#i > i {
+    position: absolute;
+    color: white;
+    width: 30px;
+    align-items: center;
+    font-size: 32px;
+    border-radius: 100%;
+    justify-content: center;
+    display: flex;
+    background-color: black;
+    height: 30px;
+    box-shadow: transparent 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.2) 0px 2px 8px;
+    bottom: 16px;
+    right: 16px;
+    cursor: pointer;
+}
+
+#add-r > button:hover,  #helpful:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+#i > i:hover {
+    color: rgb(247, 247, 247);
+}
+
+#print {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+    text-align: center;
+}
+
+#cart-info {
+    display: flex;
+    flex-direction: column;
+    padding-right: 16px;
+    box-sizing: border-box;
+    gap: 10px;
+    margin: 5px 0px;
+}
+
+#cart-r:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
+#top {
+   border-top: 1px solid rgb(231, 231, 231);
+}
+
+#item-t {
+    font-size: 16px;
+    margin: 0px;
+    line-height: 20px;
+    margin-bottom: 2px;
+}
+
+#r-addy {
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    gap: 5px
+}
+
+#r-addy > h1 {
+    font-size: 16px;
+
+}
+
+#print > p {
+    font-weight: 700;
+}
+
+#i-info > p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+/* jdnjbdgb */
+
+
+#foot-four {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    color: #767676;
+    font-size: 14px;
+}
+
+#foot-four > span > p:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: black;
+}
+
+#foot-four > span > h1 {
+    white-space: nowrap;
+}
+
+#foot-four > span {
+    width: calc(30% - 10px)
+}
+
+#foot-four {
+    gap: 20px;
+    width: 70%
+}
+
+#foot-four > span > p {
+    white-space: nowrap;
+}
+
+.shopping-menu {
+    position: sticky;
+    z-index: 17;
+    top: 0;
+}
+
+#shopping-menu {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+    width: 352px;
+    height: 100vh;
+    background-color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 17;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+
+#in-a-bar {
+    height: 100%;
+    background-color: gold;
+    border-radius: 8px;
+}
+
+#empty-cart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#empty-cart > img {
+    margin-top: 10px;
+    width: 90%;
+}
+
+.cart-r {
+    width: 100%;
+    display: flex;
+    padding: 16px;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+#edit-cart {
+    display: flex;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    gap: 10px;
+    font-size: 14px;
+    height: 34.5px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgb(0, 0, 0, 0.2) 0px 4px 12px;
+}
+
+#options {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#edit-cart > i {
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+    background-color: grey;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cart-co {
+    background-color: red;
+    height: 32px;
+    border-radius: 24px;
+    margin: 15px 0px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-r > div > img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}

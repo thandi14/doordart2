@@ -1,0 +1,514 @@
+body {
+    margin: 0
+}
+
+.header {
+    background-image: url("https://images.ctfassets.net/lmx885sr3per/2bDHgclAb2HmbBRNUuDscD/d8c64acd6f2c7ee6eed8577c69d8d7ee/hero_desktop.webp");
+    position: relative;
+    height: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 2%;
+    box-sizing: border-box;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+
+.header > div:first-child {
+    color: white;
+    display: flex;
+    font-size: 22px;
+    gap: 10px;
+    align-items: center;
+}
+
+#head-nav {
+    display: flex;
+    right: 0;
+    width: 50%;
+    padding: 0px 24px;
+    position: absolute;
+    justify-content: flex-end;
+}
+
+#address-input {
+    width: 408px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    color: rgb(25, 25, 25);
+    border-radius: 32px;
+    border: solid rgb(214, 214, 214) 1px;
+    padding: 6px 12px;
+    gap: 2%;
+}
+
+#address-input > span > i {
+    width: 34px;
+    height: 34px;
+    font-size: 30px;
+    right: 10px;
+    position: absolute;
+}
+
+#address-input > span {
+    width: 24px;
+    height: 24px;
+}
+
+#address-input > i {
+    width: 15px;
+    height: 20px;
+    font-size: 20px;
+    color: #767676ff
+}
+
+#location {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 500;
+    border: 0px;
+    width: 292px;
+    color: #767676ff
+}
+
+#head-cont {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 35%;
+    align-items: center;
+}
+
+#user-one {
+    display: flex;
+    gap: 8px
+}
+
+#user-one > button:first-child, #sp-butt {
+    height: 40px;
+    border-radius: 24px;
+    width: fit-content;
+    border: 0;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    background-color: rgb(235, 23, 0);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+
+}
+
+#user-one > button:last-child {
+    height: 40px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 18px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+
+}
+
+#head-cont > button {
+    height: 40px;
+    border-radius: 24px;
+    border: 0;
+    font-size: 14px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    white-space: nowrap;
+    justify-content: center;
+    margin-top: 20px;
+
+}
+
+#head-cont > button > i {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+#head-nav-two {
+    display: flex;
+    /* height: 72px; */
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 48px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+#hidden {
+    display: none;
+}
+
+#head-nav-two > div:first-child > img, .header > div > img {
+    width: 31px;
+    height: 18px;
+}
+
+#head-nav > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+}
+
+#head-nav > div > h1 {
+    margin: 0%;
+}
+
+#head-nav-two > div:first-child {
+   display: flex;
+   align-items: center;
+   gap: 10px
+}
+
+/* ?isjitgjise */
+
+.sp-one {
+    display: flex;
+    padding: 8%;
+}
+
+.sp-one > div, .sp-two > div, .sp-three > div, .sp-five > div, .sp-four > div, .sp-eight > div, .sp-nine > div {
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+
+.sp-one > div {
+    align-items: center;
+    display: flex;
+    padding: 2%;
+    width: 33.333%;
+    flex-direction: column;
+    text-align: center;
+}
+.sp-one > div > h2, .sp-one > div > p {
+    margin: 0;
+}
+
+#sp-butt-one {
+    font-weight: 700;
+    line-height: 20px;
+    color: red;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 45px;
+}
+
+#sp-butt-one > i {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: red;
+}
+
+.sp-two, .sp-three, .sp-five, .sp-eight, .sp-nine {
+    display: flex;
+    padding: 5%;
+    gap: 4.5%;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.sp-two > p, .sp-three > p, .sp-five > p, .sp-eight > p, .sp-nine > p {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 5%;
+}
+
+.sp-four {
+    height: 600px;
+}
+
+#sp-four-cont {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(30, 30, 30, 0.6);
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.sp-two > div, .sp-three > div, .sp-five > div, .sp-eight > div, .sp-nine > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px
+}
+
+.sp-two > img, .sp-three > img, .sp-five > img, .sp-eight > img, .sp-nine > img{
+    width: 695px;
+    height: 500px
+}
+
+.sp-two, .sp-five, .sp-eight {
+    margin-bottom: -105px;
+}
+
+
+.sp-four {
+    background-image: url("https://images.ctfassets.net/lmx885sr3per/6Km5Ovhq5F7UzErMdmuPUr/224daf8dbf0be62727eaed81360df59e/grocery_desktop.png");
+}
+
+.sp-six > div > div > img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+.sp-six {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: rgb(254, 241, 238);
+}
+
+.sp-six > div {
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0% 8%;
+    display: flex;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+
+.sp-six > div > div {
+    padding: 20px;
+    flex-basis: 50%;
+    width: 50%;
+    box-sizing: border-box;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.sp-seven > h1 {
+    margin-bottom: 0px;
+    margin-top: 65px;
+}
+
+.sp-nine, .sp-eleven {
+    background-color: rgb(254, 241, 238);
+}
+
+.sp-six > h1, .sp-seven > h1, .sp-ten > h1 {
+    text-align: center;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+
+.sp-ten > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-evenly;
+    font-size: 16px;
+    text-align: center;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+}
+
+.sp-ten {
+    padding: 2% 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+}
+
+#top-one {
+    margin-bottom: 0.8%;
+}
+
+#top-one > span {
+    display: flex;
+    color: #191919;
+    line-height: 22px;
+}
+
+#top-one > p {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    color: #191919;
+    line-height: 22px;
+    margin: 0;
+
+}
+
+#top-one > span > p {
+    border-bottom: 2px solid #e7e7e7ff;
+    padding: 6px 0px;
+    width: 100%;
+}
+
+#top-one > span > p:hover {
+    background-color: rgb(247, 247, 247);
+    cursor: pointer;
+}
+
+#top > span > p {
+    width: 100%;
+    color: #191919;
+    line-height: 22px;
+    padding: 8px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+#top > span > p:hover {
+    background-color: rgb(247, 247, 247);
+}
+
+
+#top {
+    width: 100%;
+    display: flex;
+}
+
+#top > span {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* srjgbjksr */
+
+.sp-foot {
+    background-color: rgb(25, 25, 25);
+    color: rgb(196, 196, 196);
+    padding: 2% 10%;
+    box-sizing: border-box;
+    font-family: TT Norms, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+    /* margin-top: 15px; */
+}
+
+#foot-one, #foot-two {
+    font-size: 14px;
+}
+
+#foot-one {
+    display: flex;
+    justify-content: space-between;
+}
+
+#foot-one > span > p:hover, #foot-two > span > p:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
+}
+
+#foot-two {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+#ft-one > p:hover:not(:last-child) {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#ft-two > i:hover {
+    color: rgb(221, 220, 220);
+    cursor: pointer;
+}
+
+.sp-foot > div > h1 {
+    font-size: 16px
+}
+
+.sp-foot > div:first-child {
+    display: flex;
+}
+
+.sp-foot > div:last-child {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.sp-foot {
+    background-color: rgb(25, 25, 25);
+    display: flex;
+    flex-direction: column;
+}
+
+#foot-three {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+    width: 100%;
+    gap: 10px;
+}
+
+#foot-three > img{
+    width: 31px;
+    height: 18px;
+}
+
+#ft-one {
+    display: flex;
+    font-size: 12px;
+    gap: 10px;
+}
+
+#ft-two {
+    display: flex;
+    font-size: 18px;
+    gap: 15px;
+    width: 18px;
+    height: 18px
+}
+
+#foot-three > button{
+    height: 40px;
+    border-radius: 24px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 5px;
+    border: 0;
+    font-size: 14px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    color: rgb(25, 25, 25);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0px 12px;
+    margin: 0px 100px;
+}
+
+#foot-three > button > i{
+   font-size: 18px;
+   height: 18px;
+   width: 18px
+}
