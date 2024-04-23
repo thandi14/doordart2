@@ -416,7 +416,7 @@ function Franchise({ isLoaded }) {
                             {restaurant.Reviews?.length}+
                             ratings
                             <i style={{ width: "8px", height: "8px", fontSize: "8px" }} class="fi fi-sr-bullet"></i>
-                            {restaurant.miles} mi
+                            {restaurant.miles ? restaurant.miles : 0} mi
                         </p>
                         <p style={{ color: "#767676", fontSize: "12px",}}>
                             $
@@ -496,7 +496,7 @@ function Franchise({ isLoaded }) {
                             </span>
                             <div id="line-four"></div>
                             <span>
-                            <h1 style={{ fontSize: "16px", whiteSpace: "nowrap", display: "flex", margin: "0px" }}>{restaurant.mins + 10} min</h1>
+                            <h1 style={{ fontSize: "16px", whiteSpace: "nowrap", display: "flex", margin: "0px" }}>{restaurant.mins ? restaurant.mins + 10 : 0} min</h1>
                             <h2 style={{ fontSize: "12px", color: "#767676", margin: "0px"}}> delivery time</h2>
                             </span>
                         </div>

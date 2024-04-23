@@ -125,7 +125,7 @@ function Restaurants({ arr, title }) {
                     <i class="fi fi-sr-star" style={{ fontSize: "12px", color: "#e4e404" }}></i>
                     ({f.Reviews?.length})
                     <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
-                    {f.miles} mi
+                    {f.miles ? f.miles : 0} mi
                     <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
                     {f.mins + 10} mins
                     </h1>

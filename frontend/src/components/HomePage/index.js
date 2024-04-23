@@ -521,7 +521,7 @@ function HomePage({ isLoaded }) {
     { saved.length > 0 && <Restaurants arr={saved} title={"Saved stores"} />}
     { ordered.length > 0 && <Restaurants arr={ordered} title={"Order it again"} />}
     </div> }
-    {category || Object.values(catTwo).length ? null : <div style={{ width: "100%", fontSize: "30px"}}><h1 style={{fontSize: "30px"}}>All Stores</h1></div>}
+    {category || Object.values(catTwo).length ? null : <div style={{ width: "100%", fontSize: "30px"}}><h1 style={{fontSize: "30px", marginBottom: "30px"}}>All Stores</h1></div>}
     <RestaurantsTwo category={catOne} filter={catTwo} restaurants={franchises} />
     { !user?.id && <HomeFoot />}
     { user?.id && <HomeFoot />}

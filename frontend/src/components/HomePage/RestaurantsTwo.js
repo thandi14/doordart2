@@ -167,9 +167,9 @@ function RestaurantsTwo({ filter, category, restaurants }) {
                     <i class="fi fi-sr-star" style={{ fontSize: "12px", color: "#e4e404" }}></i>
                     ({f.Reviews?.length})
                     <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
-                    {f.miles} mi
+                    {f.miles ? f.miles : 0} mi
                     <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
-                    {f.mins + 10} mins
+                    {f.mins ? f.mins + 10 : 0} mins
                     </h1>
                 </div>
                 <h1 style={{ fontSize: "12px", color: "#767676"}}>${f.deliveryFee} Delivery Fee</h1>

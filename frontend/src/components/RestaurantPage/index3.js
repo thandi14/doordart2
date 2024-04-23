@@ -439,7 +439,7 @@ function FranchiseTwo({ isLoaded }) {
                             </p>
                             <div id="line-thirteen"></div>
                             <p style={{ color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}} >
-                                {restaurant.miles} mi
+                                {restaurant.miles ? restaurant.miles : 0} mi
                             </p>
                             <div id="line-thirteen"></div>
                             <p style={{ color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}} >

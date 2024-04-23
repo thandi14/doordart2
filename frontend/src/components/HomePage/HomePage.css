@@ -278,6 +278,7 @@
     position: absolute;
     top: -4px;
     width: 0%;
+    cursor: pointer;
     /* left: -4px; */
 }
 
