@@ -441,6 +441,270 @@ module.exports = {
         category: "Ultimate Drink Stop",
         imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/8573225f-8613-487b-bc21-2a9eab3559a6-retina-large.png"
       },
+      {
+        restaurantId: 3,
+        item: "Traditional Wings",
+        description: "AWARD-WINNING & AUTHENTIC BUFFALO, NEW YORK-STYLE WINGS. FREE DIP AND VEGGIES WITH EVERY WINGS PURCHASE",
+        price: 12.49,
+        category: "Wings & Tenders",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/0ae15549-4f56-4f81-86ac-88106823135c-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Boneless Wings",
+        description: "JUICY ALL-WHITE CHICKEN, LIGHTLY BREADED AND PERFECTLY CRISPY. FREE DIP AND VEGGIES WITH EVERY WINGS PURCHASE",
+        price: 11.29,
+        category: "Wings & Tenders",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/7deddbfc-c14a-44d0-a7cf-fb5095ba9ce3-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Hand-Breaded Tenders",
+        description: "HAND-BREADED CHICKEN TENDERS / CHOICE OF SAUCE OR DRY SEASONING / NATURAL-CUT FRENCH FRIES",
+        price: 13.79,
+        category: "Wings & Tenders",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/2b81c90b-a153-4438-a386-586ec50cb555-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Traditional & Boneless Combo",
+        description: "6 TRADITIONAL WINGS / 6 BONELESS WINGS / NATURAL CUT FRENCH FRIES / SLAW",
+        price: 27.79,
+        category: "Wings & Tenders",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/c9ba0075-5ec6-4111-91ba-cd3c28a030d3-retina-large.jpg"
+      },
+      {
+        restaurantId: 3,
+        item: "Cauliflower Wings",
+        description: "BREADED CAULIFLOWER / HANDSPUN IN YOUR FAVORITE SAUCE OR DRY SEASONING / GREEN ONIONS FREE DIP AND VEGGIES WITH EVERY WINGS PURCHASE",
+        price: 13.79,
+        category: "Wings & Tenders",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/03566d4e-1824-431f-8e5d-bd63de5e0b43-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Naked Tenders®",
+        description: "CHICKEN TENDERS / GRILLED / CHOICE OF SAUCE OR SEASONING / NATURAL-CUT FRENCH FRIES",
+        price: 13.79,
+        category: "Wings & Tenders",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/9cf92f9b-eb9a-4e89-8c30-a7ac7fde5e85-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Fried Pickles",
+        description: "BREADED DILL PICKLES / SOUTHWESTERN RANCH",
+        price: 10.79,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/deca501f-9b59-4d72-9913-73729a842132-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Large Cheddar Cheese Curds",
+        description: "WISCONSIN WHITE CHEDDAR CHEESE CURDS / BATTERED / SOUTHWESTERN RANCH",
+        price: 12.49,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/3f2a8ad9-5eb3-4c9b-a1c3-370c038ce39d-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Regular Cheddar Cheese Curds",
+        description: "WISCONSIN WHITE CHEDDAR CHEESE CURDS / BATTERED / SOUTHWESTERN RANCH",
+        price: 7.29,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/3f2a8ad9-5eb3-4c9b-a1c3-370c038ce39d-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Mozzarella Sticks",
+        description: "MOZZARELLA / SEASONED PANKO BREADING / MARINARA",
+        price: 10.79,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/859e8b79-0360-4dc1-ba9c-7f56cb451c07-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Dirty Dubs Tots",
+        description: "TOTS / SMOKED PULLED BRISKET / GRILLED ONIONS / HATCH QUESO / SWEET BBQ / PICKLED HOT PEPPERS / GREEN ONIONS / COTIJA CHEESE",
+        price: 14.79,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/1cdd15f9-2d5a-495c-ac1d-f4102a45161f-retina-large.jpg"
+      },
+      {
+        restaurantId: 3,
+        item: "Hatch Queso",
+        description: "MELTED WHITE CHEDDAR / YOUNG GUNS HATCH CHILES / HOUSE-MADE PICO DE GALLO / HOUSE-MADE TORTILLA CHIPS",
+        price: 9.99,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=768,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/5abfea1b-baec-42fc-80c9-ab6e50c316fe-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Ultimate Nachos",
+        description: "DOUBLE-LAYERED / HOUSE-MADE TORTILLA CHIPS / HATCH QUESO / CHEDDAR-JACK CHEESE / HOUSE-MADE PICO DE GALLO / PICKLED HOT PEPPERS / CREMA / CILANTRO / SALSA",
+        price: 12.49,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/9cdb220e-c86a-4b88-bcec-01c689033f56-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "House Sampler",
+        description: "ULTIMATE NACHOS / BEER-BATTERED ONION RINGS / MOZZARELLA STICKS / BONELESS WINGS / CHOICE OF SAUCE OR DRY SEASONING / MARINARA / SOUTHWEST RANCH / CHOICE OF BLEU CHEESE OR RANCH DRESSING",
+        price: 18.79,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1366,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/b3487cac-8c1d-4672-9e49-53ff6f3dc3f5-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Regular Cheddar Cheese Curds",
+        description: "Regular Cheddar Cheese Curds",
+        price: 7.29,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1024,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/3f2a8ad9-5eb3-4c9b-a1c3-370c038ce39d-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Asian Zing Cauliflower Wings",
+        description: "BREADED CAULIFLOWER / ASIAN ZING® / EVERYTHING SEASONING / PICKLED HOT PEPPERS / GREEN ONIONS / RANCH",
+        price: 13.79,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=640,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/f68010aa-4c3c-43c9-ad14-a54c3739581a-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Basket Tater Tots",
+        description: "CRISPY GOLDEN BROWN TATER TOTS",
+        price: 7.29,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=460,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/7ab4e1e0-5032-4bcb-b9e4-739b91886339-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Large French Fries",
+        description: "NATURAL-CUT FRIES / SEA SALT / COARSE PEPPER",
+        price: 7.29,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=640,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/a30e7dd3-e848-4076-a814-0f05c86873d9-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Large Potato Wedges",
+        description: "THICK-CUT POTATO WEDGES / SOUR CREAM-CHIVE SEASONED",
+        price: 7.29,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/5d263bf2-68cd-47c5-a604-897daffd3194-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Buffalo Chicken Tots",
+        description: "TOTS / PULLED CHICKEN / BUFFALO SEASONING / BLEU CHEESE CRUMBLES / PICKLED HOT PEPPERS / MEDIUM BUFFALO SAUCE / RANCH / GREEN ONIONS",
+        price: 14.79,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/1b472dab-14cf-4aaa-b111-0c82cdb9a2bd-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Chips & Dip Trio",
+        description: "HATCH QUESO / HOUSE-MADE GUACAMOLE / SALSA / HOUSE-MADE PICO DE GALLO / HOUSE-MADE TORTILLA CHIPS",
+        price: 13.79,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/115a7030-ab12-42d0-8e52-2d6eeeecbaab-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Regular French Fries",
+        description: "NATURAL-CUT FRIES / SEA SALT / COARSE PEPPER",
+        price: 4.79,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=640,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/a30e7dd3-e848-4076-a814-0f05c86873d9-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Regular Tater Tots",
+        description: "CRISPY GOLDEN BROWN TATER TOTS",
+        price: 5.29,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=460,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/7ab4e1e0-5032-4bcb-b9e4-739b91886339-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Chips & House-made Guacamole",
+        description: "HASS AVOCADO / TOMATO / JALAPEÑO / ONION / CILANTRO / FRESH LIME / HOUSE-MADE TORTILLA CHIPS",
+        price: 9.99,
+        category: "Appetizers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/78329d63-c217-4c16-a2e2-89b098e9f513-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Large Beer-Battered Onion Rings",
+        description: "THICK-CUT ONION RINGS / BEER BATTER / SOUTHWESTERN RANCH",
+        price: 10.79,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/8dc2c02f-ef3c-4ca7-bd74-cdf499b86dd9-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Regular Beer-Battered Onion Rings",
+        description: "THICK-CUT ONION RINGS / BEER BATTER / SOUTHWESTERN RANCH",
+        price: 7.29,
+        category: "Appetizers, Sides",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/8dc2c02f-ef3c-4ca7-bd74-cdf499b86dd9-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "All-American Cheeseburger",
+        description: "HAND-SMASHED DOUBLE PATTY / AMERICAN CHEESE / SHREDDED ICEBERG / TOMATO / PICKLES / MUSTARD / MAYO / CHALLAH BUN / GRILLED ONION UPON REQUEST",
+        price: 13.99,
+        category: "Burgers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=768,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/cf2e9a0c-44d4-4e49-9723-067a90ecb3b8-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Triple Bacon Cheeseburger",
+        description: "HAND-SMASHED DOUBLE PATTY SEARED WITH BACON / AMERICAN CHEESE / THICK-CUT BACON / SHREDDED ICEBERG / TOMATO / PICKLES / BACON AIOLI / CHALLAH BUN",
+        price: 17.79,
+        category: "Burgers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/cabe0dbb-c57e-4b81-ab4f-9127fb0145ee-retina-large.jpg"
+      },
+      {
+        restaurantId: 3,
+        item: "Cheese Curd Bacon Burger",
+        description: "HAND-SMASHED DOUBLE PATTY / AMERICAN CHEESE / WISCONSIN WHITE CHEDDAR CHEESE CURDS / THICK-CUT BACON / SHREDDED ICEBERG / TOMATO / ONION / PICKLES / MAYO / CHIPOTLE BBQ DRY RUB / CHALLAH BUN",
+        price: 17.79,
+        category: "Burgers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/8c4de955-36f2-40e2-a3e1-1a3a3da8aa36-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Bacon Smashed Hatch Chile Burger",
+        description: "HAND-SMASHED DOUBLE PATTY SEARED WITH BACON / AMERICAN CHEESE / YOUNG GUNS HATCH CHILES / GRILLED ONIONS / PICKLED HOT PEPPERS / HATCH CHILE AIOLI / CHALLAH BUN",
+        price: 17.79,
+        category: "Burgers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/54c501ef-b183-4eef-950a-8c24397e9708-retina-large.png"
+      },
+      {
+        restaurantId: 3,
+        item: "Southwestern Black Bean Burger",
+        description: "BLACK BEAN PATTY / CHEDDAR CHEESE / HOUSE-MADE GUACAMOLE / SHREDDED ICEBERG LETTUCE / TOMATO / ONION / PICKLES / SOUTHWESTERN RANCH / CHALLAH BUN / NATURAL-CUT FRENCH FRIES",
+        price: 15.29,
+        category: "Burgers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/9f4af3da-cbfa-4bcf-892b-19695e7f506c-retina-large.jpg"
+      },
+      {
+        restaurantId: 3,
+        item: "Mushroom Swiss Burger",
+        description: "HAND-SMASHED DOUBLE PATTY / SWISS CHEESE / PARMESAN GARLIC SAUCE / SAUTÉED MUSHROOMS / GRILLED ONIONS / MAYO / HONEY MUSTARD / CHALLAH BUN",
+        price: 15.99,
+        category: "Burgers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/4ae9d1dc-8aac-4678-8804-f56f40991ed5-retina-large.jpg"
+      },
+      {
+        restaurantId: 3,
+        item: "Smoked Brisket Burger",
+        description: "DOUBLE PATTY / HAND-SMASHED / AMERICAN CHEESE / SMOKED PULLED BRISKET / SWEET BBQ / GRILLED ONIONS / PICKLES / BACON AIOLI / CHALLAH BUN / NATURAL-CUT FRENCH FRIES",
+        price: 18.79,
+        category: "Burgers",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/e59d7fc6-892a-4731-98f6-6a1a44317db2-retina-large.png"
+      },
     ], {});
   },
 
