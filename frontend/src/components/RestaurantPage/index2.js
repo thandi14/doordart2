@@ -356,6 +356,14 @@ function Franchise({ isLoaded }) {
         return `${month}/${day}/${year}`;
     }
 
+    const COLORS = ['#00838A', '#EB1700', '#00872F', '#cc99ff', '#99ff99'];
+
+    function getColorFromUserId(userId) {
+        const colorIndex = userId % COLORS.length;
+        return COLORS[colorIndex];
+    }
+
+
 
   return (
 
@@ -402,7 +410,7 @@ function Franchise({ isLoaded }) {
             <div id="rp-two">
                 <div style={{ paddingBottom: "8%"}} id="r-info">
                     <div id="info-one">
-                        <h1 style={{ marginBottom: "36px"}} >{restaurant.name}</h1>
+                        <h1 style={{ marginBottom: "36px", whiteSpace: "nowrap" }} >{restaurant.name}</h1>
                         <h2 style={{ fontSize: "20px", whiteSpace: "nowrap"}}>Store Info</h2>
                         <p style={{ fontSize: "13px", color: "#767676"}}>
                              <i style={{ width: "10px", height: "10px", fontSize: "10px", color: "#767676"}} class="fi fi-rr-clock-three"></i>
@@ -578,7 +586,7 @@ function Franchise({ isLoaded }) {
                             { peakRev?.map((review, i) =>
                                 <div onClick={(() => setModalContent(<ReviewFormThreeModal rev={review} />))} style={{ cursor: "pointer" }}>
                                     <span id="pp">
-                                        <div id="profile-pic">
+                                        <div style={{ backgroundColor: getColorFromUserId(review.userId) }} id="profile-pic">
                                         {review.User.firstName[0]}
                                         </div>
                                         <h2 style={{ whiteSpace: "nowrap", width: "50%", fontSize: "14px" }}>{review.User.firstName} {review.User.lastName}</h2>
