@@ -140,13 +140,19 @@ function RestaurantsTwo({ filter, category, restaurants }) {
 
   };
 
+  const handleClick = (id) => {
+    const newTab = window.open(`/restaurant/${id}`, '_blank');
+    newTab.focus();
+  };
+
+
 
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%"}} >
     <div className="restaurants">
         {franchises.map((f, id) =>
         <>
-            <div onClick={(() => history.push(`/restaurant/${f.id}`))} className="restaurant" id={`r-${id}`}>
+            <div onClick={(() => handleClick(f.id))} className="restaurant" id={`r-${id}`}>
                 <img style={{ marginBottom: "6px", height: "60%" }}src={f.RestaurantImage?.thumbnailUrl}></img>
                 <div id="r-name">
                     <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{f.name} </h1>

@@ -85,7 +85,10 @@ function Restaurants({ arr, title }) {
 
   };
 
-  console.log(category)
+  const handleClick = (id) => {
+    const newTab = window.open(`/restaurant/${id}`, '_blank');
+    newTab.focus();
+  };
 
 
 
@@ -106,7 +109,7 @@ function Restaurants({ arr, title }) {
     <div style={sliderStyleTwo} id="saves">
     {arr.map((f, id) =>
         <>
-            <div style={{ height: "100%"}} onClick={(() => history.push(`/restaurant/${f.id}`))} className="restaurant" id={`r-${id}`}>
+            <div style={{ height: "100%"}} onClick={(() => handleClick(f.id))} className="restaurant" id={`r-${id}`}>
                 <img style={{ marginBottom: "6px"}}src={f.RestaurantImage?.thumbnailUrl}></img>
                 <div id="r-name">
                     <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{f.name} </h1>

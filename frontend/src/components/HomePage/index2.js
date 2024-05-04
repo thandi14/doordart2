@@ -168,8 +168,6 @@ function SideBar({ isLoaded }) {
     }
   });
 
-  console.log(category)
-
   return (
 
     <div className="side-bar" style={{ position: "sticky", height: "100vh", top: "64px", zIndex: 14}}>
