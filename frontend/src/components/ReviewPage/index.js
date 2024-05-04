@@ -91,13 +91,9 @@ function ReviewPage({ isLoaded }) {
 
     function formatTimestamp(timestamp) {
         const date = new Date(timestamp);
-
-        // Extract components
-        const month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-        const day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-        const year = date.getFullYear().toString().slice(-2); // Extract last two digits
-
-        // Format into MM/DD/YY
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        const year = date.getFullYear().toString().slice(-2);
         return `${month}/${day}/${year}`;
     }
 

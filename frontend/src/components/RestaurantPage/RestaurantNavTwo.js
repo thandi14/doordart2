@@ -88,7 +88,12 @@ useEffect(() => {
 
   const submitPlaceChanged = async (place) => {
       localStorage.setItem('place', place);
-      setLocation(place);
+      if (place) {
+        setLocation(place);
+      }
+      else {
+        setLocation("")
+      }
 
       let data = {
         address: place
