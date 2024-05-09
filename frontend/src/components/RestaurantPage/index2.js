@@ -640,7 +640,7 @@ function Franchise({ isLoaded }) {
                                     <p style={{ fontSize: "13px", color: "#767676"}}>{item.description}</p>
                                     </div>
                                     <span style={{ fontSize: "12px"}}>
-                                        <p style={{ fontWeight: "700"}}>${item.price}</p>
+                                        <p style={{ fontWeight: "700", color: "#606060ff"}}>${item.price}</p>
                                         <i style={{ width: "8px", height: "8px", fontSize: "8px" }} class="fi fi-sr-bullet"></i>
                                         <i style={{ color: "#767676", width: "14px", height: "14px", fontSize: "14px" }}  class="fi fi-br-social-network"></i>
                                         <p style={{ color: "#767676"}}>92% (7)</p>

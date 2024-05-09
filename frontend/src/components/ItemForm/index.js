@@ -155,6 +155,16 @@ function ItemFormModal({ itemId }) {
             }
 
         </div>
+        <div style={{ marginTop: "15px"}} id="si">
+            <span>
+            <h2 style={{ fontSize: "16px"}}>Preferences</h2>
+            <p style={{ fontSize: "14px", color: "#767676" }}>(Optional)</p>
+            </span>
+            <span onClick={(() => window.alert("Feature coming soon"))} style={{ cursor: "pointer"}}>
+            <p style={{ fontSize: "16px"}}>Add Special Instructions</p>
+            <i style={{ fontSize: "20px", width: "20px", height: "20px" }} class="fi fi-rr-angle-small-right"></i>
+            </span>
+        </div>
         </div>
         <div id="buy-item">
             <div>
