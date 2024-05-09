@@ -110,40 +110,42 @@ function Franchise({ isLoaded }) {
   };
 
 
-  const checkInCenter = (id) => {
+  const checkPassedTop = (id) => {
     if (divRefs.current[id]) {
-            const element = divRefs.current[id];
+        const element = divRefs.current[id];
+        const rect = element.getBoundingClientRect();
+        const elementBottom = rect.top;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const scrollHeight = window.scrollY;
 
-            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-            const rect = element.getBoundingClientRect();
-            const elementTop = rect.top;
-            const elementBottom = rect.bottom;
-            const viewportCenterY = window.scrollY + viewportHeight / 2;
-            const isInCenter = elementTop <= viewportCenterY && elementBottom >= viewportCenterY;
-
-            if (isInCenter) {
-                const number = parseInt(id.split('-')[1])
-                setMark(number);
+        if (elementBottom <= (viewportHeight / 2)) { // Check if any part of the div is above the viewport
+            const number = parseInt(id.split('-')[1]);
+            if (number || number == 0) {
+                setMark(number)
+            }
+            else {
+                setMark(-1);
             }
         }
     }
+};
 
-    useEffect(() => {
-        // Attach scroll event listener when component mounts
-        const handleScroll = () => {
-            // Loop through each div ref and check if it's in the center
-            Object.keys(divRefs.current).forEach(id => {
-            checkInCenter(id);
+useEffect(() => {
+    // Attach scroll event listener when component mounts
+    const handleScroll = () => {
+        // Loop through each div ref and check if it's passed the top
+        Object.keys(divRefs.current).forEach(id => {
+            checkPassedTop(id);
         });
-        };
-        window.addEventListener('scroll', handleScroll);
+    };
 
-        return () => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
         window.removeEventListener('scroll', handleScroll);
-        };
+    };
+}, [mark, divRefs.current]);
 
-    }, [mark]);
 
    useEffect(() => {
      async function fetchData() {
@@ -189,6 +191,8 @@ function Franchise({ isLoaded }) {
         scrollToTarget();
 
     }, [scroll]);
+
+    console.log(mark)
 
 
 
@@ -236,18 +240,6 @@ function Franchise({ isLoaded }) {
 
 
       };
-
-      function getRandomColor() {
-        // Generate random values for the RGB components
-        const red = Math.floor(Math.random() * 256); // Random value between 0 and 255
-        const green = Math.floor(Math.random() * 256);
-        const blue = Math.floor(Math.random() * 256);
-
-        // Construct the RGB color string
-        const color = `rgb(${red}, ${green}, ${blue})`;
-
-        return color;
-      }
 
   const sliderStyle = {
     maxWidth: "100%",
@@ -469,7 +461,8 @@ function Franchise({ isLoaded }) {
                                 <div id={mark == -2 ? "mark" : "hidden"}></div>
                                 <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Most Ordered</p>
                             </p> */}
-                            <p onClick={(() => {
+                            <p onClick={((e) => {
+                                e.stopPropagation()
                                 setScroll(true)
                                 setMark(-1)
                                 })}  style={{ position: "relative"}}>
@@ -477,7 +470,8 @@ function Franchise({ isLoaded }) {
                                 <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Reviews</p>
                             </p>
                             {keys.map((category, i) =>
-                            <p onClick={(() => {
+                            <p onClick={((e) => {
+                                e.stopPropagation()
                                 setScroll(true)
                                 setMark(i)
                                 })}  style={{ position: "relative"}}>
@@ -551,10 +545,12 @@ function Franchise({ isLoaded }) {
                             )}
                         </div>
                     </div>}
-                    <div ref={el => divRefs.current[`mi-${-1}`] = el} className="review">
+                    <div className="review">
                         <div id="review-one">
                             <div>
+                                <div ref={el => divRefs.current[`mi-${-1}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Reviews</h1>
+                                </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
                                     {allReviews(restaurant.Reviews)}
                                     <i class="fi fi-sr-star" style={{ width: "10px", height: "10px", fontSize: "10px", color: "#767676"}}></i>
@@ -628,8 +624,10 @@ function Franchise({ isLoaded }) {
                         :
                         <>
                     { keys.map((key, i) =>
-                    <div ref={el => divRefs.current[`mi-${i}`] = el} style={{ margin: "20px 0px" }} id={`mi-${i}`} className="menu">
+                    <div style={{ margin: "20px 0px" }} id={`mi-${i}`} className="menu">
+                        <div ref={el => divRefs.current[`mi-${i}`] = el} >
                         <h1 style={{ fontSize: "24px", whiteSpace: "nowrap" }}>{key}</h1>
+                        </div>
                         <div className="item">
                             { categories[key]?.map((item, i) =>
                                 <>
