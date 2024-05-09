@@ -65,7 +65,9 @@ function FranchiseTwo({ isLoaded }) {
   const [ bar, setBar ] = useState(false)
   const [ scroll, setScroll ] = useState(false)
   const [ roll, setRoll ] = useState(false)
+  const [ searching, setSearching ] = useState(false)
   const [ search, setSearch ] = useState("")
+  const [ search2, setSearch2 ] = useState("")
   const dispatch = useDispatch()
   const { location, setRecentId, profile, setProfile } = useFilters()
   const { setModalContent } = useModal()
@@ -238,6 +240,24 @@ useEffect(() => {
     transform: `translateX(-${length * 50}%)`,
   };
 
+  useEffect(() => {
+
+    const handleDocumentClick = (event) => {
+
+        if ((targetRef.current && !targetRef.current.contains(event.target))) {
+            setSearching(false);
+        }
+
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+    return () => {
+        document.removeEventListener('click', handleDocumentClick);
+    };
+
+    }, []);
+
+
 //   const franchises = Object.values(restaurants).sort((a, b) => a.miles - b.miles)
 
   const allReviews = (reviews) => {
@@ -355,14 +375,19 @@ useEffect(() => {
                             <div id="item-search">
                             <i class="fi fi-rr-search"></i>
                             <input
-                            // value={search}
-                            // onChange={((e) => setSearch(e.target.value))}
-                            onKeyDown={((e) => {
-                                if (e.key === 'Enter') {
-                                    setSearch(e.target.value);
-                                  }
-                            })}
-                            placeholder={`Search store menu`}></input>
+                        value={search}
+                        onClick={((e) => setSearching(!searching))}
+                        onChange={((e) => setSearch(e.target.value))}
+                        onKeyDown={((e) => {
+                            if (e.key === 'Enter') {
+                                setSearch2(e.target.value);
+                              }
+                        })}
+                        placeholder={`Search store menu`}></input>
+                        { search && <i onClick={((e) => {
+                            setSearch("")
+                            setSearch2("")
+                            })} style={{ cursor: "pointer", width: "20px", height: "20px", fontSize: "20px" }} class="fi fi-sr-cross-circle"></i>}
                             </div>
                             </div>
                         </div>
