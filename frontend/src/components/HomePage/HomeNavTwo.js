@@ -24,13 +24,16 @@ function HomeNavTwo({ isLoaded }) {
   const { location } = useFilters()
   const [ lMenu, setLMenu ] = useState(false)
   const targetRef = useRef()
+  const targetRef2 = useRef()
   const { setModalContent } = useModal()
   const { setLocation } = useFilters()
   const autocompleteRef = useRef(null);
   const dispatch = useDispatch()
   const [dropTwo, setDropTwo] = useState(false)
-  const [search, setSearch] = useState("")
   const locations = useLocation();
+  const [ searching, setSearching ] = useState(false)
+  const [ search, setSearch ] = useState("")
+  const [ search2, setSearch2 ] = useState("")
   const currentPage = locations.pathname;
 
 
@@ -70,6 +73,12 @@ function HomeNavTwo({ isLoaded }) {
 
             }
 
+
+        if ((targetRef2.current && !targetRef2.current.contains(event.target))) {
+          setSearching(false)
+        }
+
+
         };
 
         document.addEventListener('click', handleDocumentClick);
@@ -89,7 +98,7 @@ function HomeNavTwo({ isLoaded }) {
             history.push(`/restaurant/${data[0].id}`)
           }
           else {
-            history.push(`restaurants/search`)
+            history.push(`/restaurants/search`)
 
           }
         }
@@ -97,6 +106,8 @@ function HomeNavTwo({ isLoaded }) {
 
 
   };
+
+  console.log(search2)
   return (
     <>
     {/* <Profile user={sessionUser} d={true} /> */}
@@ -107,13 +118,18 @@ function HomeNavTwo({ isLoaded }) {
           <span>DOORDART</span>
         </div>
         <div style={{ width: "60%" }} className="navi">
-        <div style={{ marginLeft: "16px" }} id="search">
+        <div style={{ border: searching ? "2px solid black" : "2px solid transparent", marginLeft: "16px" }} ref={targetRef2}  id="search">
             <i class="fi fi-rr-search"></i>
             <input
             value={search}
             onChange={((e) => setSearch(e.target.value))}
             onKeyDown={handleSearch}
+            onClick={((e) => setSearching(!searching))}
             placeholder="Search DoorDart"></input>
+             { search && <i onClick={((e) => {
+                  setSearch("")
+                  setSearch2("")
+              })} style={{ cursor: "pointer", width: "20px", height: "20px", fontSize: "20px" }} class="fi fi-sr-cross-circle"></i>}
         </div>
         <div style={{ position: "relative" }}>
           { lMenu &&

@@ -23,15 +23,17 @@ function HomeNav({ isLoaded }) {
   const { location } = useFilters()
   const [ lMenu, setLMenu ] = useState(false)
   const targetRef = useRef()
+  const targetRef2 = useRef()
   const { setModalContent } = useModal()
   const { setLocation } = useFilters()
   const autocompleteRef = useRef(null);
   const dispatch = useDispatch()
   const [dropTwo, setDropTwo] = useState(false)
-  const [search, setSearch] = useState("")
+  const [ searching, setSearching ] = useState(false)
+  const [ search, setSearch ] = useState("")
+  const [ search2, setSearch2 ] = useState("")
   const locations = useLocation();
   const currentPage = locations.pathname;
-
 
   useEffect(() => {
     async function fetchData() {
@@ -80,6 +82,7 @@ function HomeNav({ isLoaded }) {
   const handleSearch = async (event) => {
     let data = []
       if (event.key === 'Enter') {
+        console.log(search)
         data = await dispatch(restaurantActions.thunkGetSearch(search));
 
         if (!currentPage.includes("search")) {
@@ -97,6 +100,7 @@ function HomeNav({ isLoaded }) {
   };
 
 
+
   useEffect(() => {
 
       const handleDocumentClick = (event) => {
@@ -104,6 +108,12 @@ function HomeNav({ isLoaded }) {
               setLMenu(false);
 
             }
+
+
+        if ((targetRef2.current && !targetRef2.current.contains(event.target))) {
+          setSearching(false)
+        }
+
 
         };
 
@@ -194,13 +204,23 @@ function HomeNav({ isLoaded }) {
 
         </div>
         <div className="search">
-        <div id="search">
+        <div style={{ border: searching ? "2px solid black" : "2px solid transparent" }} ref={targetRef2} id="search">
             <i class="fi fi-rr-search"></i>
             <input
             value={search}
             onChange={((e) => setSearch(e.target.value))}
             onKeyDown={handleSearch}
+            onClick={((e) => setSearching(!searching))}
+            // onKeyDown={((e) => {
+            //     if (e.key === 'Enter') {
+            //         setSearch2(e.target.value);
+            //       }
+            // })}
             placeholder="Search stores, dishes, products"></input>
+                        { search && <i onClick={((e) => {
+                            setSearch("")
+                            setSearch2("")
+                            })} style={{ cursor: "pointer", width: "20px", height: "20px", fontSize: "20px" }} class="fi fi-sr-cross-circle"></i>}
         </div>
         {/* <i style={{ fontSize: "18px"}} id="notify" class="fi fi-rr-cowbell"></i> */}
         <i style={{ fontSize: "16px"}} onClick={(() => setDropTwo(!dropTwo))} id={Object.values(shoppingCarts).length == 0 ? "cart-two" : "cart"} class="fi fi-rr-shopping-cart">
