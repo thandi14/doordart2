@@ -36,13 +36,16 @@ function Franchise({ isLoaded }) {
   const [ selection, setSelection ] = useState("Reviews")
   const [ mark, setMark ] = useState(-1)
   const [ hide, setHide ] = useState(true)
-  const [ bar, setBar ] = useState(false)
+  const [ searching, setSearching ] = useState(false)
+  const [ searching2, setSearching2 ] = useState(false)
   const [ search, setSearch ] = useState("")
+  const [ search2, setSearch2 ] = useState("")
   const [ scroll, setScroll ] = useState(false)
   const dispatch = useDispatch()
   const { location, setRecentId, profile, setProfile } = useFilters()
   const { setModalContent } = useModal()
   const targetRef = useRef()
+  const targetRef2 = useRef()
   const divRefs = useRef({});
   const history = useHistory()
   const [categories, setCategories] = useState({});
@@ -65,13 +68,13 @@ function Franchise({ isLoaded }) {
   }, [menu]);
 
   useEffect(() => {
-    if (search) {
-      const filteredCategories = filterCategories(unfilteredCategories, search);
+    if (search2) {
+      const filteredCategories = filterCategories(unfilteredCategories, search2);
       setCategories(filteredCategories);
     } else {
       setCategories(unfilteredCategories);
     }
-  }, [search, unfilteredCategories]);
+  }, [search2, unfilteredCategories]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -169,6 +172,29 @@ useEffect(() => {
         setHide(true);
     }
   });
+
+
+    useEffect(() => {
+
+    const handleDocumentClick = (event) => {
+
+        if ((targetRef.current && !targetRef.current.contains(event.target))) {
+            setSearching(false);
+        }
+
+        if ((targetRef2.current && !targetRef2.current.contains(event.target))) {
+            setSearching2(false)
+        }
+
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+    return () => {
+        document.removeEventListener('click', handleDocumentClick);
+    };
+
+    }, []);
+
 
     useEffect(() => {
 
@@ -376,17 +402,22 @@ useEffect(() => {
                         </p>
                         </div>
                         <div style={{ display: "flex", justifyContent: "flex-end", width: "50%", alignItems: "flex-end"}}>
-                        <div style={{ width: "45%" }} id="item-search">
+                        <div style={{ width: "60%", border: searching ? "2px solid black" : "2px solid transparent" }} ref={targetRef} id="item-search">
                         <i class="fi fi-rr-search"></i>
                         <input
-                        // value={search}
-                        // onChange={((e) => setSearch(e.target.value))}
+                        value={search}
+                        onClick={((e) => setSearching(!searching))}
+                        onChange={((e) => setSearch(e.target.value))}
                         onKeyDown={((e) => {
                             if (e.key === 'Enter') {
-                                setSearch(e.target.value);
+                                setSearch2(e.target.value);
                               }
                         })}
                         placeholder={`Search ${restaurant.name}`}></input>
+                        { search && <i onClick={((e) => {
+                            setSearch("")
+                            setSearch2("")
+                            })} style={{ cursor: "pointer", width: "20px", height: "20px", fontSize: "20px" }} class="fi fi-sr-cross-circle"></i>}
                         </div>
                     </div>
             </div>
@@ -484,9 +515,22 @@ useEffect(() => {
                 </div>
                 <div id="r-items">
                     <div style={{ display: "flex", justifyContent: "flex-end", width: "100%"}}>
-                        <div id="item-search">
+                        <div onClick={(() => setSearching2(!searching2))} ref={targetRef2} style={{ border: searching2 ? "2px solid black" : "2px solid transparent" }} id="item-search">
                         <i class="fi fi-rr-search"></i>
-                        <input placeholder={`Search ${restaurant.name}`}></input>
+                        <input
+                        value={search}
+                        onClick={((e) => setSearching(!searching))}
+                        onChange={((e) => setSearch(e.target.value))}
+                        onKeyDown={((e) => {
+                            if (e.key === 'Enter') {
+                                setSearch2(e.target.value);
+                              }
+                        })}
+                        placeholder={`Search ${restaurant.name}`}></input>
+                        { search && <i onClick={((e) => {
+                            setSearch("")
+                            setSearch2("")
+                            })} style={{ cursor: "pointer", width: "20px", height: "20px", fontSize: "20px" }} class="fi fi-sr-cross-circle"></i>}
                         </div>
                     </div>
                     <div id="group">
