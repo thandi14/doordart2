@@ -146,6 +146,146 @@ module.exports = {
         selection: "Strawberry Real Fruit Slush",
         price: 1.57,
       },
+      {
+        optionId: 4,
+        selection: "American",
+      },
+      {
+        optionId: 4,
+        selection: "Cheddar",
+      },
+      {
+        optionId: 4,
+        selection: "Swiss",
+      },
+      {
+        optionId: 4,
+        selection: "Pepper Jack",
+      },
+      {
+        optionId: 4,
+        selection: "No Cheese",
+      },
+      {
+        optionId: 5,
+        selection: "American",
+      },
+      {
+        optionId: 5,
+        selection: "Cheddar",
+      },
+      {
+        optionId: 5,
+        selection: "Swiss",
+      },
+      {
+        optionId: 5,
+        selection: "Pepper Jack",
+      },
+      {
+        optionId: 5,
+        selection: "No Cheese",
+      },
+      {
+        optionId: 6,
+        selection: "American",
+      },
+      {
+        optionId: 6,
+        selection: "Cheddar",
+      },
+      {
+        optionId: 6,
+        selection: "Swiss",
+      },
+      {
+        optionId: 6,
+        selection: "Pepper Jack",
+      },
+      {
+        optionId: 6,
+        selection: "No Cheese",
+      },
+      {
+        optionId: 7,
+        selection: "American",
+      },
+      {
+        optionId: 7,
+        selection: "Cheddar",
+      },
+      {
+        optionId: 7,
+        selection: "Swiss",
+      },
+      {
+        optionId: 7,
+        selection: "Pepper Jack",
+      },
+      {
+        optionId: 7,
+        selection: "No Cheese",
+      },
+      {
+        optionId: 8,
+        selection: "American",
+      },
+      {
+        optionId: 8,
+        selection: "Cheddar",
+      },
+      {
+        optionId: 8,
+        selection: "Swiss",
+      },
+      {
+        optionId: 8,
+        selection: "Pepper Jack",
+      },
+      {
+        optionId: 8,
+        selection: "No Cheese",
+      },
+      {
+        optionId: 9,
+        selection: "American",
+      },
+      {
+        optionId: 9,
+        selection: "Cheddar",
+      },
+      {
+        optionId: 9,
+        selection: "Swiss",
+      },
+      {
+        optionId: 9,
+        selection: "Pepper Jack",
+      },
+      {
+        optionId: 9,
+        selection: "No Cheese",
+      },
+      {
+        optionId: 10,
+        selection: "American",
+      },
+      {
+        optionId: 10,
+        selection: "Cheddar",
+      },
+      {
+        optionId: 10,
+        selection: "Swiss",
+      },
+      {
+        optionId: 10,
+        selection: "Pepper Jack",
+      },
+      {
+        optionId: 10,
+        selection: "No Cheese",
+      },
     ], {});
   },
 

@@ -31,6 +31,48 @@ module.exports = {
         required: true,
         number: 1,
       },
+      {
+        itemId: 79,
+        option: "Cheese",
+        required: true,
+        number: 1,
+      },
+      {
+        itemId: 80,
+        option: "Cheese",
+        required: true,
+        number: 1,
+      },
+      {
+        itemId: 81,
+        option: "Cheese",
+        required: true,
+        number: 1,
+      },
+      {
+        itemId: 82,
+        option: "Cheese",
+        required: true,
+        number: 1,
+      },
+      {
+        itemId: 83,
+        option: "Cheese",
+        required: true,
+        number: 1,
+      },
+      {
+        itemId: 84,
+        option: "Cheese",
+        required: true,
+        number: 1,
+      },
+      {
+        itemId: 85,
+        option: "Cheese",
+        required: true,
+        number: 1,
+      },
     ], {});
   },
 
