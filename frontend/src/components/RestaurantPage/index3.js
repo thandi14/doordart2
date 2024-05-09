@@ -137,40 +137,41 @@ function FranchiseTwo({ isLoaded }) {
   }, []);
 
 
-  const checkInCenter = (id) => {
+  const checkPassedTop = (id) => {
     if (divRefs.current[id]) {
-            const element = divRefs.current[id];
+        const element = divRefs.current[id];
+        const rect = element.getBoundingClientRect();
+        const elementBottom = rect.top;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const scrollHeight = window.scrollY;
 
-            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-            const rect = element.getBoundingClientRect();
-            const elementTop = rect.top;
-            const elementBottom = rect.bottom;
-            const viewportCenterY = window.scrollY + viewportHeight / 2;
-            const isInCenter = elementTop <= viewportCenterY && elementBottom >= viewportCenterY;
-
-            if (isInCenter) {
-                const number = parseInt(id.split('-')[1])
-                setMark(number);
+        if (elementBottom <= (viewportHeight / 2)) { // Check if any part of the div is above the viewport
+            const number = parseInt(id.split('-')[1]);
+            if (number || number == 0) {
+                setMark(number)
+            }
+            else {
+                setMark(-1);
             }
         }
     }
+};
 
-    useEffect(() => {
-        // Attach scroll event listener when component mounts
-        const handleScroll = () => {
-            // Loop through each div ref and check if it's in the center
-            Object.keys(divRefs.current).forEach(id => {
-            checkInCenter(id);
+useEffect(() => {
+    // Attach scroll event listener when component mounts
+    const handleScroll = () => {
+        // Loop through each div ref and check if it's passed the top
+        Object.keys(divRefs.current).forEach(id => {
+            checkPassedTop(id);
         });
-        };
-        window.addEventListener('scroll', handleScroll);
+    };
 
-        return () => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
         window.removeEventListener('scroll', handleScroll);
-        };
-
-    }, [mark]);
+    };
+}, [mark, divRefs.current]);
 
    useEffect(() => {
      async function fetchData() {
@@ -454,9 +455,9 @@ function FranchiseTwo({ isLoaded }) {
                         </p>
                         <p style={{ fontSize: "13px", color: "#767676", display: "flex", gap: "5px", alignItems: "center" }}>Pricing & Fees<i style={{ width: "10px", height: "10px", fontSize: "10px" }}  class="fi fi-rr-circle-i"></i></p>
                     </div>
-                    <div ref={el => divRefs.current[`mi-${-1}`] = el} className="review">
+                    <div className="review">
                         <div id="review-one">
-                            <div>
+                            <div ref={el => divRefs.current[`mi-${-1}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Ratings & Reviews</h1>
                             </div>
                         </div>
@@ -694,8 +695,10 @@ function FranchiseTwo({ isLoaded }) {
                             </>
                         : <>
                     { keys.map((key, i) =>
-                    <div ref={el => divRefs.current[`mi-${i}`] = el} style={{ margin: "20px 0px" }} id={`mi-${i}`} className="menu">
+                    <div style={{ margin: "20px 0px" }} id={`mi-${i}`} className="menu">
+                        <div ref={el => divRefs.current[`mi-${i}`] = el}>
                         <h1 style={{ fontSize: "24px", whiteSpace: "nowrap" }}>{key}</h1>
+                        </div>
                         <div className="item">
                             { categories[key].map((item, i) =>
                                 <>
