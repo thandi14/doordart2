@@ -26,11 +26,14 @@ module.exports = {
       option: {
         type: Sequelize.STRING
       },
-      required: {
-        type: Sequelize.BOOLEAN
+      instructions: {
+        type: Sequelize.STRING
       },
-      number: {
-        type: Sequelize.INTEGER
+      cals: {
+        type: Sequelize.STRING
+      },
+      price: {
+        type: Sequelize.NUMBER
       },
       createdAt: {
         allowNull: false,

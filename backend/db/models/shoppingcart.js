@@ -43,7 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     pickup: DataTypes.BOOLEAN,
     group: DataTypes.BOOLEAN,
     price: DataTypes.DECIMAL,
-    status: DataTypes.STRING,
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: "Ordering"
+    },
     sessionId: DataTypes.STRING
   }, {
     sequelize,

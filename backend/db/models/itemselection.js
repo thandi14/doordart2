@@ -24,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     optionId: DataTypes.INTEGER,
     selection: DataTypes.STRING,
     cals: DataTypes.STRING,
-    price: DataTypes.DECIMAL
+    price: DataTypes.DECIMAL,
+    selected: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'ItemSelection',

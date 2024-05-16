@@ -23,8 +23,9 @@ module.exports = (sequelize, DataTypes) => {
   ItemOption.init({
     itemId: DataTypes.INTEGER,
     option: DataTypes.STRING,
-    required: DataTypes.BOOLEAN,
-    number: DataTypes.INTEGER
+    instructions: DataTypes.STRING,
+    cals: DataTypes.STRING,
+    price: DataTypes.NUMBER
   }, {
     sequelize,
     modelName: 'ItemOption',
