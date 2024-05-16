@@ -7,12 +7,13 @@ import { useModal } from "../../context/Modal";
 import "./ItemForm.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useFilters } from "../../context/Filters";
+import Instructions from "./Instructions";
 
 function ItemFormModal({ itemId }) {
   const dispatch = useDispatch();
   const { restaurant }  = useSelector((state) => state.restaurants);
   const { cartItem, shoppingCart }  = useSelector((state) => state.cart);
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal();
   const history = useHistory()
   const [ quantity, setQuantity ] = useState(1)
   const [items, setItems] = useState({});
@@ -160,7 +161,7 @@ function ItemFormModal({ itemId }) {
             <h2 style={{ fontSize: "16px"}}>Preferences</h2>
             <p style={{ fontSize: "14px", color: "#767676" }}>(Optional)</p>
             </span>
-            <span onClick={(() => window.alert("Feature coming soon"))} style={{ cursor: "pointer"}}>
+            <span onClick={(() => setModalContent(<Instructions />))} style={{ cursor: "pointer"}}>
             <p style={{ fontSize: "16px"}}>Add Special Instructions</p>
             <i style={{ fontSize: "20px", width: "20px", height: "20px" }} class="fi fi-rr-angle-small-right"></i>
             </span>
