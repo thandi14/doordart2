@@ -73,6 +73,34 @@ module.exports = {
         required: true,
         number: 1,
       },
+      {
+        itemId: 79,
+        option: "Options",
+      },
+      {
+        itemId: 80,
+        option: "Options",
+      },
+      {
+        itemId: 81,
+        option: "Options",
+      },
+      {
+        itemId: 82,
+        option: "Options",
+      },
+      {
+        itemId: 83,
+        option: "Options",
+      },
+      {
+        itemId: 84,
+        option: "Options",
+      },
+      {
+        itemId: 85,
+        option: "Options",
+      },
     ], {});
   },
 

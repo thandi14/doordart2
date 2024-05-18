@@ -286,6 +286,209 @@ module.exports = {
         optionId: 10,
         selection: "No Cheese",
       },
+      {
+        optionId: 11,
+        selection: "Grilled White Onions"
+      },
+      {
+        optionId: 11,
+        selection: "Lettuce",
+        selected: true
+      },
+      {
+        optionId: 11,
+        selection: "Tomato",
+        selected: true
+      },
+      {
+        optionId: 11,
+        selection: "Pickles",
+        selected: true
+      },
+      {
+        optionId: 11,
+        selection: "Mayo",
+        selected: true
+      },
+      {
+        optionId: 11,
+        selection: "Musturd",
+        selected: true
+      },
+      {
+        optionId: 12,
+        selection: "Grilled White Onions"
+      },
+      {
+        optionId: 12,
+        selection: "Lettuce",
+        selected: true
+      },
+      {
+        optionId: 12,
+        selection: "Tomato",
+        selected: true
+      },
+      {
+        optionId: 12,
+        selection: "Pickles",
+        selected: true
+      },
+      {
+        optionId: 12,
+        selection: "Mayo",
+        selected: true
+      },
+      {
+        optionId: 12,
+        selection: "Musturd",
+        selected: true
+      },
+      {
+        optionId: 13,
+        selection: "Grilled White Onions"
+      },
+      {
+        optionId: 13,
+        selection: "Lettuce",
+        selected: true
+      },
+      {
+        optionId: 13,
+        selection: "Tomato",
+        selected: true
+      },
+      {
+        optionId: 13,
+        selection: "Pickles",
+        selected: true
+      },
+      {
+        optionId: 13,
+        selection: "Mayo",
+        selected: true
+      },
+      {
+        optionId: 13,
+        selection: "Musturd",
+        selected: true
+      },
+      {
+        optionId: 14,
+        selection: "Grilled White Onions"
+      },
+      {
+        optionId: 14,
+        selection: "Lettuce",
+        selected: true
+      },
+      {
+        optionId: 14,
+        selection: "Tomato",
+        selected: true
+      },
+      {
+        optionId: 14,
+        selection: "Pickles",
+        selected: true
+      },
+      {
+        optionId: 14,
+        selection: "Mayo",
+        selected: true
+      },
+      {
+        optionId: 14,
+        selection: "Musturd",
+        selected: true
+      },
+      {
+        optionId: 15,
+        selection: "Grilled White Onions"
+      },
+      {
+        optionId: 15,
+        selection: "Lettuce",
+        selected: true
+      },
+      {
+        optionId: 15,
+        selection: "Tomato",
+        selected: true
+      },
+      {
+        optionId: 15,
+        selection: "Pickles",
+        selected: true
+      },
+      {
+        optionId: 15,
+        selection: "Mayo",
+        selected: true
+      },
+      {
+        optionId: 15,
+        selection: "Musturd",
+        selected: true
+      },
+      {
+        optionId: 16,
+        selection: "Grilled White Onions"
+      },
+      {
+        optionId: 16,
+        selection: "Lettuce",
+        selected: true
+      },
+      {
+        optionId: 16,
+        selection: "Tomato",
+        selected: true
+      },
+      {
+        optionId: 16,
+        selection: "Pickles",
+        selected: true
+      },
+      {
+        optionId: 16,
+        selection: "Mayo",
+        selected: true
+      },
+      {
+        optionId: 16,
+        selection: "Musturd",
+        selected: true
+      },
+      {
+        optionId: 17,
+        selection: "Grilled White Onions"
+      },
+      {
+        optionId: 17,
+        selection: "Lettuce",
+        selected: true
+      },
+      {
+        optionId: 17,
+        selection: "Tomato",
+        selected: true
+      },
+      {
+        optionId: 17,
+        selection: "Pickles",
+        selected: true
+      },
+      {
+        optionId: 17,
+        selection: "Mayo",
+        selected: true
+      },
+      {
+        optionId: 17,
+        selection: "Musturd",
+        selected: true
+      },
     ], {});
   },
 
