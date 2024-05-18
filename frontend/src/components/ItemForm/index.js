@@ -101,7 +101,7 @@ function ItemFormModal({ itemId }) {
     closeModal()
   };
 
-  console.log(options)
+  options = options.filter((op) => op.required)
 
   return (
     <div className="item-modal">
