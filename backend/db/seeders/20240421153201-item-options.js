@@ -76,30 +76,43 @@ module.exports = {
       {
         itemId: 79,
         option: "Options",
+        number: 7,
       },
       {
         itemId: 80,
         option: "Options",
+        number: 7,
+
       },
       {
         itemId: 81,
         option: "Options",
+        number: 7,
+
       },
       {
         itemId: 82,
         option: "Options",
+        number: 7,
+
       },
       {
         itemId: 83,
         option: "Options",
+        number: 7,
+
       },
       {
         itemId: 84,
         option: "Options",
+        number: 7,
+
       },
       {
         itemId: 85,
         option: "Options",
+        number: 7,
+
       },
     ], {});
   },

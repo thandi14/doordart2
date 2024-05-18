@@ -1,5 +1,4 @@
 'use strict';
-
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
@@ -15,7 +14,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      itemId: {
+      itemId:  {
         type: Sequelize.INTEGER,
         references: {
           model: 'MenuItems',
@@ -26,14 +25,11 @@ module.exports = {
       option: {
         type: Sequelize.STRING
       },
-      instructions: {
-        type: Sequelize.STRING
+      required: {
+        type: Sequelize.BOOLEAN
       },
-      cals: {
-        type: Sequelize.STRING
-      },
-      price: {
-        type: Sequelize.NUMBER
+      number: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

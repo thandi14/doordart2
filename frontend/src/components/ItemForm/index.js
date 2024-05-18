@@ -93,7 +93,6 @@ function ItemFormModal({ itemId }) {
             sessionId,
         };
 
-        console.log(sessionId)
         localStorage.setItem('sessionId', sessionId);
         data1 = await dispatch(cartActions.thunkCreateCart(restaurant.id, requestBody))
         if (data1) await dispatch(cartActions.thunkCreateCartItem(data1.id, data))
@@ -122,23 +121,30 @@ function ItemFormModal({ itemId }) {
                 <div id="item-options">
                     <h2 style={{ fontSize: "15px", margin: "0px" }}>{option.option}</h2>
                         <p style={{ margin: "6px 0px", gap: "3px", color: "#767676", fontSize: "11px", display: "flex", alignItems: "center"}}>
-                            <span style={{ gap: "3px", display: "flex", alignItems: "center", color: optionIds.some((id) => option.id == id) ? "green" : "gold", fontSize: "11px"}}>
+                            { option.required && <span style={{ gap: "3px", display: "flex", alignItems: "center", color: optionIds.some((id) => option.id == id) ? "green" : "gold", fontSize: "11px"}}>
                                 { optionIds.some((id) => option.id == id) ? <i style={{ width: "12px", height: "12px", fontSize: "12px" }} class="fi fi-sr-check-circle"></i> :
                                 <i style={{ width: "12px", height: "12px", fontSize: "12px" }} class="fi fi-sr-triangle-warning"></i>}
-                                {option.required ? "Required" : "(Optional)"}</span>
+                                 Required</span>}
+                                { !option.required && <span style={{ gap: "3px", display: "flex", alignItems: "center", color: "grey", fontSize: "11px"}}>
+                                (Optional)</span>}
                                 <i style={{ width: "8px", height: "8px", fontSize: "8px" }} class="fi fi-sr-bullet"></i>
-                            Select {option.number}
+                            Select {!option.required && "up to"} {option.number}
                         </p>
                     {option.ItemSelections?.map((selection) =>
-                        <div onClick={(()=> {
+                    <>
+                        {option.required ? <div onClick={(()=> {
                             console.log(selection.price)
                             setPrice(price + selection.price)
                             addItem(selection, option)
                             })} id="item-selection">
+                            { option.required &&
+                            <>
                             {
-                            items[option.id]?.some((i) => i == selection.id) ?
+                            items[option.id]?.some((i) => i == selection.id) || selection.selected ?
                             <i style={{ width: "16px", height: "16px", fontSize: "16px" }} class="fi fi-bs-dot-circle"></i> :
                             <i style={{ width: "16px", height: "16px", fontSize: "16px" }} class="fi fi-rr-circle"></i>
+                            }
+                            </>
                             }
                             <div>
                                 <p style={{ fontSize: "14px", fontWeight: "500" }}>
@@ -149,8 +155,32 @@ function ItemFormModal({ itemId }) {
                                 </p>
                             </div>
                         </div>
+                        :
+                        <div onClick={(()=> {
+                            addItem(selection, option)
+                            })} id="item-selection">
+                            { !option.required &&
+                            <>
+                            {
+                            items[option.id]?.some((i) => i == selection.id) || selection.selected ?
+                            <i class="fi fi-sr-square-x"></i> :
+                            <i class="fi fi-br-square"></i>
+                            }
+                            </>
+                            }
+                            <div>
+                                <p style={{ fontSize: "14px", fontWeight: "500" }}>
+                                {selection.selection}
+                                </p>
+                                <p style={{ fontSize: "12px", color: "#767676", fontWeight: "500" }}>
+                                {selection.cals ? selection.cals : selection.price}
+                                </p>
+                            </div>
+                        </div>}
+                    </>
                     ).reverse()}
                 </div>
+
             </>
             )
             }
