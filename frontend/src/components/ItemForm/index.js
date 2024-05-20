@@ -17,17 +17,47 @@ function ItemFormModal({ itemId }) {
   const history = useHistory()
   const [ quantity, setQuantity ] = useState(1)
   const [items, setItems] = useState({});
+  const [ ops, setOps ] = useState([])
   const { setItem, setCount } = useFilters()
   const [ data, setData ] = useState({})
-  const [ validation, setValidation ] = useState(0)
+  const [ validation, setValidation ] = useState([])
   const [ optionIds, setOptionIds ] = useState([]);
   const [ price, setPrice ] = useState(0)
 
-
   let options = cartItem.ItemOptions
+
+  useEffect(() => {
+    console.log("Options:", options); // Log options to check its value
+
+    // Function to add selected options to items state
+    if (options && options.length > 0) {
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                // Check if the option is selected
+                if (option.selected) {
+                    // If selected, update the items state
+                    const num = option.id;
+                    setItems(prevItems => {
+                        const currentArray = prevItems[num]?.length ? prevItems[num] : [];
+                        const updatedArray = [...currentArray, option.id];
+                        return {
+                            ...prevItems,
+                            [num]: updatedArray
+                        };
+                    });
+                }
+            }
+    }
+
+}, [dispatch, options, setItems]);
+
 
   const addItem = (selection, option) => {
     let num = option.id
+    if (validation.includes(num)) {
+        const updatedValidation = validation.filter(item => item !== num);
+        setValidation(updatedValidation);
+    }
     const newArray = [...optionIds, num];
     setOptionIds(newArray)
     const currentArray = items[num]?.length ? items[num] : [];
@@ -43,14 +73,32 @@ function ItemFormModal({ itemId }) {
     });
   };
 
+  const removeItem = (selection, option) => {
+    const num = option.id;
+
+    const newArray = optionIds.filter(id => id !== num);
+    setOptionIds(newArray);
+
+    const currentArray = items[num] || [];
+
+    const updatedArray = currentArray.filter(id => id !== selection.id);
+
+    setItems({
+        ...items,
+        [num]: updatedArray
+    });
+};
+
+
+
    useEffect(() => {
     async function validateItem() {
-        let required = 0
+        let required = []
         let ops = []
         ops = cartItem.ItemOptions
         if (ops?.length) {
             for (let o of ops) {
-                if (o.required) required++
+                if (o.required) required.push(o.id)
             }
 
         }
@@ -101,7 +149,11 @@ function ItemFormModal({ itemId }) {
     closeModal()
   };
 
-  options = options.filter((op) => op.required)
+//   options = options.filter((op) => op.required)
+console.log(options)
+console.log(items)
+console.log(price)
+
 
   return (
     <div className="item-modal">
@@ -140,7 +192,7 @@ function ItemFormModal({ itemId }) {
                             { option.required &&
                             <>
                             {
-                            items[option.id]?.some((i) => i == selection.id) || selection.selected ?
+                            items[option.id]?.some((i) => i == selection.id) ?
                             <i style={{ width: "16px", height: "16px", fontSize: "16px" }} class="fi fi-bs-dot-circle"></i> :
                             <i style={{ width: "16px", height: "16px", fontSize: "16px" }} class="fi fi-rr-circle"></i>
                             }
@@ -157,14 +209,15 @@ function ItemFormModal({ itemId }) {
                         </div>
                         :
                         <div onClick={(()=> {
-                            addItem(selection, option)
+                            if (selection.price) setPrice(price + selection.price)
+                            items[option.id]?.some((i) => i == selection.id) ? removeItem(selection, option) : addItem(selection, option)
                             })} id="item-selection">
                             { !option.required &&
                             <>
                             {
-                            items[option.id]?.some((i) => i == selection.id) || selection.selected ?
+                            items[option.id]?.some((i) => i == selection.id) ?
                             <i class="fi fi-sr-square-x"></i> :
-                            <i class="fi fi-br-square"></i>
+                            <i class="fi fi-rr-square"></i>
                             }
                             </>
                             }
@@ -217,7 +270,7 @@ function ItemFormModal({ itemId }) {
                     handleSubmit()
                  }
             })}>
-                {Object.keys(items).length == validation ? "Add to cart" : `Make ${validation - Object.keys(items).length} required selections` } - ${!options?.length ? cartItem.price * quantity : (validation == Object.keys(items).length && price == 0 ? cartItem.price * quantity : price * quantity)}
+                {validation.length == 0 ? "Add to cart" : `Make ${validation.length} required selections` } - ${!options?.length ? cartItem.price * quantity : (validation.length == 0 && price == 0 ? cartItem.price * quantity : price * quantity)}
             </button>
         </div>
     </div>

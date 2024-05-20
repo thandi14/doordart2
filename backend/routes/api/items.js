@@ -22,7 +22,11 @@ router.get('/:id', async (req, res) => {
             {
                 model: ItemOption,
                 include : [
-                    { model: ItemSelection }
+                    {
+                        model: ItemSelection,
+                        order: [['attributeToSort', 'ASC']]
+                     }
+
                 ]
             }
         ]
