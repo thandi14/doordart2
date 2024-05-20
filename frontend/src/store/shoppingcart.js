@@ -96,7 +96,7 @@ export const thunkGetItem = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/items/${id}`)
     const data = await response.json();
     dispatch(getItem(data));
-    return response;
+    return data;
   };
 
 export const thunkCreateCart = (id, data) => async (dispatch) => {

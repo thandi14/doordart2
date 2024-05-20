@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as sessionActions from "../../store/session";
 import * as cartActions from "../../store/shoppingcart";
 import * as restaurantActions from "../../store/restaurants";
@@ -16,40 +16,33 @@ function ItemFormModal({ itemId }) {
   const { closeModal, setModalContent } = useModal();
   const history = useHistory()
   const [ quantity, setQuantity ] = useState(1)
-  const [items, setItems] = useState({});
   const [ ops, setOps ] = useState([])
-  const { setItem, setCount } = useFilters()
+  const { setItem, setCount, setSelections, selections } = useFilters()
   const [ data, setData ] = useState({})
+  const [items, setItems] = useState(selections);
   const [ validation, setValidation ] = useState([])
   const [ optionIds, setOptionIds ] = useState([]);
   const [ price, setPrice ] = useState(0)
+  const targetRef = useRef()
 
   let options = cartItem.ItemOptions
 
   useEffect(() => {
-    console.log("Options:", options); // Log options to check its value
 
-    // Function to add selected options to items state
-    if (options && options.length > 0) {
-            for (let i = 0; i < options.length; i++) {
-                const option = options[i];
-                // Check if the option is selected
-                if (option.selected) {
-                    // If selected, update the items state
-                    const num = option.id;
-                    setItems(prevItems => {
-                        const currentArray = prevItems[num]?.length ? prevItems[num] : [];
-                        const updatedArray = [...currentArray, option.id];
-                        return {
-                            ...prevItems,
-                            [num]: updatedArray
-                        };
-                    });
-                }
-            }
-    }
+    const handleDocumentClick = (event) => {
+        if (targetRef.current && !targetRef.current.contains(event.target)) {
+            setSelections({});
 
-}, [dispatch, options, setItems]);
+        }
+
+      };
+
+      document.addEventListener('click', handleDocumentClick);
+      return () => {
+          document.removeEventListener('click', handleDocumentClick);
+      };
+
+    }, []);
 
 
   const addItem = (selection, option) => {
@@ -109,13 +102,34 @@ function ItemFormModal({ itemId }) {
   }, [dispatch, itemId, options])
 
   useEffect(() => {
-    async function fetchData() {
-         await dispatch(cartActions.thunkGetItem(itemId))
-         await dispatch(cartActions.thunkGetCart(restaurant.id))
-       }
-    fetchData()
+    const fetchData = async () => {
+        await dispatch(cartActions.thunkGetCart(restaurant.id))
+        let data = await dispatch(cartActions.thunkGetItem(itemId))
+        let ops = data.ItemOptions;
+        let selectedOptions = {}; // Object to store selected options and their selections
 
-  }, [dispatch, itemId])
+        if (ops && ops.length > 0) {
+            for (let option of ops) {
+                for (let selection of option.ItemSelections) {
+                    if (selection.selected) {
+                        const num = option.id;
+                        if (!selectedOptions[num]) {
+                            selectedOptions[num] = []; // Initialize array if not exists
+                        }
+                        selectedOptions[num].push(selection.id); // Add selection ID to array
+                    }
+                }
+            }
+        }
+
+        setItems(selectedOptions)
+
+    };
+
+    fetchData();
+
+
+}, [dispatch, itemId, setItems]);
 
   const handleSubmit = async (e) => {
 
@@ -147,18 +161,21 @@ function ItemFormModal({ itemId }) {
     }
     if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
     closeModal()
+    setSelections({})
   };
 
-//   options = options.filter((op) => op.required)
+   options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
+
 console.log(options)
-console.log(items)
 console.log(price)
 
 
   return (
-    <div className="item-modal">
+    <div ref={targetRef} className="item-modal">
         <div id="close-item">
-        <i onClick={(() => closeModal())} class="fi fi-br-cross"></i>
+        <i onClick={(() => {
+            setSelections({})
+            closeModal()})} class="fi fi-br-cross"></i>
         </div>
         <div id="item-modal">
         <div className="item-one">
@@ -244,7 +261,9 @@ console.log(price)
             <h2 style={{ fontSize: "16px"}}>Preferences</h2>
             <p style={{ fontSize: "14px", color: "#767676" }}>(Optional)</p>
             </span>
-            <span onClick={(() => setModalContent(<Instructions />))} style={{ cursor: "pointer"}}>
+            <span onClick={(() => {
+                setSelections(items)
+                setModalContent(<Instructions />)})} style={{ cursor: "pointer"}}>
             <p style={{ fontSize: "16px"}}>Add Special Instructions</p>
             <i style={{ fontSize: "20px", width: "20px", height: "20px" }} class="fi fi-rr-angle-small-right"></i>
             </span>
