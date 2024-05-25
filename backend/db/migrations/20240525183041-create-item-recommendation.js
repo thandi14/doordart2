@@ -4,21 +4,20 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CartItemNotes', {
+    await queryInterface.createTable('ItemRecommendations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      itemId: {
+      optionId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'CartItems',
+          model: 'ItemOptions',
           key: 'id',
       },
       onDelete: 'cascade'
@@ -31,6 +30,18 @@ module.exports = {
       },
       onDelete: 'cascade'
       },
+      recommendation: {
+        type: Sequelize.STRING
+      },
+      cals: {
+        type: Sequelize.STRING
+      },
+      price: {
+        type: Sequelize.DECIMAL
+      },
+      selected: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -42,7 +53,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "CartItemNotes";
+    options.tableName = "ItemRecommendations";
     return queryInterface.dropTable(options);
   }
 };
