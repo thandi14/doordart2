@@ -29,7 +29,10 @@ router.get('/:id', async (req, res) => {
                                 model: ItemRecommendation,
                             }
                         ]
-                     }
+                    },
+                    {
+                        model: ItemRecommendation,
+                    }
 
                 ]
             }

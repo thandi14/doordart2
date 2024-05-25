@@ -16,42 +16,42 @@ module.exports = {
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Pepsi®",
+      recommendation: "Pepsi®",
     },
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Diet Pepsi®",
+      recommendation: "Diet Pepsi®",
     },
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Mountain Dew Legend™",
+      recommendation: "Mountain Dew Legend™",
     },
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Mountain Dew®",
+      recommendation: "Mountain Dew®",
     },
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Starry®",
+      recommendation: "Starry®",
     },
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Tropicana® Lemonade",
+      recommendation: "Tropicana® Lemonade",
     },
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Dr.Pepper®",
+      recommendation: "Dr.Pepper®",
     },
     {
       optionId: 19,
       selectionId: 105,
-      selection: "Pepsi® Zero",
+      recommendation: "Pepsi® Zero",
     },
   ], {});
   },

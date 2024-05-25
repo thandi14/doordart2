@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
         models.CartItemNotes,
           { foreignKey: 'selectionId', onDelete: 'CASCADE',  hooks: true }
       );
+      ItemSelection.hasMany(
+        models.ItemRecommendation,
+          { foreignKey: 'selectionId', onDelete: 'CASCADE',  hooks: true }
+      );
+
     }
   }
   ItemSelection.init({

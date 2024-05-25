@@ -26,6 +26,10 @@ function ItemFormModal({ itemId }) {
   const targetRef = useRef()
 
   let options = cartItem.ItemOptions
+  console.log(options)
+
+  options = options?.filter((ops) => ops.ItemSelections.length > 0)
+
 
   useEffect(() => {
 
@@ -201,7 +205,7 @@ console.log(price)
                         </p>
                     {option.ItemSelections?.map((selection) =>
                     <>
-                        {option.required ? <div onClick={(()=> {
+                        {option.required ? <div style={{ position: "relative"}} onClick={(()=> {
                             console.log(selection.price)
                             setPrice(price + selection.price)
                             addItem(selection, option)
@@ -223,9 +227,10 @@ console.log(price)
                                 {selection.cals ? selection.cals : selection.price}
                                 </p>
                             </div>
+                            { selection.ItemRecommendations?.length > 0 && <i onClick={(() => window.alert("Feature coming soon"))} style={{ width: "16px", height: "16px", fontSize: "16px", position: "absolute", right: "0" }}  class="fi fi-rr-angle-small-right"></i>}
                         </div>
                         :
-                        <div onClick={(()=> {
+                        <div style={{ position: "relative"}} onClick={(()=> {
                             if (selection.price) setPrice(price + selection.price)
                             items[option.id]?.some((i) => i == selection.id) ? removeItem(selection, option) : addItem(selection, option)
                             })} id="item-selection">
@@ -246,6 +251,7 @@ console.log(price)
                                 {selection.cals ? selection.cals : selection.price}
                                 </p>
                             </div>
+                        { selection.ItemRecommendations?.length > 0 && <i onClick={(() => window.alert("Feature coming soon"))} style={{ width: "16px", height: "16px", fontSize: "16px", position: "absolute", right: "0" }}  class="fi fi-rr-angle-small-right"></i>}
                         </div>}
                     </>
                     ).reverse()}
