@@ -114,6 +114,16 @@ module.exports = {
         number: 7,
 
       },
+      {
+        itemId: 79,
+        option: "Recommended Beverages",
+        number: 5,
+      },
+      {
+        itemId: 79,
+        option: "Pick One",
+        number: 1,
+      },
     ], {});
   },
 

@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, MenuItem, ItemOption, ItemSelection } = require('../../db/models');
+const { User, MenuItem, ItemOption, ItemSelection, ItemRecommendation } = require('../../db/models');
 
 const router = express.Router();
 
@@ -24,7 +24,11 @@ router.get('/:id', async (req, res) => {
                 include : [
                     {
                         model: ItemSelection,
-                        order: [['attributeToSort', 'ASC']]
+                        include : [
+                            {
+                                model: ItemRecommendation,
+                            }
+                        ]
                      }
 
                 ]

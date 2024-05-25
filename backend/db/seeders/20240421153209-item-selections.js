@@ -489,6 +489,29 @@ module.exports = {
         selection: "Musturd",
         selected: true
       },
+      {
+        optionId: 18,
+        selection: "20oz Fountain Soda",
+        price: 2.29
+      },
+      {
+        optionId: 18,
+        selection: "Bottled Soda",
+      },
+      {
+        optionId: 18,
+        selection: "Red Bull",
+      },
+      {
+        optionId: 18,
+        selection: "bubly™ Lime Sparkling Water",
+        price: 3.49
+      },
+      {
+        optionId: 18,
+        selection: "Aquafina® Bottled Water",
+        price: 2.29
+      },
     ], {});
   },
 

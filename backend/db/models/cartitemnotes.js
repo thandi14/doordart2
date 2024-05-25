@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
           { foreignKey: 'selectionId' }
       );
       CartItemNotes.belongsTo(
+        models.ItemRecommendation,
+          { foreignKey: 'recommendationId' }
+      );
+      CartItemNotes.belongsTo(
         models.CartItem,
           { foreignKey: 'itemId' }
       );
@@ -22,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   CartItemNotes.init({
     itemId: DataTypes.INTEGER,
-    selectionId: DataTypes.INTEGER
+    selectionId: DataTypes.INTEGER,
+    recommendationId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'CartItemNotes',
