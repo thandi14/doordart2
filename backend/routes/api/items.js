@@ -27,11 +27,21 @@ router.get('/:id', async (req, res) => {
                         include : [
                             {
                                 model: ItemRecommendation,
+                                include : [
+                                    {
+                                        model: ItemOption,
+                                    }
+                                ]
                             }
                         ]
                     },
                     {
                         model: ItemRecommendation,
+                        include : [
+                            {
+                                model: ItemOption,
+                            }
+                        ]
                     }
 
                 ]

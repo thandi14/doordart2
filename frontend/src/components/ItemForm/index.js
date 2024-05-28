@@ -8,6 +8,7 @@ import "./ItemForm.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useFilters } from "../../context/Filters";
 import Instructions from "./Instructions";
+import Recommendations from "./Recommendations";
 
 function ItemFormModal({ itemId }) {
   const dispatch = useDispatch();
@@ -19,17 +20,20 @@ function ItemFormModal({ itemId }) {
   const [ ops, setOps ] = useState([])
   const { setItem, setCount, setSelections, selections } = useFilters()
   const [ data, setData ] = useState({})
-  const [items, setItems] = useState(selections);
+  const [ items, setItems ] = useState(selections);
   const [ validation, setValidation ] = useState([])
   const [ optionIds, setOptionIds ] = useState([]);
   const [ price, setPrice ] = useState(0)
   const targetRef = useRef()
 
   let options = cartItem.ItemOptions
-  console.log(options)
+  console.log(items)
 
   options = options?.filter((ops) => ops.ItemSelections.length > 0)
 
+  useEffect(() => {
+        setItems(selections)
+    }, [selections]);
 
   useEffect(() => {
 
@@ -87,24 +91,6 @@ function ItemFormModal({ itemId }) {
 };
 
 
-
-   useEffect(() => {
-    async function validateItem() {
-        let required = []
-        let ops = []
-        ops = cartItem.ItemOptions
-        if (ops?.length) {
-            for (let o of ops) {
-                if (o.required) required.push(o.id)
-            }
-
-        }
-        setValidation(required)
-    }
-    validateItem()
-
-  }, [dispatch, itemId, options])
-
   useEffect(() => {
     const fetchData = async () => {
         await dispatch(cartActions.thunkGetCart(restaurant.id))
@@ -132,8 +118,24 @@ function ItemFormModal({ itemId }) {
 
     fetchData();
 
+}, [dispatch, itemId]);
 
-}, [dispatch, itemId, setItems]);
+useEffect(() => {
+    async function validateItem() {
+        let required = []
+        let ops = []
+        ops = cartItem.ItemOptions
+        if (ops?.length) {
+            for (let o of ops) {
+                if (o.required) required.push(o.id)
+            }
+
+        }
+        setValidation(required)
+    }
+    validateItem()
+
+}, [dispatch, itemId])
 
   const handleSubmit = async (e) => {
 
@@ -171,7 +173,7 @@ function ItemFormModal({ itemId }) {
    options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
 
 console.log(options)
-console.log(price)
+console.log(selections)
 
 
   return (
@@ -231,8 +233,12 @@ console.log(price)
                         </div>
                         :
                         <div style={{ position: "relative"}} onClick={(()=> {
-                            if (selection.price) setPrice(price + selection.price)
                             items[option.id]?.some((i) => i == selection.id) ? removeItem(selection, option) : addItem(selection, option)
+                            if (selection.price) setPrice(price + selection.price)
+                            // if (selection.ItemRecommendations?.length) {
+                            //     if (Object.values(items).length) setSelections(items)
+                            //     setModalContent(<Recommendations selection={selection} opIds={optionIds} itemId={itemId} items={items} op={option} />)
+                            // }
                             })} id="item-selection">
                             { !option.required &&
                             <>
@@ -247,11 +253,18 @@ console.log(price)
                                 <p style={{ fontSize: "14px", fontWeight: "500" }}>
                                 {selection.selection}
                                 </p>
+                                { selection.ItemRecommendations?.some((i) => items[option.id]?.includes(i.id)) && <p style={{ fontSize: "12px", fontWeight: "500" }}>
+                                {selection.ItemRecommendations?.find((i) =>  items[option.id]?.includes(i.id)).recommendation}
+                                </p>}
                                 <p style={{ fontSize: "12px", color: "#767676", fontWeight: "500" }}>
                                 {selection.cals ? selection.cals : selection.price}
                                 </p>
                             </div>
-                        { selection.ItemRecommendations?.length > 0 && <i onClick={(() => window.alert("Feature coming soon"))} style={{ width: "16px", height: "16px", fontSize: "16px", position: "absolute", right: "0" }}  class="fi fi-rr-angle-small-right"></i>}
+                        { selection.ItemRecommendations?.length > 0 && <i onClick={(() => {
+                            if (Object.values(items).length) setSelections(items)
+                            window.alert("Feature coming soon")
+                            // setModalContent(<Recommendations selection={selection}  opIds={optionIds} itemId={itemId} items={items} op={option}  />)
+                            })} style={{ width: "16px", height: "16px", fontSize: "16px", position: "absolute", right: "0" }}  class="fi fi-rr-angle-small-right"></i>}
                         </div>}
                     </>
                     ).reverse()}

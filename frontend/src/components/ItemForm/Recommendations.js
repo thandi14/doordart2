@@ -8,24 +8,50 @@ import "./ItemForm.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useFilters } from "../../context/Filters";
 import Instructions from "./Instructions";
+import ItemFormModal from ".";
 
-function Recommendations({ selection }) {
+function Recommendations({ selection, itemId, items, opIds, op }) {
   const dispatch = useDispatch();
   const { restaurant }  = useSelector((state) => state.restaurants);
   const { cartItem, shoppingCart }  = useSelector((state) => state.cart);
   const { closeModal, setModalContent } = useModal();
   const history = useHistory()
-  const [ quantity, setQuantity ] = useState(1)
   const [ ops, setOps ] = useState([])
   const { setItem, setCount, setSelections, selections } = useFilters()
   const [ data, setData ] = useState({})
-  const [items, setItems] = useState(selections);
+  const [ itemsTwo, setItemsTwo ] = useState(items);
   const [ validation, setValidation ] = useState([])
-  const [ optionIds, setOptionIds ] = useState([]);
+  const [ optionIds, setOptionIds ] = useState(opIds);
   const [ price, setPrice ] = useState(0)
   const targetRef = useRef()
 
-  let options = cartItem.ItemOptions
+  let options = selection.ItemRecommendations
+
+  useEffect(() => {
+    if (!opIds) {
+        setOptionIds([])
+
+    }
+
+    let num = op.id
+
+    if (!itemsTwo[num]?.includes(selection.id)) {
+
+        const newArray = [...optionIds, num];
+        setOptionIds(newArray)
+        const currentArray = itemsTwo[num]?.length ? itemsTwo[num] : [];
+        const updatedArray = [...currentArray, selection.id];
+        setItemsTwo({
+            ...itemsTwo,
+            [num]: updatedArray
+        });
+        setSelections(itemsTwo)
+
+    }
+
+  }, [opIds, op]);
+
+  console.log(itemsTwo)
 
   useEffect(() => {
 
@@ -45,25 +71,32 @@ function Recommendations({ selection }) {
     }, []);
 
 
-  const addItem = (selection, option) => {
+  const addItem = (s, option, recommendation) => {
+
+
+
+    console.log(recommendation)
+
     let num = option.id
-    if (validation.includes(num)) {
-        const updatedValidation = validation.filter(item => item !== num);
-        setValidation(updatedValidation);
+
+    if (validation.length < recommendation.number && s.optionId === recommendation.id) {
+        setValidation([...validation, num]);
     }
+
     const newArray = [...optionIds, num];
     setOptionIds(newArray)
-    const currentArray = items[num]?.length ? items[num] : [];
-    const updatedArray = [...currentArray, selection.id];
+    const currentArray = itemsTwo[num]?.length ? itemsTwo[num] : [];
+    const updatedArray = [...currentArray, s.id];
 
-    if (updatedArray.length > option.number && selection.optionId === option.id) {
+    if (updatedArray.length > recommendation.number && s.optionId === recommendation.id) {
       updatedArray.shift();
     }
 
-    setItems({
-      ...items,
+    setItemsTwo({
+      ...itemsTwo,
       [num]: updatedArray
     });
+
   };
 
   const removeItem = (selection, option) => {
@@ -76,121 +109,62 @@ function Recommendations({ selection }) {
 
     const updatedArray = currentArray.filter(id => id !== selection.id);
 
-    setItems({
-        ...items,
+    setItemsTwo({
+        ...itemsTwo,
         [num]: updatedArray
     });
-};
+  };
 
 
 
-   useEffect(() => {
-    async function validateItem() {
-        let required = []
-        let ops = []
-        ops = cartItem.ItemOptions
-        if (ops?.length) {
-            for (let o of ops) {
-                if (o.required) required.push(o.id)
-            }
-
-        }
-        setValidation(required)
-    }
-    validateItem()
-
-  }, [dispatch, itemId, options])
-
-  useEffect(() => {
-    const fetchData = async () => {
-        await dispatch(cartActions.thunkGetCart(restaurant.id))
-        let data = await dispatch(cartActions.thunkGetItem(itemId))
-        let ops = data.ItemOptions;
+    useEffect(() => {
+        let ops = selection.ItemRecommendations;
         let selectedOptions = {}; // Object to store selected options and their selections
 
         if (ops && ops.length > 0) {
-            for (let option of ops) {
-                for (let selection of option.ItemSelections) {
+                for (let selection of ops) {
                     if (selection.selected) {
-                        const num = option.id;
+                        const num = selection.optionId;
                         if (!selectedOptions[num]) {
                             selectedOptions[num] = []; // Initialize array if not exists
                         }
                         selectedOptions[num].push(selection.id); // Add selection ID to array
                     }
                 }
-            }
         }
 
-        setItems(selectedOptions)
+        setItemsTwo(selectedOptions)
 
-    };
+    }, [dispatch, itemId]);
 
-    fetchData();
-
-
-}, [dispatch, itemId, setItems]);
+    console.log(selection)
 
   const handleSubmit = async (e) => {
-
-    const generateRandomSessionId = () => {
-        return Math.random().toString(36).substring(2);
+      setSelections(itemsTwo)
+      setModalContent(<ItemFormModal />)
     };
 
+  let recommendations = selection.ItemRecommendations.sort((a, b) => a.recommendation.localeCompare(b.recommendation))
+  let option = selection.ItemRecommendations.find((r) => r.ItemOption).ItemOption
 
-
-    // e.preventDefault();
-    setCount(quantity)
-    setItem(cartItem)
-    let selections = Object.values(items)
-    const ops = [].concat(...selections);
-    let data = { itemId, options: ops, quantity }
-    let data1
-    if (!shoppingCart?.id) {
-        let sessionId = localStorage.getItem('sessionId');
-
-        if (!sessionId) sessionId = generateRandomSessionId();
-
-        const requestBody = {
-            sessionId,
-        };
-
-        localStorage.setItem('sessionId', sessionId);
-        data1 = await dispatch(cartActions.thunkCreateCart(restaurant.id, requestBody))
-        if (data1) await dispatch(cartActions.thunkCreateCartItem(data1.id, data))
-    }
-    if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
-    closeModal()
-    setSelections({})
-  };
-
-   options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
-
-console.log(options)
-console.log(price)
-
+console.log(validation)
+console.log(op)
 
   return (
     <div ref={targetRef} className="item-modal">
-        <div id="close-item">
-        <i onClick={(() => {
-            setSelections({})
-            closeModal()})} class="fi fi-br-cross"></i>
+        <div style={{ display: "flex", gap: "10px"}} id="instruct-item">
+        <i onClick={(() => setModalContent(<ItemFormModal />))} class="fi fi-rr-arrow-small-left"></i>
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px", paddingTop: "16px"}} >
+        <p style={{ fontSize: "14px", margin: "0px"}}>{cartItem.item}</p>
+        <h1 style={{ fontSize: "16px", margin: "0px"}} >{selection.selection}</h1>
         </div>
-        <div id="item-modal">
-        <div className="item-one">
-            <h1>{cartItem.item}</h1>
-            {cartItem.cals && <p>{cartItem.cals} cal</p>}
-            <p>{cartItem.description}</p>
         </div>
-        <img style={{ width: "100%", marginBottom: "20px" }} src={cartItem.imgUrl}></img>
+        <div style={{ marginBottom: "20px" }} id="item-modal">
         <div className="item-two">
-            {options?.length > 0 && options.map((option) =>
-            <>
                 <div id="item-options">
                     <h2 style={{ fontSize: "15px", margin: "0px" }}>{option.option}</h2>
                         <p style={{ margin: "6px 0px", gap: "3px", color: "#767676", fontSize: "11px", display: "flex", alignItems: "center"}}>
-                            { option.required && <span style={{ gap: "3px", display: "flex", alignItems: "center", color: optionIds.some((id) => option.id == id) ? "green" : "gold", fontSize: "11px"}}>
+                            { option?.required && <span style={{ gap: "3px", display: "flex", alignItems: "center", color: optionIds.some((id) => option.id == id) ? "green" : "gold", fontSize: "11px"}}>
                                 { optionIds.some((id) => option.id == id) ? <i style={{ width: "12px", height: "12px", fontSize: "12px" }} class="fi fi-sr-check-circle"></i> :
                                 <i style={{ width: "12px", height: "12px", fontSize: "12px" }} class="fi fi-sr-triangle-warning"></i>}
                                  Required</span>}
@@ -199,17 +173,17 @@ console.log(price)
                                 <i style={{ width: "8px", height: "8px", fontSize: "8px" }} class="fi fi-sr-bullet"></i>
                             Select {!option.required && "up to"} {option.number}
                         </p>
-                    {option.ItemSelections?.map((selection) =>
+                    {recommendations?.map((selection) =>
                     <>
-                        {option.required ? <div onClick={(()=> {
+                        {selection.ItemOption?.required ? <div onClick={(()=> {
                             console.log(selection.price)
                             setPrice(price + selection.price)
-                            addItem(selection, option)
+                            addItem(selection, selection.ItemOption)
                             })} id="item-selection">
-                            { option.required &&
+                            { selection.ItemOption?.required &&
                             <>
                             {
-                            items[option.id]?.some((i) => i == selection.id) ?
+                            itemsTwo[op.id]?.some((i) => i == selection.id) ?
                             <i style={{ width: "16px", height: "16px", fontSize: "16px" }} class="fi fi-bs-dot-circle"></i> :
                             <i style={{ width: "16px", height: "16px", fontSize: "16px" }} class="fi fi-rr-circle"></i>
                             }
@@ -217,7 +191,7 @@ console.log(price)
                             }
                             <div>
                                 <p style={{ fontSize: "14px", fontWeight: "500" }}>
-                                {selection.selection}
+                                {selection.recommendation}
                                 </p>
                                 <p style={{ fontSize: "12px", color: "#767676", fontWeight: "500" }}>
                                 {selection.cals ? selection.cals : selection.price}
@@ -227,12 +201,13 @@ console.log(price)
                         :
                         <div onClick={(()=> {
                             if (selection.price) setPrice(price + selection.price)
-                            items[option.id]?.some((i) => i == selection.id) ? removeItem(selection, option) : addItem(selection, option)
+                            if (selection.ItemRecommendations?.length) setModalContent(<Recommendations selection={selection} itemId={itemId} items={items} opIds={optionIds} op={op}/>)
+                            itemsTwo[op.id]?.some((i) => i == selection.id) ? removeItem(selection, op, selection.ItemOption) : addItem(selection, op, selection.ItemOption)
                             })} id="item-selection">
-                            { !option.required &&
+                            { !selection.ItemOption?.required &&
                             <>
                             {
-                            items[option.id]?.some((i) => i == selection.id) ?
+                            itemsTwo[op.id]?.some((i) => i == selection.id) ?
                             <i class="fi fi-sr-square-x"></i> :
                             <i class="fi fi-rr-square"></i>
                             }
@@ -240,7 +215,7 @@ console.log(price)
                             }
                             <div>
                                 <p style={{ fontSize: "14px", fontWeight: "500" }}>
-                                {selection.selection}
+                                {selection.recommendation}
                                 </p>
                                 <p style={{ fontSize: "12px", color: "#767676", fontWeight: "500" }}>
                                 {selection.cals ? selection.cals : selection.price}
@@ -248,48 +223,17 @@ console.log(price)
                             </div>
                         </div>}
                     </>
-                    ).reverse()}
+                    )}
                 </div>
-
-            </>
-            )
-            }
-
-        </div>
-        <div style={{ marginTop: "15px"}} id="si">
-            <span>
-            <h2 style={{ fontSize: "16px"}}>Preferences</h2>
-            <p style={{ fontSize: "14px", color: "#767676" }}>(Optional)</p>
-            </span>
-            <span onClick={(() => {
-                setSelections(items)
-                setModalContent(<Instructions />)})} style={{ cursor: "pointer"}}>
-            <p style={{ fontSize: "16px"}}>Add Special Instructions</p>
-            <i style={{ fontSize: "20px", width: "20px", height: "20px" }} class="fi fi-rr-angle-small-right"></i>
-            </span>
         </div>
         </div>
         <div id="buy-item">
-            <div>
-                <i style={{ curser: quantity == 1 ? "not-allowed" : "pointer" }} onClick={(() => {
-                    if (quantity == 1) {
-                        setQuantity(1)
-                    }
-                    else {
-                        setQuantity(quantity - 1)
-                    }
-                })} class="fi fi-rr-minus-circle"></i>
-                <span>
-                    {quantity}
-                    </span>
-                <i onClick={(() => setQuantity(quantity + 1))} class="fi fi-rr-add"></i>
-            </div>
-            <button onClick={(() => {
-                 if (Object.keys(items).length == validation) {
+            <button style={{ width: "100%", justifyContent: "center", }} onClick={(() => {
+                 if (validation.length > 0) {
                     handleSubmit()
                  }
             })}>
-                {validation.length == 0 ? "Add to cart" : `Make ${validation.length} required selections` } - ${!options?.length ? cartItem.price * quantity : (validation.length == 0 && price == 0 ? cartItem.price * quantity : price * quantity)}
+                {validation.length > 0 ? "Save" : `Make 1 required selection` }
             </button>
         </div>
     </div>
