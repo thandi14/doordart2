@@ -10,17 +10,17 @@ import { useFilters } from "../../context/Filters";
 import Instructions from "./Instructions";
 import ItemFormModal from ".";
 
-function Recommendations({ selection, itemId, items, opIds, op }) {
+function Recommendations({ val, selection, itemId, items, opIds, op }) {
   const dispatch = useDispatch();
   const { restaurant }  = useSelector((state) => state.restaurants);
   const { cartItem, shoppingCart }  = useSelector((state) => state.cart);
   const { closeModal, setModalContent } = useModal();
   const history = useHistory()
   const [ ops, setOps ] = useState([])
-  const { setItem, setCount, setSelections, selections } = useFilters()
+  const { setItem, setCount, setSelections, selections, validation, setValidation   } = useFilters()
   const [ data, setData ] = useState({})
   const [ itemsTwo, setItemsTwo ] = useState(items);
-  const [ validation, setValidation ] = useState([])
+  const [ validationTwo, setValidationTwo ] = useState([])
   const [ optionIds, setOptionIds ] = useState(opIds);
   const [ price, setPrice ] = useState(0)
   const targetRef = useRef()
@@ -33,23 +33,32 @@ function Recommendations({ selection, itemId, items, opIds, op }) {
 
     }
 
-    let num = op.id
-
-    if (!itemsTwo[num]?.includes(selection.id)) {
-
-        const newArray = [...optionIds, num];
-        setOptionIds(newArray)
-        const currentArray = itemsTwo[num]?.length ? itemsTwo[num] : [];
-        const updatedArray = [...currentArray, selection.id];
-        setItemsTwo({
-            ...itemsTwo,
-            [num]: updatedArray
-        });
-        setSelections(itemsTwo)
+    if (!itemsTwo || !Object.values(itemsTwo)?.length) {
+        setItemsTwo(items)
 
     }
 
-  }, [opIds, op]);
+    if (!val.length) {
+        setValidationTwo(validation)
+    }
+
+  }, [opIds, items, itemsTwo, val]);
+
+  useEffect(() => {
+
+    let num = op.id
+
+    if (!itemsTwo[num] || !itemsTwo[num]?.includes(selection.id)) {
+        const current = itemsTwo[num]?.length ? itemsTwo[num] : [];
+        const updated = [...current, selection.id];
+        setItemsTwo({
+            ...itemsTwo,
+            [num]: updated
+        });
+    }
+
+
+  }, [op, itemsTwo, selection]);
 
   console.log(itemsTwo)
 
@@ -73,31 +82,29 @@ function Recommendations({ selection, itemId, items, opIds, op }) {
 
   const addItem = (s, option, recommendation) => {
 
-
-
-    console.log(recommendation)
-
     let num = option.id
-
-    if (validation.length < recommendation.number && s.optionId === recommendation.id) {
-        setValidation([...validation, num]);
-    }
 
     const newArray = [...optionIds, num];
     setOptionIds(newArray)
     const currentArray = itemsTwo[num]?.length ? itemsTwo[num] : [];
-    const updatedArray = [...currentArray, s.id];
+    let updatedArray = [...currentArray, s.id];
 
-    if (updatedArray.length > recommendation.number && s.optionId === recommendation.id) {
-      updatedArray.shift();
+    if (updatedArray.filter((i) => i !== s.selectionId ).length > recommendation.number && recommendation.id == s.optionId) {
+        updatedArray = updatedArray.filter((i) => i !== s.selectionId )
+        updatedArray.shift();
+        updatedArray = [...updatedArray, s.selectionId]
+
     }
 
     setItemsTwo({
-      ...itemsTwo,
-      [num]: updatedArray
+        ...itemsTwo,
+        [num]: updatedArray
     });
 
-  };
+    console.log("hello", s, recommendation)
+
+
+};
 
   const removeItem = (selection, option) => {
     const num = option.id;
@@ -133,22 +140,27 @@ function Recommendations({ selection, itemId, items, opIds, op }) {
                 }
         }
 
-        setItemsTwo(selectedOptions)
+        setItemsTwo({
+            ...itemsTwo,
+            ...selectedOptions
+        })
 
     }, [dispatch, itemId]);
 
-    console.log(selection)
+    console.log(validation)
 
   const handleSubmit = async (e) => {
-      setSelections(itemsTwo)
-      setModalContent(<ItemFormModal />)
-    };
+
+    setValidation(validation)
+    setSelections(itemsTwo)
+    setModalContent(<ItemFormModal />)
+
+  };
 
   let recommendations = selection.ItemRecommendations.sort((a, b) => a.recommendation.localeCompare(b.recommendation))
   let option = selection.ItemRecommendations.find((r) => r.ItemOption).ItemOption
 
 console.log(validation)
-console.log(op)
 
   return (
     <div ref={targetRef} className="item-modal">
@@ -229,11 +241,11 @@ console.log(op)
         </div>
         <div id="buy-item">
             <button style={{ width: "100%", justifyContent: "center", }} onClick={(() => {
-                 if (validation.length > 0) {
+                 if (itemsTwo[op.id]?.length > 1) {
                     handleSubmit()
                  }
             })}>
-                {validation.length > 0 ? "Save" : `Make 1 required selection` }
+                {itemsTwo[op.id]?.length > 1 ? "Save" : `Make 1 required selection` }
             </button>
         </div>
     </div>

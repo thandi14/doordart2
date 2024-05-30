@@ -18,16 +18,14 @@ function ItemFormModal({ itemId }) {
   const history = useHistory()
   const [ quantity, setQuantity ] = useState(1)
   const [ ops, setOps ] = useState([])
-  const { setItem, setCount, setSelections, selections } = useFilters()
+  const { setItem, setCount, setSelections, selections, validation, setValidation  } = useFilters()
   const [ data, setData ] = useState({})
   const [ items, setItems ] = useState(selections);
-  const [ validation, setValidation ] = useState([])
   const [ optionIds, setOptionIds ] = useState([]);
   const [ price, setPrice ] = useState(0)
   const targetRef = useRef()
 
   let options = cartItem.ItemOptions
-  console.log(items)
 
   options = options?.filter((ops) => ops.ItemSelections.length > 0)
 
@@ -112,7 +110,10 @@ function ItemFormModal({ itemId }) {
             }
         }
 
-        setItems(selectedOptions)
+        setItems({
+            ...items,
+            ...selectedOptions,
+        })
 
     };
 
@@ -127,7 +128,7 @@ useEffect(() => {
         ops = cartItem.ItemOptions
         if (ops?.length) {
             for (let o of ops) {
-                if (o.required) required.push(o.id)
+                if (o.required && !Object.keys(items).some((i) => i == o.id)) required.push(o.id)
             }
 
         }
@@ -173,7 +174,7 @@ useEffect(() => {
    options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
 
 console.log(options)
-console.log(selections)
+console.log(items)
 
 
   return (
@@ -196,8 +197,8 @@ console.log(selections)
                 <div id="item-options">
                     <h2 style={{ fontSize: "15px", margin: "0px" }}>{option.option}</h2>
                         <p style={{ margin: "6px 0px", gap: "3px", color: "#767676", fontSize: "11px", display: "flex", alignItems: "center"}}>
-                            { option.required && <span style={{ gap: "3px", display: "flex", alignItems: "center", color: optionIds.some((id) => option.id == id) ? "green" : "gold", fontSize: "11px"}}>
-                                { optionIds.some((id) => option.id == id) ? <i style={{ width: "12px", height: "12px", fontSize: "12px" }} class="fi fi-sr-check-circle"></i> :
+                            { option.required && <span style={{ gap: "3px", display: "flex", alignItems: "center", color: optionIds.some((id) => option.id == id) || Object.keys(items).some((id) => option.id == id) ? "green" : "gold", fontSize: "11px"}}>
+                                { optionIds.some((id) => option.id == id) || Object.keys(items).some((id) => option.id == id) ? <i style={{ width: "12px", height: "12px", fontSize: "12px" }} class="fi fi-sr-check-circle"></i> :
                                 <i style={{ width: "12px", height: "12px", fontSize: "12px" }} class="fi fi-sr-triangle-warning"></i>}
                                  Required</span>}
                                 { !option.required && <span style={{ gap: "3px", display: "flex", alignItems: "center", color: "grey", fontSize: "11px"}}>
@@ -235,10 +236,10 @@ console.log(selections)
                         <div style={{ position: "relative"}} onClick={(()=> {
                             items[option.id]?.some((i) => i == selection.id) ? removeItem(selection, option) : addItem(selection, option)
                             if (selection.price) setPrice(price + selection.price)
-                            // if (selection.ItemRecommendations?.length) {
-                            //     if (Object.values(items).length) setSelections(items)
-                            //     setModalContent(<Recommendations selection={selection} opIds={optionIds} itemId={itemId} items={items} op={option} />)
-                            // }
+                            if (selection.ItemRecommendations?.length) {
+                                if (Object.values(items).length) setSelections(items)
+                                setModalContent(<Recommendations val={validation} selection={selection} opIds={optionIds} itemId={itemId} items={items} op={option} />)
+                            }
                             })} id="item-selection">
                             { !option.required &&
                             <>
@@ -262,8 +263,7 @@ console.log(selections)
                             </div>
                         { selection.ItemRecommendations?.length > 0 && <i onClick={(() => {
                             if (Object.values(items).length) setSelections(items)
-                            window.alert("Feature coming soon")
-                            // setModalContent(<Recommendations selection={selection}  opIds={optionIds} itemId={itemId} items={items} op={option}  />)
+                            setModalContent(<Recommendations val={validation} selection={selection}  opIds={optionIds} itemId={itemId} items={items} op={option}  />)
                             })} style={{ width: "16px", height: "16px", fontSize: "16px", position: "absolute", right: "0" }}  class="fi fi-rr-angle-small-right"></i>}
                         </div>}
                     </>
@@ -308,7 +308,7 @@ console.log(selections)
                     handleSubmit()
                  }
             })}>
-                {validation.length == 0 ? "Add to cart" : `Make ${validation.length} required selections` } - ${!options?.length ? cartItem.price * quantity : (validation.length == 0 && price == 0 ? cartItem.price * quantity : price * quantity)}
+                {validation?.length == 0 ? "Add to cart" : `Make ${validation?.length} required selections` } - ${!options?.length ? cartItem.price * quantity : (validation.length == 0 && price == 0 ? cartItem.price * quantity : price * quantity)}
             </button>
         </div>
     </div>

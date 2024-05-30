@@ -12,10 +12,12 @@ export function FiltersProvider({ children }) {
     const [profile, setProfile] = useState(false);
     const [results, setResults] = useState(1);
     const [selections, setSelections] = useState({});
+    const [validation, setValidation] = useState([]);
+
 
 
   return (
-    <FiltersContext.Provider value={{ selections, setSelections, results, setResults, profile, setProfile, recentId, setRecentId, filter, setFilter, location, setLocation, item, setItem, count, setCount }}>
+    <FiltersContext.Provider value={{ validation, setValidation, selections, setSelections, results, setResults, profile, setProfile, recentId, setRecentId, filter, setFilter, location, setLocation, item, setItem, count, setCount }}>
       {children}
     </FiltersContext.Provider>
   );
