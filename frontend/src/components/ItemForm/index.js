@@ -258,8 +258,16 @@ console.log(items)
                                 {selection.ItemRecommendations?.find((i) =>  items[option.id]?.includes(i.id)).recommendation}
                                 </p>}
                                 <p style={{ fontSize: "12px", color: "#767676", fontWeight: "500" }}>
-                                {selection.cals ? selection.cals : selection.price}
+                                 {selection.cals && selection.cals }
+                                 {selection.price && ` + ${selection.price}`}
                                 </p>
+                                {items[option.id]?.some((i) => i == selection.id) && selection.ItemRecommendations?.length > 0 &&
+                                       <div id="es">
+                                       <p style={{ fontSize: "12px", fontWeight: "500" }}>
+                                        Edit selection
+                                        </p>
+                                       </div>
+                                }
                             </div>
                         { selection.ItemRecommendations?.length > 0 && <i onClick={(() => {
                             if (Object.values(items).length) setSelections(items)

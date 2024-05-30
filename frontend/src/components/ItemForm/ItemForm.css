@@ -83,6 +83,17 @@
     padding: 16px
 }
 
+#es {
+    padding: 0px 4px;
+    height: 20px;
+    background-color: #f1f1f1ff;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    border-radius: 4px;
+    width: min-content;
+}
+
 #unavailable {
     padding: 16px;
     width: 100%;
