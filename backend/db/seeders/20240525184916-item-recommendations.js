@@ -1,6 +1,6 @@
 'use strict';
 
-const { ItemRecommendation } = require('../models');
+const { ItemRecommendation, ItemOption } = require('../models');
 const bcrypt = require("bcryptjs");
 
 let options = {};
@@ -12,48 +12,63 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await ItemRecommendation.bulkCreate([
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Pepsi®",
-    },
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Diet Pepsi®",
-    },
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Mountain Dew Legend™",
-    },
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Mountain Dew®",
-    },
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Starry®",
-    },
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Tropicana® Lemonade",
-    },
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Dr.Pepper®",
-    },
-    {
-      optionId: 19,
-      selectionId: 105,
-      recommendation: "Pepsi® Zero",
-    },
-  ], {});
+    const idsToRetrieve = [18, 19, 20, 21, 22, 23, 24];
+    const idsToRetrieveSelec = [105, 106, 107, 108, 109, 110, 111];
+
+    const options = await ItemOption.findAll({
+      where: {
+        id: idsToRetrieve
+      }
+    });
+
+    const rec = options.flatMap(option => {
+      return idsToRetrieveSelec.flatMap((selectionId) => [
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Pepsi®",
+      },
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Diet Pepsi®",
+      },
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Mountain Dew Legend™",
+      },
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Mountain Dew®",
+      },
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Starry®",
+      },
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Tropicana® Lemonade",
+      },
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Dr.Pepper®",
+      },
+      {
+        optionId: option.id,
+        selectionId: selectionId,
+        recommendation: "Pepsi® Zero",
+      }
+    ]);
+    });
+
+    await ItemRecommendation.bulkCreate(rec);
+
+
   },
 
   async down (queryInterface, Sequelize) {

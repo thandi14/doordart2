@@ -1,6 +1,6 @@
 'use strict';
 
-const { ItemSelection } = require('../models');
+const { ItemSelection, ItemOption } = require('../models');
 const bcrypt = require("bcryptjs");
 
 let options = {};
@@ -489,30 +489,62 @@ module.exports = {
         selection: "Musturd",
         selected: true
       },
+    ], {});
+
+    const idsToRetrieve = [18, 19, 20, 21, 22, 23, 24];
+
+    const options = await ItemOption.findAll({
+      where: {
+      id: idsToRetrieve
+      }
+    });
+
+    const fountain = options.flatMap(option => [
       {
-        optionId: 18,
+        optionId: option.id,
         selection: "20oz Fountain Soda",
         price: 2.29
       },
+    ]);
+
+    const soda = options.flatMap(option => [
       {
-        optionId: 18,
+        optionId: option.id,
         selection: "Bottled Soda",
       },
+    ]);
+
+    const bull = options.flatMap(option => [
       {
-        optionId: 18,
+        optionId: option.id,
         selection: "Red Bull",
       },
+    ]);
+
+    const water = options.flatMap(option => [
       {
-        optionId: 18,
+        optionId: option.id,
         selection: "bubly™ Lime Sparkling Water",
         price: 3.49
       },
+    ]);
+
+    const aqua = options.flatMap(option => [
       {
-        optionId: 18,
+        optionId: option.id,
         selection: "Aquafina® Bottled Water",
         price: 2.29
       },
-    ], {});
+    ]);
+
+    await ItemSelection.bulkCreate(fountain);
+    await ItemSelection.bulkCreate(soda);
+    await ItemSelection.bulkCreate(bull);
+    await ItemSelection.bulkCreate(water);
+    await ItemSelection.bulkCreate(aqua);
+
+
+
   },
 
   async down (queryInterface, Sequelize) {

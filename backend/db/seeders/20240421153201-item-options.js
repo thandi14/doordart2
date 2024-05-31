@@ -1,6 +1,6 @@
 'use strict';
 
-const { ItemOption } = require('../models');
+const { ItemOption, MenuItem } = require('../models');
 const bcrypt = require("bcryptjs");
 
 let options = {};
@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+
     await ItemOption.bulkCreate([
       {
         itemId: 1,
@@ -114,18 +115,36 @@ module.exports = {
         number: 7,
 
       },
+    ], {});
+
+    const idsToRetrieve = [79, 80, 81, 82, 83, 84, 85];
+
+    const items = await MenuItem.findAll({
+      where: {
+      id: idsToRetrieve 
+      }
+    });
+
+    const menuItems = items.flatMap(item => [
       {
-        itemId: 79,
+        itemId: item.id,
         option: "Recommended Beverages",
         number: 5,
       },
+    ]);
+
+    const moreItems = items.flatMap(item => [
       {
-        itemId: 79,
+        itemId: item.id,
         option: "Pick One",
         required: true,
         number: 1,
       },
-    ], {});
+    ]);
+
+    await ItemOption.bulkCreate(menuItems);
+    await ItemOption.bulkCreate(moreItems);
+
   },
 
   async down (queryInterface, Sequelize) {
