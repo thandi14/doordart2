@@ -122,6 +122,7 @@ module.exports = {
       {
         itemId: 79,
         option: "Pick One",
+        required: true,
         number: 1,
       },
     ], {});

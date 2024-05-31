@@ -27,7 +27,7 @@ function RestaurantNavTwo({ isLoaded }) {
   const targetRef = useRef()
   const targetRef2 = useRef()
   const { setModalContent } = useModal()
-  const { setLocation, item, setItem, count } = useFilters()
+  const { setLocation, item, setItem, count, price } = useFilters()
   const autocompleteRef = useRef(null);
   const dispatch = useDispatch()
   const [dropTwo, setDropTwo] = useState(false)
@@ -261,7 +261,7 @@ useEffect(() => {
                 </div>
                 <div style={{backgroundColor: "rgb(231, 231, 231)", height: "1px", width: "100%"}} id="divider-two"></div>
                 <button onClick={(() => setDropTwo(!dropTwo))} style={{ display: "flex", justifyContent: "center" }}><p>Go to cart</p></button>
-                <button id="cart-c" style={{ backgroundColor: "red", color: "white" }}><p>Checkout</p> {cartItem.price * count}</button>
+                <button id="cart-c" style={{ backgroundColor: "red", color: "white" }}><p>Checkout</p> {(cartItem.price + price) * count}</button>
                 </div>
             </div>
           </div>

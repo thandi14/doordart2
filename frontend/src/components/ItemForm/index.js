@@ -18,11 +18,10 @@ function ItemFormModal({ itemId }) {
   const history = useHistory()
   const [ quantity, setQuantity ] = useState(1)
   const [ ops, setOps ] = useState([])
-  const { setItem, setCount, setSelections, selections, validation, setValidation  } = useFilters()
+  const { setItem, setCount, setSelections, selections, validation, setValidation, price, setPrice } = useFilters()
   const [ data, setData ] = useState({})
   const [ items, setItems ] = useState(selections);
   const [ optionIds, setOptionIds ] = useState([]);
-  const [ price, setPrice ] = useState(0)
   const targetRef = useRef()
 
   let options = cartItem.ItemOptions
@@ -38,7 +37,7 @@ function ItemFormModal({ itemId }) {
     const handleDocumentClick = (event) => {
         if (targetRef.current && !targetRef.current.contains(event.target)) {
             setSelections({});
-
+            setPrice(0)
         }
 
       };
@@ -125,10 +124,11 @@ useEffect(() => {
     async function validateItem() {
         let required = []
         let ops = []
-        ops = cartItem.ItemOptions
+        ops = cartItem.ItemOptions?.filter((ops) => ops.ItemSelections.length > 0)
         if (ops?.length) {
             for (let o of ops) {
                 if (o.required && !Object.keys(items).some((i) => i == o.id)) required.push(o.id)
+                console.log(o)
             }
 
         }
@@ -136,7 +136,7 @@ useEffect(() => {
     }
     validateItem()
 
-}, [dispatch, itemId])
+}, [dispatch, itemId, cartItem])
 
   const handleSubmit = async (e) => {
 
@@ -144,14 +144,11 @@ useEffect(() => {
         return Math.random().toString(36).substring(2);
     };
 
-
-
-    // e.preventDefault();
     setCount(quantity)
     setItem(cartItem)
     let selections = Object.values(items)
     const ops = [].concat(...selections);
-    let data = { itemId, options: ops, quantity }
+    let data = { itemId: cartItem.id, options: ops, quantity }
     let data1
     if (!shoppingCart?.id) {
         let sessionId = localStorage.getItem('sessionId');
@@ -169,12 +166,15 @@ useEffect(() => {
     if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
     closeModal()
     setSelections({})
-  };
+    setTimeout(() =>{
+        setPrice(0)
+    }, 2500)
+    };
 
    options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
 
 console.log(options)
-console.log(items)
+console.log(itemId)
 
 
   return (
@@ -182,6 +182,7 @@ console.log(items)
         <div id="close-item">
         <i onClick={(() => {
             setSelections({})
+            setPrice(0)
             closeModal()})} class="fi fi-br-cross"></i>
         </div>
         <div id="item-modal">
@@ -235,7 +236,8 @@ console.log(items)
                         :
                         <div style={{ position: "relative"}} onClick={(()=> {
                             items[option.id]?.some((i) => i == selection.id) ? removeItem(selection, option) : addItem(selection, option)
-                            if (selection.price) setPrice(price + selection.price)
+                            if (selection.price && !items[option.id]?.some((i) => i == selection.id) ) setPrice(price + selection.price)
+                            if (selection.price && items[option.id]?.some((i) => i == selection.id) ) setPrice(price - selection.price)
                             if (selection.ItemRecommendations?.length) {
                                 if (Object.values(items).length) setSelections(items)
                                 setModalContent(<Recommendations val={validation} selection={selection} opIds={optionIds} itemId={itemId} items={items} op={option} />)
@@ -312,11 +314,11 @@ console.log(items)
                 <i onClick={(() => setQuantity(quantity + 1))} class="fi fi-rr-add"></i>
             </div>
             <button onClick={(() => {
-                 if (Object.keys(items).length == validation) {
+                 if (validation?.length == 0 ) {
                     handleSubmit()
                  }
             })}>
-                {validation?.length == 0 ? "Add to cart" : `Make ${validation?.length} required selections` } - ${!options?.length ? cartItem.price * quantity : (validation.length == 0 && price == 0 ? cartItem.price * quantity : price * quantity)}
+                {validation?.length == 0 ? "Add to cart" : `Make ${validation?.length} required selections` } - ${!options?.length ? cartItem.price * quantity : (validation.length == 0 && price == 0 ? cartItem.price * quantity : price == 0 ? 0 : (cartItem.price + price) * quantity)}
             </button>
         </div>
     </div>

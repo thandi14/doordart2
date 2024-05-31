@@ -17,12 +17,11 @@ function Recommendations({ val, selection, itemId, items, opIds, op }) {
   const { closeModal, setModalContent } = useModal();
   const history = useHistory()
   const [ ops, setOps ] = useState([])
-  const { setItem, setCount, setSelections, selections, validation, setValidation   } = useFilters()
+  const { setItem, setCount, setSelections, selections, validation, setValidation, price, setPrice } = useFilters()
   const [ data, setData ] = useState({})
   const [ itemsTwo, setItemsTwo ] = useState(items);
   const [ validationTwo, setValidationTwo ] = useState([])
   const [ optionIds, setOptionIds ] = useState(opIds);
-  const [ price, setPrice ] = useState(0)
   const targetRef = useRef()
 
   let options = selection.ItemRecommendations
@@ -83,13 +82,19 @@ function Recommendations({ val, selection, itemId, items, opIds, op }) {
   const addItem = (s, option, recommendation) => {
 
     let num = option.id
+    let numTwo = recommendation.id
+    let updatedArray
 
-    const newArray = [...optionIds, num];
+    if (!validation.includes(num) && !validation.includes(numTwo)) {
+
+    const newArray = [...optionIds, num, numTwo];
     setOptionIds(newArray)
     const currentArray = itemsTwo[num]?.length ? itemsTwo[num] : [];
-    let updatedArray = [...currentArray, s.id];
+    updatedArray = [...currentArray, s.id];
 
-    if (updatedArray.filter((i) => i !== s.selectionId ).length > recommendation.number && recommendation.id == s.optionId) {
+    }
+
+    if (updatedArray.filter((i) => i !== s.selectionId ).length > recommendation?.number && recommendation?.id == s.optionId) {
         updatedArray = updatedArray.filter((i) => i !== s.selectionId )
         updatedArray.shift();
         updatedArray = [...updatedArray, s.selectionId]
@@ -103,8 +108,7 @@ function Recommendations({ val, selection, itemId, items, opIds, op }) {
 
     console.log("hello", s, recommendation)
 
-
-};
+  };
 
   const removeItem = (selection, option) => {
     const num = option.id;
@@ -147,7 +151,7 @@ function Recommendations({ val, selection, itemId, items, opIds, op }) {
 
     }, [dispatch, itemId]);
 
-    console.log(validation)
+    console.log(price)
 
   const handleSubmit = async (e) => {
 
@@ -160,7 +164,7 @@ function Recommendations({ val, selection, itemId, items, opIds, op }) {
   let recommendations = selection.ItemRecommendations.sort((a, b) => a.recommendation.localeCompare(b.recommendation))
   let option = selection.ItemRecommendations.find((r) => r.ItemOption).ItemOption
 
-console.log(validation)
+console.log(itemsTwo)
 
   return (
     <div ref={targetRef} className="item-modal">
@@ -188,9 +192,9 @@ console.log(validation)
                     {recommendations?.map((selection) =>
                     <>
                         {selection.ItemOption?.required ? <div onClick={(()=> {
-                            console.log(selection.price)
-                            setPrice(price + selection.price)
-                            addItem(selection, selection.ItemOption)
+                            if (selection.price) setPrice(price + selection.price)
+                            if (selection.ItemRecommendations?.length) setModalContent(<Recommendations selection={selection} itemId={itemId} items={items} opIds={optionIds} op={op}/>)
+                            addItem(selection, op, selection.ItemOption)
                             })} id="item-selection">
                             { selection.ItemOption?.required &&
                             <>

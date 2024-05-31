@@ -21,7 +21,7 @@ function RestaurantNav() {
   const history = useHistory()
   const [drop, setDrop] = useState(false)
   const [dropTwo, setDropTwo] = useState(false)
-  const { location, item, setItem, count } = useFilters()
+  const { location, item, setItem, count, price } = useFilters()
   const [ lMenu, setLMenu ] = useState(false)
   const [ cMenu, setCMenu ] = useState(false)
   const [ sc, setSc ] = useState([])
@@ -195,7 +195,7 @@ function RestaurantNav() {
                 </div>
                 <div style={{backgroundColor: "rgb(231, 231, 231)", height: "1px", width: "100%"}} id="divider-two"></div>
                 <button onClick={(() => setDropTwo(!dropTwo))} style={{ display: "flex", justifyContent: "center" }}><p>Go to cart</p></button>
-                <button onClick={(() => setDropTwo(!dropTwo))}  id="cart-c" style={{ backgroundColor: "red", color: "white" }}><p>Checkout</p> {cartItem.price * count}</button>
+                <button onClick={(() => setDropTwo(!dropTwo))}  id="cart-c" style={{ backgroundColor: "red", color: "white" }}><p>Checkout</p> {(cartItem.price + price) * count}</button>
                 </div>
             </div>
           </div>
