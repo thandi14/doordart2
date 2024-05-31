@@ -12,62 +12,70 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const idsToRetrieve = [18, 19, 20, 21, 22, 23, 24];
-    const idsToRetrieveSelec = [105, 106, 107, 108, 109, 110, 111];
 
-    const options = await ItemOption.findAll({
-      where: {
-        id: idsToRetrieve
-      }
-    });
+  let obj = {
+    "18": 105,
+    "19": 106,
+    "20": 107,
+    "21": 108,
+    "22": 109,
+    "23": 110,
+    "24": 111
+  };
 
-    const rec = options.flatMap(option => {
-      return idsToRetrieveSelec.flatMap((selectionId) => [
+  const rec = [];
+
+  for (let optionId in obj) {
+    const selectionId1 = obj[optionId];
+
+    const recommendations = [
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Pepsi®",
       },
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Diet Pepsi®",
       },
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Mountain Dew Legend™",
       },
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Mountain Dew®",
       },
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Starry®",
       },
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Tropicana® Lemonade",
       },
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Dr.Pepper®",
       },
       {
-        optionId: option.id,
-        selectionId: selectionId,
+        optionId: optionId,
+        selectionId: selectionId1,
         recommendation: "Pepsi® Zero",
-      }
-    ]);
-    });
+      },
+    ];
 
-    await ItemRecommendation.bulkCreate(rec);
+    rec.push(...recommendations);
+  }
 
+
+  await ItemRecommendation.bulkCreate(rec);
 
   },
 
