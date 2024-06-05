@@ -119,7 +119,7 @@ function Restaurants({ arr, title }) {
     newTab.focus();
   };
 
-  console.log(start, stop)
+  console.log(start, stop, arr.length)
 
   return (
 
@@ -134,7 +134,7 @@ function Restaurants({ arr, title }) {
                   if (lengthTwo > 0) {
                     goToPrevTwo(e)
                   }})} class="fi fi-sr-angle-circle-left"></i>}
-                { <i id="gotobutt-two" style={{ cursor: lengthTwo == arr.length - 1 && "not-allowed", left: "0", color: lengthTwo == arr.length - 1 && "rgb(247, 247, 247)", backgroundColor: lengthTwo == arr.length - 1 && "rgb(178, 178, 178)", right: "0"}} onClick={((e) => {
+                { <i id="gotobutt-two" style={{ cursor: lengthTwo == arr.length && "not-allowed", left: "0", color: lengthTwo == arr.length && "rgb(247, 247, 247)", backgroundColor: lengthTwo == arr.length - 1 && "rgb(178, 178, 178)", right: "0"}} onClick={((e) => {
                   if (lengthTwo < arr.length) {
                     goToNextTwo(e)
                   }
