@@ -18,6 +18,8 @@ function Restaurants({ arr, title }) {
   const { location, setLocation } = useFilters()
   const history = useHistory()
 
+  let franchise = arr
+
  useEffect(() => {
      async function fetchData() {
          if ( !location && user?.id ) await dispatch(restaurantActions.thunkGetUserRestaurants())
@@ -41,9 +43,17 @@ function Restaurants({ arr, title }) {
         e.stopPropagation()
         setLengthTwo(lengthTwo + 1)
         setTimeout(() => {
-          setStart(start + 3)
-          setStop(stop + 3)
-        }, 100);
+          const nextStart = start + 3;
+          const nextStop = stop + 3;
+
+          if (nextStop <= arr.length) {
+            setStart(nextStart);
+            setStop(nextStop);
+          } else {
+            setStart(arr.length - 3);
+            setStop(arr.length);
+          }
+        }, 250);
 
     };
 
@@ -51,18 +61,27 @@ function Restaurants({ arr, title }) {
         e.stopPropagation();
         setLengthTwo(lengthTwo - 1)
         setTimeout(() => {
-          setStart(start - 3)
-          setStop(stop - 3)
-        }, 100);
+          const nextStart = start - 3;
+          const nextStop = stop - 3;
+
+          if (nextStart >= 0) {
+            setStart(nextStart);
+            setStop(nextStop);
+          } else {
+            setStart(0);
+            setStop(3);
+          }
+        }, 250);
     };
 
   const sliderStyleTwo = {
     maxWidth: "100%",
     display: "flex",
-    transition: "transform 0.25s ease",
-    transform: `translateX(-${lengthTwo * 33.3}%)`,
+    transition: "transform 250ms ease",
+    // transform: `translateX(-${lengthTwo * 33.3}%)`,
     margin: "10px 0px"
   };
+
 
   const saveRestaurant = (id) => {
     dispatch(restaurantActions.thunkCreateSave(id))
@@ -100,7 +119,7 @@ function Restaurants({ arr, title }) {
     newTab.focus();
   };
 
-
+  console.log(start, stop)
 
   return (
 
@@ -111,15 +130,25 @@ function Restaurants({ arr, title }) {
         <div style={{ display: "flex", gap: "18px", alignItems: "center", fontSize: "14px", fontWeight: "600"}}>
             <p>See All</p>
             <span style={{ display: "flex", gap: "10px", boxSizing: "border-box"}}>
-                { <i id="gotobutt-two" style={{ cursor: lengthTwo == 0 && "not-allowed", left: "0", color: lengthTwo == 0 && "rgb(247, 247, 247)", backgroundColor: lengthTwo == 0 && "rgb(178, 178, 178)" }} onClick={goToPrevTwo} class="fi fi-sr-angle-circle-left"></i>}
-                { <i id="gotobutt-two" style={{ cursor: lengthTwo == arr.length - 1 && "not-allowed", left: "0", color: lengthTwo == arr.length - 1 && "rgb(247, 247, 247)", backgroundColor: lengthTwo == arr.length - 1 && "rgb(178, 178, 178)", right: "0"}} onClick={goToNextTwo} class="fi fi-sr-angle-circle-right"></i>}
+                { <i id="gotobutt-two" style={{ cursor: lengthTwo == 0 && "not-allowed", left: "0", color: lengthTwo == 0 && "rgb(247, 247, 247)", backgroundColor: lengthTwo == 0 && "rgb(178, 178, 178)" }} onClick={((e) => {
+                  if (lengthTwo > 0) {
+                    goToPrevTwo(e)
+                  }})} class="fi fi-sr-angle-circle-left"></i>}
+                { <i id="gotobutt-two" style={{ cursor: lengthTwo == arr.length - 1 && "not-allowed", left: "0", color: lengthTwo == arr.length - 1 && "rgb(247, 247, 247)", backgroundColor: lengthTwo == arr.length - 1 && "rgb(178, 178, 178)", right: "0"}} onClick={((e) => {
+                  if (lengthTwo < arr.length) {
+                    goToNextTwo(e)
+                  }
+                  })} class="fi fi-sr-angle-circle-right"></i>}
             </span>
         </div>
     </div>
     <div style={sliderStyleTwo} id="saves">
     {arr.map((f, id) =>
-        <>
-            <div style={{ height: "100%"}} onClick={(() => handleClick(f.id))} className="restaurant" id={`r-${id}`}>
+       <>
+        <div style={{
+            height: "100%",
+          }}
+          onClick={(() => handleClick(f.id))} className="restaurant" id={`r-${id}`}>
                 <img style={{ marginBottom: "6px"}}src={f.RestaurantImage?.thumbnailUrl}></img>
                 <div id="r-name">
                     <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{f.name} </h1>
