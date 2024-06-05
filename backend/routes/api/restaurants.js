@@ -187,7 +187,9 @@ router.get('/wallets', async (req, res) => {
 
     wallet = await Restaurant.findAll({
         where: {
-            deliveryFee: { $lt: 0.50 },
+            deliveryFee: {
+                [Op.lt]: 0.50
+            }
         },
         include : [
             { model: MenuItem },
@@ -198,7 +200,6 @@ router.get('/wallets', async (req, res) => {
             { model: Save }
         ]
     });
-
 
     if (!wallet) {
 

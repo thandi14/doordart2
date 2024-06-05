@@ -263,6 +263,7 @@ let initialState = {
    reviews: {},
    review: {},
    saves: {},
+   wallets: {},
    orders: {},
    searchs: {}
 

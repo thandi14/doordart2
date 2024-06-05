@@ -37,7 +37,7 @@ import RestaurantsTwo from "./RestaurantsTwo";
 
 function HomePage({ isLoaded }) {
   const { user } = useSelector((state) => state.session );
-  const { restaurants, saves, orders } = useSelector((state) => state.restaurants);
+  const { restaurants, saves, orders, wallets } = useSelector((state) => state.restaurants);
   const [ length, setLength ] = useState(0)
   const [ lengthTwo, setLengthTwo ] = useState(0)
   const [ index, setIndex ] = useState(0)
@@ -67,6 +67,8 @@ function HomePage({ isLoaded }) {
          dispatch(cartActions.thunkGetCarts())
          if (user?.id) dispatch(restaurantActions.thunkGetSaves())
          if (user?.id) dispatch(restaurantActions.thunkGetOrders())
+         dispatch(restaurantActions.thunkGetWallets())
+
         }
      fetchData()
 
@@ -140,6 +142,9 @@ function HomePage({ isLoaded }) {
     }
   }
 
+  let allWallets = Object.values(wallets)
+
+
   let ordered = []
   let set = new Set()
 
@@ -169,7 +174,7 @@ function HomePage({ isLoaded }) {
     }
   });
 
-  console.log(category)
+  console.log(wallets)
 
   return (
     <div style={{ position: "relative"}}>
@@ -517,7 +522,8 @@ function HomePage({ isLoaded }) {
     </div> }
     </div>
     <div style={{ padding: "0.4% 3%"}} className="hp">
-    { (saved.length > 0 || ordered.length > 0)  && <div className="types">
+    { <div className="types">
+    { allWallets.length > 0 && <Restaurants arr={allWallets} title={"Wallet friendly"} />}
     { saved.length > 0 && <Restaurants arr={saved} title={"Saved stores"} />}
     { ordered.length > 0 && <Restaurants arr={ordered} title={"Order it again"} />}
     </div> }
