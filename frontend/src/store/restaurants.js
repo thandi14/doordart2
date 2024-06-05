@@ -9,6 +9,7 @@ const UPDATE_REVIEW = "restaurant/updateReview";
 const DELETE_REVIEW = "restaurant/deleteReview";
 const GET_SAVE_DETAILS = "restaurant/getSaveDetails";
 const GET_SAVES = "restaurant/getSaves";
+const GET_WALLETS = "restaurant/getWallets";
 const GET_ORDERS = "restaurant/getOrders";
 const GET_SEARCHS = "restaurant/getSearchs";
 const DELETE_SAVE = "restaurant/deleteSave";
@@ -39,6 +40,13 @@ const getSaves = (saves) => {
   return {
     type: GET_SAVES,
     saves,
+  };
+};
+
+const getWallets = (wallets) => {
+  return {
+    type: GET_WALLETS,
+    wallets,
   };
 };
 
@@ -147,6 +155,13 @@ export const thunkGetSaves = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/restaurants/saves`)
   const data1 = await response.json();
   dispatch(getSaves(data1));
+  return data1;
+};
+
+export const thunkGetWallets = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/restaurants/wallets`)
+  const data1 = await response.json();
+  dispatch(getWallets(data1));
   return data1;
 };
 
@@ -294,11 +309,18 @@ const restaurantReducer = (state = initialState, action) => {
         (save) => (newState.saves[save.id] = { ...save })
       );
       return newState;
+    case GET_WALLETS:
+      newState = { ...state };
+      if (action.wallets?.length) action.wallets?.forEach(
+        (wallet) => (newState.wallets[wallet.id] = { ...wallet })
+      );
+      return newState;
     case GET_ORDERS:
     newState = { ...state };
     if (action.orders?.length) action.orders?.forEach(
       (order) => (newState.orders[order.id] = { ...order })
     );
+    return newState;
     case GET_SEARCHS:
       newState = { ...state };
       if (action.searchs?.length) action.searchs?.forEach(

@@ -181,6 +181,35 @@ router.get('/search', async (req, res) => {
 
 })
 
+router.get('/wallets', async (req, res) => {
+
+    let wallet = []
+
+    wallet = await Restaurant.findAll({
+        where: {
+            deliveryFee: { $lt: 0.50 },
+        },
+        include : [
+            { model: MenuItem },
+            { model: RestaurantTime },
+            { model: Review },
+            { model: Offer },
+            { model: RestaurantImage },
+            { model: Save }
+        ]
+    });
+
+
+    if (!wallet) {
+
+        res.json({"message": "Wallets couldn't be found"});
+
+    }
+
+    res.json( wallet )
+
+})
+
 router.get('/saves', async (req, res) => {
     const { user } = req
     const userId = user?.dataValues.id
