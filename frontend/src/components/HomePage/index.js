@@ -133,6 +133,8 @@ function HomePage({ isLoaded }) {
   };
 
   let franchises = Object.values(restaurants).sort((a, b) => a.miles - b.miles)
+  let closest = Object.values(restaurants).sort((a, b) => a.miles - b.miles)
+
 
   let saved = []
 
@@ -523,6 +525,7 @@ function HomePage({ isLoaded }) {
     </div>
     <div style={{ padding: "0.4% 3%"}} className="hp">
     { <div className="types">
+    { closest.length > 0 && <Restaurants arr={closest} title={"Fastest near you"} />}
     { allWallets.length > 0 && <Restaurants arr={allWallets} title={"Wallet friendly"} />}
     { saved.length > 0 && <Restaurants arr={saved} title={"Saved stores"} />}
     { ordered.length > 0 && <Restaurants arr={ordered} title={"Order it again"} />}

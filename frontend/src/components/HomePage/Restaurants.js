@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Restaurants({ arr, title }) {
   const { user } = useSelector((state) => state.session );
   const { restaurants, saves, orders } = useSelector((state) => state.restaurants);
+  const [ start, setStart ] = useState(0)
+  const [ stop, setStop ] = useState(3)
   const [ lengthTwo, setLengthTwo ] = useState(0)
   const [ category, setCategory ] = useState("")
   const dispatch = useDispatch()
@@ -38,19 +40,27 @@ function Restaurants({ arr, title }) {
     const goToNextTwo = (e) => {
         e.stopPropagation()
         setLengthTwo(lengthTwo + 1)
+        setTimeout(() => {
+          setStart(start + 3)
+          setStop(stop + 3)
+        }, 100);
 
     };
 
     const goToPrevTwo = (e) => {
         e.stopPropagation();
         setLengthTwo(lengthTwo - 1)
+        setTimeout(() => {
+          setStart(start - 3)
+          setStop(stop - 3)
+        }, 100);
     };
 
   const sliderStyleTwo = {
     maxWidth: "100%",
     display: "flex",
-    transition: "transform 0.5s ease",
-    transform: `translateX(-${lengthTwo * 50}%)`,
+    transition: "transform 0.25s ease",
+    transform: `translateX(-${lengthTwo * 33.3}%)`,
     margin: "10px 0px"
   };
 
@@ -136,7 +146,7 @@ function Restaurants({ arr, title }) {
                 <h1 style={{ fontSize: "12px", color: "#767676"}}>${f.deliveryFee} Delivery Fee</h1>
             </div>
         </>
-        )}
+        ).slice(start, stop)}
     </div>
     </div>}
 
