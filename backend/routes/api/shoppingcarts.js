@@ -147,6 +147,75 @@ router.get('/orders', async (req, res) => {
 
 })
 
+router.get('/ordered', async (req, res) => {
+    const { user } = req
+    const userId = user?.dataValues.id
+
+    if (!userId) {
+
+        return res.json({"message": "Please login"});
+
+    }
+
+    let cart = await ShoppingCart.findAll({
+        where : {
+            status: "Ordered"
+        },
+        include : [
+               { model: Restaurant,
+                include: [
+                    { model: MenuItem },
+                    { model: RestaurantTime },
+                    { model: Review },
+                    { model: Offer },
+                    { model: RestaurantImage },
+                    { model: Save }
+                    ]
+                },
+                { model: CartItem,
+                    include: [
+                        { model: MenuItem },
+                        { model: CartItemNotes,
+                            include : [
+                                {
+                                    model: ItemSelection,
+                                }
+                            ]
+                            }
+                        ]
+                }
+            ]
+    });
+
+    const restaurantOrdersCount = cart.reduce((acc, cartItem) => {
+        const restaurantId = cartItem.Restaurant.id;
+        acc[restaurantId] = (acc[restaurantId] || 0) + 1;
+        return acc;
+    }, {});
+
+    cart.sort((a, b) => restaurantOrdersCount[b.Restaurant.id] - restaurantOrdersCount[a.Restaurant.id]);
+
+    const uniqueRestaurantIds = new Set();
+
+    const uniqueCart = cart.filter(cartItem => {
+    const restaurantId = cartItem.Restaurant.id;
+    if (uniqueRestaurantIds.has(restaurantId)) {
+        return false; 
+    }
+    uniqueRestaurantIds.add(restaurantId);
+    return true;
+    });
+
+    if (!cart) {
+
+        res.json({"message": "Shopping Cart couldn't be found"});
+
+    }
+
+    res.json( uniqueCart )
+
+})
+
 router.put('/:id', async (req, res) => {
     let cartId = req.params.id;
     let cartExist = await ShoppingCart.findByPk(cartId);
