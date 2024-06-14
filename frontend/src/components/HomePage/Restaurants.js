@@ -11,14 +11,12 @@ function Restaurants({ arr, title }) {
   const { user } = useSelector((state) => state.session );
   const { restaurants, saves, orders } = useSelector((state) => state.restaurants);
   const [ start, setStart ] = useState(0)
-  const [ stop, setStop ] = useState(3)
+  // const [ stop, setStop ] = useState(2)
   const [ lengthTwo, setLengthTwo ] = useState(0)
   const [ category, setCategory ] = useState("")
   const dispatch = useDispatch()
   const { location, setLocation } = useFilters()
   const history = useHistory()
-
-  let franchise = arr
 
  useEffect(() => {
      async function fetchData() {
@@ -39,46 +37,30 @@ function Restaurants({ arr, title }) {
     }
   }, [location]);
 
-    const goToNextTwo = (e) => {
-        e.stopPropagation()
-        setLengthTwo(lengthTwo + 1)
-        setTimeout(() => {
-          const nextStart = start + 3;
-          const nextStop = stop + 3;
 
-          if (nextStop <= arr.length) {
-            setStart(nextStart);
-            setStop(nextStop);
-          } else {
-            setStart(arr.length - 3);
-            setStop(arr.length);
-          }
-        }, 250);
+    const goToNextTwo = (e) => {
+      e.stopPropagation()
+      setLengthTwo(lengthTwo + 1)
+      const newStart = start + 1;
+      if (newStart + 2 < arr.length) {
+        setStart(newStart);
+      }
 
     };
 
     const goToPrevTwo = (e) => {
         e.stopPropagation();
         setLengthTwo(lengthTwo - 1)
-        setTimeout(() => {
-          const nextStart = start - 3;
-          const nextStop = stop - 3;
-
-          if (nextStart >= 0) {
-            setStart(nextStart);
-            setStop(nextStop);
-          } else {
-            setStart(0);
-            setStop(3);
-          }
-        }, 250);
+        if (start > 0) {
+          setStart(start - 1);
+        }
     };
 
   const sliderStyleTwo = {
     maxWidth: "100%",
     display: "flex",
     transition: "transform 250ms ease",
-    // transform: `translateX(-${lengthTwo * 33.3}%)`,
+    transform: `translateX(-${lengthTwo * (100 / arr.length)}%)`,
     margin: "10px 0px"
   };
 
@@ -119,13 +101,15 @@ function Restaurants({ arr, title }) {
     newTab.focus();
   };
 
-  console.log(start, stop, arr.length)
+
+
+  console.log(start, arr.length)
 
   return (
 
     <div className="types">
-    { arr.length > 0 && !category && <div style={{ overflow: "hidden"}} className="saved">
-    <div style={{ boxSizing: "border-box"}} id="saved">
+    { arr.length > 0 && !category && <div style={{ overflow: "hidden" }} className="saved">
+    <div style={{ boxSizing: "border-box", padding: "0px 4px",}} id="saved">
     <h1 style={{ fontSize: "26px", margin: "0px"}}>{title}</h1>
         <div style={{ display: "flex", gap: "18px", alignItems: "center", fontSize: "14px", fontWeight: "600"}}>
             <p>See All</p>
@@ -142,11 +126,13 @@ function Restaurants({ arr, title }) {
             </span>
         </div>
     </div>
+    <div style={{ overflow: "hidden", width: `${Math.max(arr.length, 3) * 33.3}%`}}>
     <div style={sliderStyleTwo} id="saves">
-    {arr.map((f, id) =>
+    {arr.map(((f, id) =>
        <>
-        <div style={{
+        { <div key={id} style={{
             height: "100%",
+            width: "33%"
           }}
           onClick={(() => handleClick(f.id))} className="restaurant" id={`r-${id}`}>
                 <img style={{ marginBottom: "6px"}}src={f.RestaurantImage?.thumbnailUrl}></img>
@@ -173,12 +159,12 @@ function Restaurants({ arr, title }) {
                     </h1>
                 </div>
                 <h1 style={{ fontSize: "12px", color: "#767676"}}>${f.deliveryFee} Delivery Fee</h1>
-            </div>
+            </div>}
         </>
-        ).slice(start, stop)}
+        ))}
     </div>
+      </div>
     </div>}
-
     </div>
 
   );
