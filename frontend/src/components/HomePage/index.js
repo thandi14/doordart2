@@ -37,6 +37,7 @@ import RestaurantsTwo from "./RestaurantsTwo";
 
 function HomePage({ isLoaded }) {
   const { user } = useSelector((state) => state.session );
+  const { cartOrders } = useSelector((state) => state.cart);
   const { restaurants, saves, orders, wallets } = useSelector((state) => state.restaurants);
   const [ length, setLength ] = useState(0)
   const [ lengthTwo, setLengthTwo ] = useState(0)
@@ -155,6 +156,18 @@ function HomePage({ isLoaded }) {
         if (!set.has(order.Restaurant.name)) {
             ordered.push(order.Restaurant)
             set.add(order.Restaurant.name)
+        }
+    }
+  }
+
+  let allCarts = []
+  let setTwo = new Set()
+
+  if (Object.values(cartOrders).length) {
+    for (let order of Object.values(orders)) {
+        if (!setTwo.has(order.Restaurant.name)) {
+            ordered.push(order.Restaurant)
+            setTwo.add(order.Restaurant.name)
         }
     }
   }
@@ -526,6 +539,7 @@ function HomePage({ isLoaded }) {
     <div style={{ padding: "0.4% 3%"}} className="hp">
     { <div className="types">
     { closest.length > 0 && <Restaurants arr={closest} title={"Fastest near you"} />}
+    {/* { allCarts.length > 0 && <Restaurants arr={allCarts} title={"Most Ordered"} />} */}
     { allWallets.length > 0 && <Restaurants arr={allWallets} title={"Wallet friendly"} />}
     { saved.length > 0 && <Restaurants arr={saved} title={"Saved stores"} />}
     { ordered.length > 0 && <Restaurants arr={ordered} title={"Order it again"} />}

@@ -202,7 +202,7 @@ let initialState = {
    shoppingCarts: {},
    shoppingCart: {},
    cartItem: {},
-   orders: {}
+   cartOrders: {}
 }
 
 
@@ -218,7 +218,7 @@ const cartReducer = (state = initialState, action) => {
     case GET_ORDERED:
       newState = { ...state };
       if (action.orders.length) action.orders.forEach(
-        (order) => (newState.orders[order.id] = { ...order})
+        (order) => (newState.cartOrders[order.id] = { ...order})
       );
       return newState;
     case GET_CART:
