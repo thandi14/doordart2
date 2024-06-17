@@ -90,7 +90,7 @@ function Franchise({ isLoaded }) {
   const processCategories = (menu) => {
     const cat = {};
     menu.forEach(item => {
-      const categories = item.category.includes(',') ? item.category.split(',').map(c => c.trim()) : [item.category.trim()];
+      const categories = item.category.includes(',') && !item.category.endsWith(' n\' More') ? item.category.split(',').map(c => c.trim()) : [item.category.trim()];
       categories.forEach(category => {
         const key = category;
         if (!cat[key]) {
