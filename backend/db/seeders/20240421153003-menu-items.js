@@ -705,6 +705,77 @@ module.exports = {
         category: "Burgers",
         imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/e59d7fc6-892a-4731-98f6-6a1a44317db2-retina-large.png"
       },
+      {
+        restaurantId: 10,
+        item: "Country Vegetable Plate",
+        description: "Choice of four Country Sides. Served with Buttermilk Biscuits or Corn Muffins.",
+        price: 12.99,
+        cals: "160 - 2480 cal",
+        category: "Sides n' Barrel Bites",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/6a2b370d-cda4-4aee-a4ea-2adce9244724-retina-large.jpg"
+      },
+      {
+        restaurantId: 10,
+        item: "Barrel Bite Duo",
+        description: "For a limited time, satisfy your cravings with two of your favorite Barrel Bites for one great price.",
+        price: 11.69,
+        category: "Sides n' Barrel Bites",
+        cals: "2070 cal",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/d0f55ffc-52e0-45f8-b423-e6ae5e5553a3-retina-large.jpg"
+      },
+      {
+        restaurantId: 10,
+        item: "Hashbrown Casserole",
+        description: "Shredded potatoes, Colby cheese, chopped onions, our signature seasoning blend, salt and pepper baked together in the oven for our Signature Hashbrown Casserole.",
+        price: 12.99,
+        category: "Sides n' Barrel Bites",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/539c0cc9-4559-4905-bf59-099461dff79d-cb3888ac-0009-4da9-b20a-3d864ee8672a-retina-large.JPG"
+      },
+      {
+        restaurantId: 10,
+        item: "Buttermilk Biscuits (4)",
+        description: "Four hand-rolled Buttermilk Biscuits.",
+        price: 3.89,
+        cals: "640 cal",
+        category: "Sides n' Barrel Bites",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/03ad8cd2-1f45-495f-a1e5-405b5f902ef1-43ac6c22-fe84-4df6-935f-3b39e00ed42e-retina-large.JPG"
+      },
+      {
+        restaurantId: 10,
+        item: "The Barrel Cheeseburger*",
+        description: "Our juicy grilled to order patty is seasoned and seared on our flat top grill, topped with melted Colby Cheese, mayonnaise, lettuce, tomato and thick-sliced Bacon stacked on a bun. Made to order and your choice of a Cup of Soup or any Country Side. We suggest enjoying it with Steak Fries.",
+        price: 14.94,
+        cals: "990 cal",
+        category: "Burgers, Salads, n' More",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1600,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/492ddb4c-c29d-4236-bf94-f8dd8d7c6eb6-retina-large.jpg"
+      },
+      {
+        restaurantId: 10,
+        item: "Homestyle Fried Chicken Salad",
+        description: "Crispy, golden-fried Sunday Homestyle Chicken® over fresh greens with boiled egg, grape tomatoes, cucumbers, croutons and Colby cheese plus crackers.",
+        price: 8.50,
+        cals: "850 cal",
+        category: "Burgers, Salads, n' More",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/3fe8ab30-8e5e-4129-8654-2be62ae8fc82-retina-large.jpg"
+      },
+      {
+        restaurantId: 10,
+        item: "Homestyle Grilled Chicken Salad",
+        description: "Smoky Southern grilled chicken breast over fresh greens with boiled egg, grape tomatoes, cucumbers, croutons and Colby cheese plus crackers.",
+        price: 12.99,
+        cals: "470 cal",
+        category: "Burgers, Salads, n' More",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/a4b99395-e5bc-4dbf-a1f3-82004104ccd3-retina-large.jpg"
+      },
+      {
+        restaurantId: 10,
+        item: "Vegetable Soup Bowl",
+        cals: "160 cal",
+        description: "Enjoy a bowl of our Vegetable Soup.",
+        price: 6.75,
+        category: "Burgers, Salads, n' More",
+        imgUrl: "https://img.cdn4dd.com/cdn-cgi/image/fit=contain,width=1920,format=auto,quality=50/https://doordash-static.s3.amazonaws.com/media/photosV2/737e9e48-365a-406f-b6d0-d048afdc4472-retina-large.jpg"
+      },
     ], {});
   },
 
