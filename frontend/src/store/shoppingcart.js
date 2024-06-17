@@ -88,7 +88,7 @@ export const thunkGetMostOrdered = (id, data) => async (dispatch) => {
 
   const response = await csrfFetch(`/api/shoppingcarts/ordered`)
   const data1 = await response.json();
-  dispatch(getCart(data1));
+  dispatch(getOrdered(data1));
   return response;
 };
 

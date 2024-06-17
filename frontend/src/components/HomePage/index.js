@@ -69,6 +69,8 @@ function HomePage({ isLoaded }) {
          if (user?.id) dispatch(restaurantActions.thunkGetSaves())
          if (user?.id) dispatch(restaurantActions.thunkGetOrders())
          dispatch(restaurantActions.thunkGetWallets())
+         dispatch(cartActions.thunkGetMostOrdered())
+
 
         }
      fetchData()
@@ -164,9 +166,9 @@ function HomePage({ isLoaded }) {
   let setTwo = new Set()
 
   if (Object.values(cartOrders).length) {
-    for (let order of Object.values(orders)) {
+    for (let order of Object.values(cartOrders)) {
         if (!setTwo.has(order.Restaurant.name)) {
-            ordered.push(order.Restaurant)
+            allCarts.push(order.Restaurant)
             setTwo.add(order.Restaurant.name)
         }
     }
@@ -539,7 +541,7 @@ function HomePage({ isLoaded }) {
     <div style={{ padding: "0.4% 3%"}} className="hp">
     { <div className="types">
     { closest.length > 0 && <Restaurants arr={closest} title={"Fastest near you"} />}
-    {/* { allCarts.length > 0 && <Restaurants arr={allCarts} title={"Most Ordered"} />} */}
+    { allCarts.length > 0 && <Restaurants arr={allCarts} title={"Most Ordered"} />}
     { allWallets.length > 0 && <Restaurants arr={allWallets} title={"Wallet friendly"} />}
     { saved.length > 0 && <Restaurants arr={saved} title={"Saved stores"} />}
     { ordered.length > 0 && <Restaurants arr={ordered} title={"Order it again"} />}
