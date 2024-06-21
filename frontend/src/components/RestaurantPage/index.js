@@ -22,7 +22,7 @@ import RestaurantNavTwo from "./RestaurantNavTwo";
 function RestaurantPage({ isLoaded }) {
   const { user } = useSelector((state) => state.session );
   const { restaurant } = useSelector((state) => state.restaurants);
-  const { cartItem, shoppingCart }  = useSelector((state) => state.cart);
+  const { cartItem, shoppingCart, itemOrders }  = useSelector((state) => state.cart);
   const { id } = useParams();
   const [ length, setLength ] = useState(0)
   const [ selection, setSelection ] = useState("Reviews")
@@ -41,6 +41,7 @@ function RestaurantPage({ isLoaded }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     async function fetchData() {
+        // dispatch(cartActions.thunkGetMostOrderedItems(id))
         const sessionId = localStorage.getItem('sessionId');
         let data = {
             sessionId
@@ -51,6 +52,8 @@ function RestaurantPage({ isLoaded }) {
     fetchData()
 
   }, []);
+
+//   console.log(itemOrders)
 
 
 
@@ -218,12 +221,10 @@ if (menu?.length) {
     function formatTimestamp(timestamp) {
         const date = new Date(timestamp);
 
-        // Extract components
-        const month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-        const day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-        const year = date.getFullYear().toString().slice(-2); // Extract last two digits
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        const year = date.getFullYear().toString().slice(-2);
 
-        // Format into MM/DD/YY
         return `${month}/${day}/${year}`;
     }
 
