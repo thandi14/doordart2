@@ -200,7 +200,7 @@ router.get('/ordered', async (req, res) => {
     const uniqueCart = cart.filter(cartItem => {
     const restaurantId = cartItem.Restaurant.id;
     if (uniqueRestaurantIds.has(restaurantId)) {
-        return false; 
+        return false;
     }
     uniqueRestaurantIds.add(restaurantId);
     return true;
@@ -213,6 +213,80 @@ router.get('/ordered', async (req, res) => {
     }
 
     res.json( uniqueCart )
+
+})
+
+router.get('/:id/ordered', async (req, res) => {
+    const { user } = req
+    const userId = user?.dataValues.id
+    let restauranId = req.params.id;
+    let restaurantExist = await Restaurant.findByPk(restauranId);
+
+    if (!restaurantExist) {
+
+        res.json({"message": "Restaurant couldn't be found"});
+
+    }
+
+    if (!userId) {
+
+        return res.json({"message": "Please login"});
+
+    }
+
+    let items = await Restaurant.findByPk( restauranId, {
+        include : [
+
+                    { model: MenuItem },
+                    { model: RestaurantTime },
+                    { model: Review },
+                    { model: Offer },
+                    { model: RestaurantImage },
+                    { model: Save },
+                {
+                    model: ShoppingCart,
+                    where : {
+                        status: "Ordered"
+                    },
+                    include: [
+                        { model: CartItem,
+                        include: [
+                            { model: MenuItem },
+                            { model: CartItemNotes,
+                                include : [
+                                    {
+                                        model: ItemSelection,
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                    ]
+                }
+            ]
+    });
+
+    const menuOrdersCount = items.reduce((acc, order) => {
+        const orderId = order.ShoppingCart.id;
+        acc[orderId] = (acc[orderId] || 0) + 1;
+        return acc;
+    }, {});
+
+    items.sort((a, b) => menuOrdersCount[b.ShoppingCart.id] - menuOrdersCount[a.ShoppingCart.id]);
+
+    const uniqueMenuItemIds = new Set();
+
+    const uniqueItems = items.filter(order => {
+        const orderId = order.ShoppingCart.id;
+    if (uniqueMenuItemIds.has(orderId)) {
+        return false;
+    }
+    uniqueMenuItemIds.add(orderId);
+    return true;
+    });
+
+
+    res.json( uniqueItems )
 
 })
 
