@@ -217,20 +217,12 @@ router.get('/ordered', async (req, res) => {
 })
 
 router.get('/:id/ordered', async (req, res) => {
-    const { user } = req
-    const userId = user?.dataValues.id
     let restauranId = req.params.id;
     let restaurantExist = await Restaurant.findByPk(restauranId);
 
     if (!restaurantExist) {
 
         res.json({"message": "Restaurant couldn't be found"});
-
-    }
-
-    if (!userId) {
-
-        return res.json({"message": "Please login"});
 
     }
 
@@ -266,18 +258,20 @@ router.get('/:id/ordered', async (req, res) => {
             ]
     });
 
-    const menuOrdersCount = items.reduce((acc, order) => {
-        const orderId = order.ShoppingCart.id;
+    console.log(items.ShoppingCarts)
+
+    const menuOrdersCount = items.ShoppingCarts.reduce((acc, order) => {
+        const orderId = order.id;
         acc[orderId] = (acc[orderId] || 0) + 1;
         return acc;
     }, {});
 
-    items.sort((a, b) => menuOrdersCount[b.ShoppingCart.id] - menuOrdersCount[a.ShoppingCart.id]);
+    items.ShoppingCarts.sort((a, b) => menuOrdersCount[b.ShoppingCart.id] - menuOrdersCount[a.ShoppingCart.id]);
 
     const uniqueMenuItemIds = new Set();
 
-    const uniqueItems = items.filter(order => {
-        const orderId = order.ShoppingCart.id;
+    const uniqueItems = items.ShoppingCarts.filter(order => {
+        const orderId = order.id;
     if (uniqueMenuItemIds.has(orderId)) {
         return false;
     }

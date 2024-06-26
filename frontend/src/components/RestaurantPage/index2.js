@@ -29,7 +29,7 @@ const filterCategories = (categories, search) => {
 function Franchise({ isLoaded }) {
   const { user } = useSelector((state) => state.session );
   const { restaurant, orders } = useSelector((state) => state.restaurants);
-  const { cartItem, shoppingCart }  = useSelector((state) => state.cart);
+  const { cartItem, shoppingCart, itemOrders }  = useSelector((state) => state.cart);
   const { id } = useParams();
   const [ length, setLength ] = useState(0)
   const [ lengthTwo, setLengthTwo ] = useState(0)
@@ -82,6 +82,8 @@ function Franchise({ isLoaded }) {
         dispatch(cartActions.thunkGetCart(id))
         setRecentId(id)
         if (user?.id) dispatch(restaurantActions.thunkGetOrders())
+        dispatch(cartActions.thunkGetMostOrderedItems(id))
+
     }
     fetchData()
 
@@ -380,6 +382,8 @@ useEffect(() => {
         const colorIndex = userId % COLORS.length;
         return COLORS[colorIndex];
     }
+
+    console.log(itemOrders)
 
 
 
