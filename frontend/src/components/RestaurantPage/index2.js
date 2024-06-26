@@ -665,7 +665,7 @@ useEffect(() => {
                         </div>
                     </div>
                     <div className="review">
-                        <div id="review-one">
+                        <div id="most-one">
                             <div>
                                 <div ref={el => divRefs.current[`mi-${-1}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Most Ordered</h1>
@@ -674,12 +674,16 @@ useEffect(() => {
                                 The most commonly ordered items and dishes from this store
                                 </p>
                             </div>
-                            {/* <div id="most-item">
+                            {/* <div id="m-i">
                                     {
                                         items.map((item, id) =>
                                         <>
-                                        <div onClick={(() => setModalContent(<ItemFormModal itemId={item.id}/>))} id="menu-item">
-                                            <div id="item">
+                                        <div onClick={(() => setModalContent(<ItemFormModal itemId={item.id}/>))} id="most-item">
+                                            <div id="item-two">
+                                            <div id="i">
+                                                <img src={item.imgUrl}></img>
+                                                <i class="fi fi-sr-add"></i>
+                                            </div>
                                             <h1 style={{ fontSize: "16px", whiteSpace: "nowrap", margin: "0" }}>{item.item}</h1>
                                             <div id="i-info">
                                             <p style={{ fontSize: "13px", color: "#767676"}}>{item.description}</p>
@@ -690,10 +694,6 @@ useEffect(() => {
                                                 <i style={{ color: "#767676", width: "14px", height: "14px", fontSize: "14px" }}  class="fi fi-br-social-network"></i>
                                                 <p style={{ color: "#767676"}}>92% (7)</p>
                                             </span>
-                                            </div>
-                                            <div id="i">
-                                                <img src={item.imgUrl}></img>
-                                                <i class="fi fi-sr-add"></i>
                                             </div>
                                         </div>
                                         </>

@@ -745,6 +745,49 @@
     gap: 5px
 }
 
+#most-item {
+        border-radius: 12px;
+        /* height: 156px; */
+        display: flex;
+        align-items: center;
+        width: calc(50% - 10px);
+        overflow: hidden;
+        cursor: pointer;
+}
+
+#item-two > span {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    gap: 3px;
+}
+
+#item-two > span > p {
+    margin: 0px;
+}
+
+
+#item-two {
+    /* padding: 0px 16px; */
+    flex: 1 1;
+    height: 100%;
+    box-sizing: border-box;
+    gap: 6px;
+    justify-content: center;
+    display: flex;
+    width: 156px;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+#most-one {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
 #add-r > button {
     background-color: rgb(231, 231, 231);
     height: 32px;
