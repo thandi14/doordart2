@@ -664,27 +664,27 @@ useEffect(() => {
                                 </div>
                         </div>
                     </div>
-                    <div className="review">
+                    {/* <div className="review">
                         <div id="most-one">
                             <div>
                                 <div ref={el => divRefs.current[`mi-${-1}`] = el} >
-                                <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Most Ordered</h1>
+                                <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "10px 0px 5px"}}>Most Ordered</h1>
                                 </div>
-                                <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
+                                <p style={{ gap: "3px", margin: "0px 0px 10px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
                                 The most commonly ordered items and dishes from this store
                                 </p>
                             </div>
-                            {/* <div id="m-i">
+                            <div id="m-i">
                                     {
                                         items.map((item, id) =>
                                         <>
                                         <div onClick={(() => setModalContent(<ItemFormModal itemId={item.id}/>))} id="most-item">
                                             <div id="item-two">
-                                            <div id="i">
+                                            <div id="mi">
                                                 <img src={item.imgUrl}></img>
-                                                <i class="fi fi-sr-add"></i>
+                                                <i class="fi fi-sr-square-plus"></i>
                                             </div>
-                                            <h1 style={{ fontSize: "16px", whiteSpace: "nowrap", margin: "0" }}>{item.item}</h1>
+                                            <h1 style={{ fontSize: "16px", whiteSpace: "nowrap", margin: "0px" }}>{item.item}</h1>
                                             <div id="i-info">
                                             <p style={{ fontSize: "13px", color: "#767676"}}>{item.description}</p>
                                             </div>
@@ -699,9 +699,9 @@ useEffect(() => {
                                         </>
                                         )
                                     }
-                            </div> */}
+                            </div>
                         </div>
-                    </div>
+                    </div> */}
                     { keys.length == 0 ?
                             <>
                             <div style={{ textAlign: "center"}} id="no-results">
