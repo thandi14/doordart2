@@ -31,6 +31,12 @@ module.exports = {
         price: 8,
         status: "Ordered",
       },
+      {
+        restaurantId: 3,
+        userId: 2,
+        price: 14,
+        status: "Ordered",
+      },
     ])
   },
 

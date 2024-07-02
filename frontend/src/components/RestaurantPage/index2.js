@@ -664,13 +664,13 @@ useEffect(() => {
                                 </div>
                         </div>
                     </div>
-                    {/* <div className="review">
+                    <div className="review">
                         <div id="most-one">
                             <div>
                                 <div ref={el => divRefs.current[`mi-${-1}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "10px 0px 5px"}}>Most Ordered</h1>
                                 </div>
-                                <p style={{ gap: "3px", margin: "0px 0px 10px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
+                                <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
                                 The most commonly ordered items and dishes from this store
                                 </p>
                             </div>
@@ -697,11 +697,11 @@ useEffect(() => {
                                             </div>
                                         </div>
                                         </>
-                                        )
+                                        ).slice(0, 12)
                                     }
                             </div>
                         </div>
-                    </div> */}
+                    </div>
                     { keys.length == 0 ?
                             <>
                             <div style={{ textAlign: "center"}} id="no-results">

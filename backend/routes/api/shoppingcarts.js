@@ -258,7 +258,6 @@ router.get('/:id/ordered', async (req, res) => {
             ]
     });
 
-    console.log(items.ShoppingCarts)
 
     const menuOrdersCount = items.ShoppingCarts.reduce((acc, order) => {
         const orderId = order.id;
@@ -266,7 +265,8 @@ router.get('/:id/ordered', async (req, res) => {
         return acc;
     }, {});
 
-    items.ShoppingCarts.sort((a, b) => menuOrdersCount[b.ShoppingCart.id] - menuOrdersCount[a.ShoppingCart.id]);
+    console.log(items.ShoppingCarts)
+    items.ShoppingCarts.sort((a, b) => menuOrdersCount[b.id] - menuOrdersCount[a.id]);
 
     const uniqueMenuItemIds = new Set();
 

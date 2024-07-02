@@ -750,7 +750,7 @@
         /* height: 156px; */
         display: flex;
         align-items: center;
-        width: calc(50% - 10px);
+        width: calc(33.33% - 16px);
         overflow: hidden;
         cursor: pointer;
 }
@@ -788,6 +788,14 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+}
+
+#m-i {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    height: 1204px;
 }
 
 #add-r > button {
