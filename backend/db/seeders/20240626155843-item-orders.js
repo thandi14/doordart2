@@ -19,6 +19,72 @@ module.exports = {
         quantity: 1,
         instructions: ""
       },
+      {
+        cartId: 1,
+        itemId: 53,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 80,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 81,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 76,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 55,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 83,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 84,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 78,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 57,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 58,
+        quantity: 1,
+        instructions: ""
+      },
+      {
+        cartId: 1,
+        itemId: 85,
+        quantity: 1,
+        instructions: ""
+      },
     ])
   },
 
