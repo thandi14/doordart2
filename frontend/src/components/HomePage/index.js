@@ -155,6 +155,7 @@ function HomePage({ isLoaded }) {
 
   if (Object.values(orders).length) {
     for (let order of Object.values(orders)) {
+        
         if (!set.has(order.Restaurant.name)) {
             ordered.push(order.Restaurant)
             set.add(order.Restaurant.name)

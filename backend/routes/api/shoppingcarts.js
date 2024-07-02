@@ -174,6 +174,7 @@ router.get('/ordered', async (req, res) => {
                 },
                 { model: CartItem,
                     include: [
+                        // { model: User },
                         { model: MenuItem },
                         { model: CartItemNotes,
                             include : [
@@ -265,7 +266,6 @@ router.get('/:id/ordered', async (req, res) => {
         return acc;
     }, {});
 
-    console.log(items.ShoppingCarts)
     items.ShoppingCarts.sort((a, b) => menuOrdersCount[b.id] - menuOrdersCount[a.id]);
 
     const uniqueMenuItemIds = new Set();
@@ -343,8 +343,6 @@ router.post('/:id', async (req, res) => {
     let { sessionId } = req.body;
     const { user } = req
     const userId = user?.dataValues.id
-
-    console.log(sessionId)
 
     if (!userId) {
 

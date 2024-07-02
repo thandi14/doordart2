@@ -34,7 +34,7 @@ function Franchise({ isLoaded }) {
   const [ length, setLength ] = useState(0)
   const [ lengthTwo, setLengthTwo ] = useState(0)
   const [ selection, setSelection ] = useState("Reviews")
-  const [ mark, setMark ] = useState(-1)
+  const [ mark, setMark ] = useState(-2)
   const [ hide, setHide ] = useState(true)
   const [ searching, setSearching ] = useState(false)
   const [ searching2, setSearching2 ] = useState(false)
@@ -344,6 +344,7 @@ useEffect(() => {
     let arr = Object.values(cat)
 
     for (let o of arr) {
+        console.log(o)
         for ( let ci of o) {
             ordered.push(ci)
 
@@ -508,10 +509,18 @@ useEffect(() => {
                             <p onClick={((e) => {
                                 e.stopPropagation()
                                 setScroll(true)
+                                setMark(-2)
+                                })}  style={{ position: "relative"}}>
+                                <div id={mark == -2 ? "mark" : "hidden"}></div>
+                                <p style={{ color: mark == -2 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Reviews</p>
+                            </p>
+                            <p onClick={((e) => {
+                                e.stopPropagation()
+                                setScroll(true)
                                 setMark(-1)
                                 })}  style={{ position: "relative"}}>
                                 <div id={mark == -1 ? "mark" : "hidden"}></div>
-                                <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Reviews</p>
+                                <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Most Ordered</p>
                             </p>
                             {keys.map((category, i) =>
                             <p onClick={((e) => {
@@ -560,7 +569,7 @@ useEffect(() => {
                             </span>
                         </div>
                     </div>
-                    { ordered.length > 0 && <div ref={el => divRefs.current[`mi-${-1}`] = el} style={{ margin: "30px 0px"}} className="review">
+                    { ordered.length > 0 && <div ref={el => divRefs.current[`mi-${-3}`] = el} style={{ margin: "30px 0px"}} className="review">
                         <div id="review-one">
                             <div>
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Order it again</h1>
@@ -605,7 +614,7 @@ useEffect(() => {
                     <div className="review">
                         <div id="review-one">
                             <div>
-                                <div ref={el => divRefs.current[`mi-${-1}`] = el} >
+                                <div ref={el => divRefs.current[`mi-${-2}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Reviews</h1>
                                 </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
