@@ -360,6 +360,12 @@ useEffect(() => {
         }
     }
 
+    items.slice(0, 12)
+
+    if (search2) {
+        items = items.filter((i) => i.item.toLowerCase().includes(search2.toLocaleLowerCase()))
+    }
+
     console.log(items)
 
 
@@ -673,7 +679,7 @@ useEffect(() => {
                                 </div>
                         </div>
                     </div>
-                    <div className="review">
+                   { items.length > 0 && <div className="review">
                         <div id="most-one">
                             <div>
                                 <div ref={el => divRefs.current[`mi-${-1}`] = el} >
@@ -706,12 +712,12 @@ useEffect(() => {
                                             </div>
                                         </div>
                                         </>
-                                        ).slice(0, 12)
+                                        )
                                     }
                             </div>
                         </div>
-                    </div>
-                    { keys.length == 0 ?
+                    </div>}
+                    { keys.length == 0 && items.length == 0 ?
                             <>
                             <div style={{ textAlign: "center"}} id="no-results">
                             <img src="https://img.cdn4dd.com/s/managed/consumer/search/NoResult.svg"></img>

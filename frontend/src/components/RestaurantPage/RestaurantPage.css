@@ -795,7 +795,7 @@
     flex-wrap: wrap;
     row-gap: 10px;
     column-gap: 10px;
-    height: 1204px;
+    max-height: 1204px;
 }
 
 #add-r > button {
