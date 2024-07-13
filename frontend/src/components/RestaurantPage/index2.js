@@ -606,7 +606,9 @@ useEffect(() => {
                                     </div>
                                     <div id="i">
                                         <img src={item.MenuItem.imgUrl}></img>
-                                        <i class="fi fi-sr-add"></i>
+                                        <i onClick={((e) => {e.stopPropagation()
+                                        window.alert("feature coming soon")
+}                                       )} class="fi fi-sr-add"></i>
                                     </div>
                                 </div>
                                 </>
