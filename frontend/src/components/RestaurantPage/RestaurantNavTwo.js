@@ -245,7 +245,10 @@ useEffect(() => {
         <i style={{ fontSize: "16px"}} onClick={(() => setDropTwo(!dropTwo))} id={shoppingCart.CartItems?.length == 0 ? "cart-two" : "cart"} class="fi fi-rr-shopping-cart">
         <p>{shoppingCart.CartItems?.length ? shoppingCart.CartItems?.length : 0}</p>
         { cMenu &&
-          <div style={{ right: "0" }}  onClick={((e) => e.stopPropagation())} id="cart-menu">
+          <div style={{ right: "0" }}  onClick={((e) => {
+            e.stopPropagation()
+            setModalContent(<ShoppingCart />)
+            })} id="cart-menu">
             <div style={{ cursor: "default" }} id="c-menu">
                 <div  style={{ padding: "10px", borderBottom: "1px solid rgb(231, 231, 231)" }}>
                 <h1 style={{ fontSize: "18px", marginBottom: "0px", color: "black"}}>{restaurant.name}</h1>
@@ -260,7 +263,10 @@ useEffect(() => {
                     </span>
                 </div>
                 <div style={{backgroundColor: "rgb(231, 231, 231)", height: "1px", width: "100%"}} id="divider-two"></div>
-                <button onClick={(() => setDropTwo(!dropTwo))} style={{ display: "flex", justifyContent: "center" }}><p>Go to cart</p></button>
+                <button onClick={(() => {
+                  setDropTwo(!dropTwo)
+                  setModalContent(<ShoppingCart />)
+                  })} style={{ display: "flex", justifyContent: "center" }}><p>Go to cart</p></button>
                 <button id="cart-c" style={{ backgroundColor: "red", color: "white" }}><p>Checkout</p> {(cartItem.price + price) * count}</button>
                 </div>
             </div>
