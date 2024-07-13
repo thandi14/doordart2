@@ -124,12 +124,16 @@ function Franchise({ isLoaded }) {
         const scrollHeight = window.scrollY;
 
         if (elementBottom <= (viewportHeight / 2)) { // Check if any part of the div is above the viewport
-            const number = parseInt(id.split('-')[1]);
-            if (number || number == 0) {
+            const numericPart = id.split('mi-')[1];
+            const number = parseInt(numericPart);
+            console.log("num for cat", number)
+            console.log("div", id)
+
+            if (!isNaN(number)) {
                 setMark(number)
             }
             else {
-                setMark(-1);
+                setMark(-2);
             }
         }
     }
@@ -220,7 +224,7 @@ useEffect(() => {
 
     }, [scroll]);
 
-    console.log(mark)
+    // console.log(mark)
 
 
 
@@ -344,7 +348,6 @@ useEffect(() => {
     let arr = Object.values(cat)
 
     for (let o of arr) {
-        console.log(o)
         for ( let ci of o) {
             ordered.push(ci)
 
@@ -365,9 +368,6 @@ useEffect(() => {
     if (search2) {
         items = items.filter((i) => i.item.toLowerCase().includes(search2.toLocaleLowerCase()))
     }
-
-    console.log(items)
-
 
     let keys = []
 
@@ -401,8 +401,8 @@ useEffect(() => {
         return COLORS[colorIndex];
     }
 
-    console.log("num", Object.values(categories).length)
-    console.log("array", Object.values(categories).map((a) => a.length).reduce((sum, length) => sum + length, 0))
+    // console.log("num", Object.values(categories).length)
+    console.log("mark", mark)
 
 
 
@@ -503,13 +503,6 @@ useEffect(() => {
                             </p>
                             <p onClick={(() => {
                                 setScroll(true)
-                                setMark(-3)
-                                })}  style={{ position: "relative"}}>
-                                <div id={mark == -3 ? "mark" : "hidden"}></div>
-                                <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Reviews</p>
-                            </p>
-                            <p onClick={(() => {
-                                setScroll(true)
                                 setMark(-2)
                                 })}  style={{ position: "relative"}}>
                                 <div id={mark == -2 ? "mark" : "hidden"}></div>
@@ -578,7 +571,7 @@ useEffect(() => {
                             </span>
                         </div>
                     </div>
-                    { ordered.length > 0 && <div ref={el => divRefs.current[`mi-${-3}`] = el} style={{ margin: "30px 0px"}} className="review">
+                    { ordered.length > 0 && <div style={{ margin: "30px 0px"}} className="review">
                         <div id="review-one">
                             <div>
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Order it again</h1>
