@@ -788,6 +788,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    margin-top: 15px;
 }
 
 #m-i {
@@ -1122,6 +1123,10 @@ input:focus {
 }
 
 #i > i:hover {
+    color: rgb(247, 247, 247);
+}
+
+#mi > i:hover {
     color: rgb(247, 247, 247);
 }
 

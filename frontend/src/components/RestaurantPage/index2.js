@@ -401,6 +401,9 @@ useEffect(() => {
         return COLORS[colorIndex];
     }
 
+    console.log("num", Object.values(categories).length)
+    console.log("array", Object.values(categories).map((a) => a.length).reduce((sum, length) => sum + length, 0))
+
 
 
   return (
@@ -679,6 +682,11 @@ useEffect(() => {
                                 </div>
                         </div>
                     </div>
+                    {search && <div>
+                        <p style={{ fontSize: "16px", margin: "10px 0px"}}>
+                            Displaying {items.length + Object.values(categories).map((a) => a.length).reduce((sum, length) => sum + length, 0)} results for "{search}"
+                        </p>
+                    </div>}
                    { items.length > 0 && <div className="review">
                         <div id="most-one">
                             <div>
