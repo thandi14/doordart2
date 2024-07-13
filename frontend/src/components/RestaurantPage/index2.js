@@ -401,8 +401,17 @@ useEffect(() => {
         return COLORS[colorIndex];
     }
 
-    // console.log("num", Object.values(categories).length)
-    console.log("mark", mark)
+    // const handleSubmit = async (e, item) => {
+
+    //     let selections = Object.values(items)
+    //     const ops = [].concat(...selections);
+    //     let data = { itemId: cartItem.id, options: ops, quantity }
+    //     if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
+    //     setTimeout(() =>{
+    //         setPrice(0)
+    //     }, 2500)
+
+    // };
 
 
 
