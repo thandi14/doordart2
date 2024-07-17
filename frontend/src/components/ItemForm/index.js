@@ -174,7 +174,7 @@ useEffect(() => {
    options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
 
 console.log(options)
-console.log(itemId)
+console.log(items)
 
 
   return (

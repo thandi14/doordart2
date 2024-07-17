@@ -42,7 +42,7 @@ function Franchise({ isLoaded }) {
   const [ search2, setSearch2 ] = useState("")
   const [ scroll, setScroll ] = useState(false)
   const dispatch = useDispatch()
-  const { location, setRecentId, profile, setProfile } = useFilters()
+  const { location, setRecentId, profile, setProfile, setPrice, setItem } = useFilters()
   const { setModalContent } = useModal()
   const targetRef = useRef()
   const targetRef2 = useRef()
@@ -401,17 +401,35 @@ useEffect(() => {
         return COLORS[colorIndex];
     }
 
-    // const handleSubmit = async (e, item) => {
+    const handleSubmit = async (item, items) => {
 
-    //     let selections = Object.values(items)
-    //     const ops = [].concat(...selections);
-    //     let data = { itemId: cartItem.id, options: ops, quantity }
-    //     if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
-    //     setTimeout(() =>{
-    //         setPrice(0)
-    //     }, 2500)
+        const generateRandomSessionId = () => {
+            return Math.random().toString(36).substring(2);
+        };
 
-    // };
+        setPrice(item.price)
+        const ops = items.map((selection) => selection.id);
+        setItem(item)
+        let data = { itemId: item.id, options: ops, quantity: 1 }
+        if (!shoppingCart?.id) {
+            let sessionId = localStorage.getItem('sessionId');
+
+            if (!sessionId) sessionId = generateRandomSessionId();
+
+            const requestBody = {
+                sessionId,
+            };
+
+            localStorage.setItem('sessionId', sessionId);
+            let data1 = await dispatch(cartActions.thunkCreateCart(restaurant.id, requestBody))
+            if (data1) await dispatch(cartActions.thunkCreateCartItem(data1.id, data))
+        }
+        if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
+        setTimeout(() =>{
+            setPrice(0)
+        }, 2500)
+
+    };
 
 
 
@@ -616,7 +634,7 @@ useEffect(() => {
                                     <div id="i">
                                         <img src={item.MenuItem.imgUrl}></img>
                                         <i onClick={((e) => {e.stopPropagation()
-                                        window.alert("feature coming soon")
+                                        handleSubmit(item.MenuItem, item.CartItemNotes)
 }                                       )} class="fi fi-sr-add"></i>
                                     </div>
                                 </div>
