@@ -320,19 +320,35 @@ useEffect(() => {
     let catTwo = {};
     let set = new Set();
 
+    function arraysEqual(arr1, arr2) {
+        if (!arr1) return false
+        if (!arr2) return false
+        if (arr1.length !== arr2.length) return false;
+
+        const sortedArr1 = arr1.slice().sort();
+        const sortedArr2 = arr2.slice().sort();
+
+        return sortedArr1.every((value, index) => value === sortedArr2[index]);
+    }
+
     if (or?.length) {
         for (const o of or) {
           for (const item of o.CartItems) {
             const name = item.MenuItem.item.toLowerCase(); // Ensure consistent case
-            if (!set.has(name)) {
+            const notes = item.CartItemNotes; // Ensure consistent case
+
+            if (!set.has(name) && !arraysEqual(cat[name]?.CartItemNotes, notes)) {
               cat[name] = [];
               cat[name].push(item);
               catTwo[name] = 0;
               set.add(name);
             }
             catTwo[name] += 1;
+
           }
+
         }
+
       }
 
     // if (or?.length) {
@@ -431,6 +447,8 @@ useEffect(() => {
 
     };
 
+    console.log(ordered)
+
 
 
   return (
@@ -527,13 +545,6 @@ useEffect(() => {
                                 })}   style={{ position: "relative"}}>
                                 <div id={mark == -4 ? "mark" : "hidden"}></div>
                                 <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Item Deals</p>
-                            </p>
-                            <p onClick={(() => {
-                                setScroll(true)
-                                setMark(-2)
-                                })}  style={{ position: "relative"}}>
-                                <div id={mark == -2 ? "mark" : "hidden"}></div>
-                                <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Most Ordered</p>
                             </p> */}
                             <p onClick={((e) => {
                                 e.stopPropagation()

@@ -218,6 +218,8 @@ router.get('/ordered', async (req, res) => {
 })
 
 router.get('/:id/ordered', async (req, res) => {
+    const { user } = req
+    const userId = user?.dataValues.id
     let restauranId = req.params.id;
     let restaurantExist = await Restaurant.findByPk(restauranId);
 
@@ -239,7 +241,7 @@ router.get('/:id/ordered', async (req, res) => {
                 {
                     model: ShoppingCart,
                     where : {
-                        status: "Ordered"
+                        status: "Ordered",
                     },
                     include: [
                         { model: CartItem,
@@ -278,6 +280,7 @@ router.get('/:id/ordered', async (req, res) => {
     uniqueMenuItemIds.add(orderId);
     return true;
     });
+
 
 
     res.json( uniqueItems )
