@@ -25,7 +25,7 @@ function RestaurantNav() {
   const [ lMenu, setLMenu ] = useState(false)
   const [ cMenu, setCMenu ] = useState(false)
   const [ sc, setSc ] = useState([])
-  const [ selectionsTwo, setSelectionsTwo ] = useState("")
+  const [ priceTwo, setPriceTwo ] = useState(0)
   const targetRef = useRef()
   const { setModalContent } = useModal()
   const { setLocation } = useFilters()
@@ -47,7 +47,7 @@ function RestaurantNav() {
             setTimeout(() =>{
                 setCMenu(false)
                 setPrice(0)
-            }, 250000)
+            }, 2500)
         }
 
     }, [item]);
@@ -72,8 +72,11 @@ function RestaurantNav() {
         }, 0);
         return totalPrice;
       });
-        setPrice(selections + cartItem.price)
+      if (!isNaN(selections)) {
+        setPriceTwo(selections)
+      }
     }
+
   }, [sc]);
 
 
@@ -213,7 +216,7 @@ function RestaurantNav() {
                     <img style={{ width: "30%"}} src={cartItem.imgUrl}></img>
                     <span style={{ width: "70%", color: "black"}}>
                         <h2 style={{ fontSize: "14px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{cartItem.item}</h2>
-                        <p style={{ fontSize: "12px", margin: "0px" }}> {price}</p>
+                        <p style={{ fontSize: "12px", margin: "0px" }}> {priceTwo + cartItem.price}</p>
                     </span>
                 </div>
                 <div style={{backgroundColor: "rgb(231, 231, 231)", height: "1px", width: "100%"}} id="divider-two"></div>
