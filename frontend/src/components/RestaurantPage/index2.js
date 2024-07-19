@@ -42,7 +42,7 @@ function Franchise({ isLoaded }) {
   const [ search2, setSearch2 ] = useState("")
   const [ scroll, setScroll ] = useState(false)
   const dispatch = useDispatch()
-  const { location, setRecentId, profile, setProfile, setPrice, setItem } = useFilters()
+  const { location, setRecentId, profile, setProfile, setPrice, setItem, setSelections, } = useFilters()
   const { setModalContent } = useModal()
   const targetRef = useRef()
   const targetRef2 = useRef()
@@ -782,7 +782,9 @@ useEffect(() => {
                         <div className="item">
                             { categories[key]?.map((item, i) =>
                                 <>
-                                <div onClick={(() => setModalContent(<ItemFormModal itemId={item.id}/>))} id="menu-item">
+                                <div onClick={(() => {
+                                    setSelections({})
+                                    setModalContent(<ItemFormModal itemId={item.id}/>)})} id="menu-item">
                                     <div id="item">
                                     <h1 style={{ fontSize: "16px", whiteSpace: "nowrap", margin: "0" }}>{item.item}</h1>
                                     <div id="i-info">

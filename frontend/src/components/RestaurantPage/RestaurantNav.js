@@ -21,16 +21,20 @@ function RestaurantNav() {
   const history = useHistory()
   const [drop, setDrop] = useState(false)
   const [dropTwo, setDropTwo] = useState(false)
-  const { location, item, setItem, count, price } = useFilters()
+  const { location, item, setItem, count, price, setPrice } = useFilters()
   const [ lMenu, setLMenu ] = useState(false)
   const [ cMenu, setCMenu ] = useState(false)
   const [ sc, setSc ] = useState([])
+  const [ selectionsTwo, setSelectionsTwo ] = useState("")
   const targetRef = useRef()
   const { setModalContent } = useModal()
   const { setLocation } = useFilters()
   const autocompleteRef = useRef(null);
   const dispatch = useDispatch()
   const [ cartItem, setCartItem ] = useState({})
+
+  console.log(shoppingCart.CartItems.map((item) => item.CartItemNotes?.map((note) => note.ItemSelection?.selection)).join(', '))
+  console.log(cartItem)
 
 
 
@@ -42,7 +46,8 @@ function RestaurantNav() {
             setItem({})
             setTimeout(() =>{
                 setCMenu(false)
-            }, 2500)
+                setPrice(0)
+            }, 250000)
         }
 
     }, [item]);
@@ -58,6 +63,21 @@ function RestaurantNav() {
   }, [shoppingCart]);
 
   console.log(sc);
+
+  useEffect(() => {
+    if (sc.length) {
+      let selections = shoppingCart.CartItems.map((item) => {
+        let totalPrice = item.CartItemNotes?.reduce((total, note) => {
+            return total + (note.ItemSelection?.price || 0); // Ensure price exists and add to total
+        }, 0);
+        return totalPrice;
+      });
+        setPrice(selections + cartItem.price)
+    }
+  }, [sc]);
+
+
+
 
   const handlePlaceChanged = () => {
     const autocomplete = autocompleteRef.current;
@@ -191,9 +211,9 @@ function RestaurantNav() {
                 <div id="cart-m">
                 <div style={{ padding: "8px", boxSizing: "border-box" }} id="cart-pic">
                     <img style={{ width: "30%"}} src={cartItem.imgUrl}></img>
-                    <span style={{ width: "70%"}}>
+                    <span style={{ width: "70%", color: "black"}}>
                         <h2 style={{ fontSize: "14px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{cartItem.item}</h2>
-                        <p style={{ fontSize: "12px", margin: "0px" }}> {cartItem.price}</p>
+                        <p style={{ fontSize: "12px", margin: "0px" }}> {price}</p>
                     </span>
                 </div>
                 <div style={{backgroundColor: "rgb(231, 231, 231)", height: "1px", width: "100%"}} id="divider-two"></div>

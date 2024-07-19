@@ -30,6 +30,7 @@ function ItemFormModal({ itemId }) {
 
   useEffect(() => {
         setItems(selections)
+        setPrice(0)
     }, [selections]);
 
   useEffect(() => {
@@ -37,7 +38,6 @@ function ItemFormModal({ itemId }) {
     const handleDocumentClick = (event) => {
         if (targetRef.current && !targetRef.current.contains(event.target)) {
             setSelections({});
-            setPrice(0)
         }
 
       };
@@ -165,7 +165,6 @@ useEffect(() => {
     }
     if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
     closeModal()
-    setSelections({})
     setTimeout(() =>{
         setPrice(0)
     }, 2500)
@@ -173,8 +172,8 @@ useEffect(() => {
 
    options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
 
-console.log(options)
-console.log(items)
+console.log(price)
+console.log(cartItem.price)
 
 
   return (
