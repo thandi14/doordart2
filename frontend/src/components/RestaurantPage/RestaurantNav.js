@@ -33,11 +33,6 @@ function RestaurantNav() {
   const dispatch = useDispatch()
   const [ cartItem, setCartItem ] = useState({})
 
-  console.log(shoppingCart.CartItems.map((item) => item.CartItemNotes?.map((note) => note.ItemSelection?.selection)).join(', '))
-  console.log(cartItem)
-
-
-
     useEffect(() => {
 
         if (Object.values(item).length) {
@@ -61,8 +56,6 @@ function RestaurantNav() {
           setSc(cart);
       }
   }, [shoppingCart]);
-
-  console.log(sc);
 
   useEffect(() => {
     if (sc.length) {

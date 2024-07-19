@@ -124,7 +124,7 @@ function Franchise({ isLoaded }) {
         const scrollHeight = window.scrollY;
 
         if (elementBottom <= (viewportHeight / 2)) { // Check if any part of the div is above the viewport
-            const numericPart = id.split('mi-')[1];
+            const numericPart = id.split('mi/')[1];
             const number = parseInt(numericPart);
             console.log("num for cat", number)
             console.log("div", id)
@@ -224,9 +224,6 @@ useEffect(() => {
 
     }, [scroll]);
 
-    // console.log(mark)
-
-
 
   const goToNext = (e) => {
       e.stopPropagation()
@@ -269,8 +266,6 @@ useEffect(() => {
         else {
             setLengthTwo(lengthTwo - 1)
         }
-
-
       };
 
   const sliderStyle = {
@@ -447,7 +442,7 @@ useEffect(() => {
 
     };
 
-    console.log(ordered)
+    console.log("mark:", mark)
 
 
 
@@ -656,7 +651,7 @@ useEffect(() => {
                     <div className="review">
                         <div id="review-one">
                             <div>
-                                <div ref={el => divRefs.current[`mi-${-2}`] = el} >
+                                <div ref={el => divRefs.current[`mi/${-2}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Reviews</h1>
                                 </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
@@ -723,7 +718,7 @@ useEffect(() => {
                    { items.length > 0 && <div className="review">
                         <div id="most-one">
                             <div>
-                                <div ref={el => divRefs.current[`mi-${-1}`] = el} >
+                                <div ref={el => divRefs.current[`mi/${-1}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "10px 0px 5px"}}>Most Ordered</h1>
                                 </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
@@ -775,8 +770,8 @@ useEffect(() => {
                         :
                         <>
                     { keys.map((key, i) =>
-                    <div style={{ margin: "20px 0px" }} id={`mi-${i}`} className="menu">
-                        <div ref={el => divRefs.current[`mi-${i}`] = el} >
+                    <div style={{ margin: "20px 0px" }} id={`mi/${i}`} className="menu">
+                        <div ref={el => divRefs.current[`mi/${i}`] = el} >
                         <h1 style={{ fontSize: "24px", whiteSpace: "nowrap" }}>{key}</h1>
                         </div>
                         <div className="item">
