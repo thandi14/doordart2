@@ -358,9 +358,6 @@ useEffect(() => {
     }
 
 
-    console.log(revCount, reviews)
-
-
 
   return (
 

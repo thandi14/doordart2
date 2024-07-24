@@ -121,13 +121,10 @@ function Franchise({ isLoaded }) {
         const rect = element.getBoundingClientRect();
         const elementBottom = rect.top;
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        const scrollHeight = window.scrollY;
 
         if (elementBottom <= (viewportHeight / 2)) { // Check if any part of the div is above the viewport
             const numericPart = id.split('mi/')[1];
             const number = parseInt(numericPart);
-            console.log("num for cat", number)
-            console.log("div", id)
 
             if (!isNaN(number)) {
                 setMark(number)
@@ -357,9 +354,11 @@ useEffect(() => {
     // }
     let ordered = []
     let arr = Object.values(cat)
+    let setTwo = new Set()
 
     for (let o of arr) {
         for ( let ci of o) {
+            console.log(ci)
             ordered.push(ci)
 
         }
@@ -374,11 +373,12 @@ useEffect(() => {
         }
     }
 
-    items.slice(0, 12)
 
     if (search2) {
         items = items.filter((i) => i.item.toLowerCase().includes(search2.toLocaleLowerCase()))
     }
+
+    items = items.slice(0, 12)
 
     let keys = []
 
@@ -441,8 +441,6 @@ useEffect(() => {
         }, 2500)
 
     };
-
-    console.log("mark:", mark)
 
 
 
