@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_CART = "cart/getCart";
 const GET_ORDERED = "cart/getOrdered";
 const GET_ORDERED_ITEMS = "cart/getOrderedItems";
+const GET_ORDERED_ITEM = "cart/getOrderedItem";
 const GET_DETAILS = "cart/getDetails";
 const GET_UPDATES = "cart/getUpdates";
 const GET_CARTS = "cart/getCarts";
@@ -36,6 +37,13 @@ const getOrderedItems = (orders) => {
   return {
     type: GET_ORDERED_ITEMS,
     orders,
+  };
+};
+
+const getOrderedItem = (item) => {
+  return {
+    type: GET_ORDERED_ITEM,
+    item,
   };
 };
 
@@ -103,6 +111,13 @@ export const thunkGetMostOrderedItems = (id, data) => async (dispatch) => {
   const response = await csrfFetch(`/api/shoppingcarts/${id}/ordered`)
   const data1 = await response.json();
   dispatch(getOrderedItems(data1));
+  return response;
+};
+
+export const thunkGetRecentOrderedItem = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/items/${id}`)
+  const data1 = await response.json();
+  dispatch(getOrderedItem(data1));
   return response;
 };
 
@@ -216,6 +231,7 @@ let initialState = {
    shoppingCarts: {},
    shoppingCart: {},
    cartItem: {},
+   orderedItem: {},
    cartOrders: {},
    itemOrders: {}
 
@@ -265,6 +281,11 @@ const cartReducer = (state = initialState, action) => {
 
       }
       return newState;
+      case GET_ORDERED_ITEM:
+        newState = { ...state };
+        const cartItem = action.item;
+        newState.orderedItem = cartItem
+        return newState;
     case GET_UPDATES:
       newState = { ...state };
       const updates = action.updates;
