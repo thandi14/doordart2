@@ -324,57 +324,57 @@ router.post('/', async (req, res) => {
 
     let restaurants = await Restaurant.findAll()
 
-    const requests = restaurants.map(async (restaurant) => {
-        const response = await axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
-            params: {
-                place_id: 'PLACE_ID',
-                query: restaurant.name,
-                location: address,
-                radius: 50000, // Search radius in meters (adjust as needed)
-                key: 'AIzaSyA9ZZhYki6tunwewDOEljGqWu9sSY6VC9k',
-                // place_level: 'PLACE_LEVEL',
+    // const requests = restaurants.map(async (restaurant) => {
+    //     const response = await axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
+    //         params: {
+    //             place_id: 'PLACE_ID',
+    //             query: restaurant.name,
+    //             location: address,
+    //             radius: 50000, // Search radius in meters (adjust as needed)
+    //             key: 'AIzaSyA9ZZhYki6tunwewDOEljGqWu9sSY6VC9k',
+    //             // place_level: 'PLACE_LEVEL',
 
-            }
-        });
-
-
-        const places = response.data.results;
-        let location = ""
-
-        if (places.length > 0) {
-            location = places[0].formatted_address;
-        }
-
-        let franchise = await Restaurant.findOne({
-            where: {
-                name: restaurant.name
-            }
-        });
-
-        if (franchise) {
-            let distance = await distanceInMiles(location, address);
-            let miles = 1;
-            let mins = 0;
-
-            if (distance) {
-                miles = distance.toFixed(1);
-                mins = milesToMinutes(Math.round(miles), 60);
-            }
-
-            franchise.set({
-                address: location,
-                miles,
-                mins,
-                franchiseId: places[0]?.place_id,
-                level: places[0]?.price_level
-
-            });
-
-            await franchise.save();
-        }
+    //         }
+    //     });
 
 
-    })
+    //     const places = response.data.results;
+    //     let location = ""
+
+    //     if (places.length > 0) {
+    //         location = places[0].formatted_address;
+    //     }
+
+    //     let franchise = await Restaurant.findOne({
+    //         where: {
+    //             name: restaurant.name
+    //         }
+    //     });
+
+    //     if (franchise) {
+    //         let distance = await distanceInMiles(location, address);
+    //         let miles = 1;
+    //         let mins = 0;
+
+    //         if (distance) {
+    //             miles = distance.toFixed(1);
+    //             mins = milesToMinutes(Math.round(miles), 60);
+    //         }
+
+    //         franchise.set({
+    //             address: location,
+    //             miles,
+    //             mins,
+    //             franchiseId: places[0]?.place_id,
+    //             level: places[0]?.price_level
+
+    //         });
+
+    //         await franchise.save();
+    //     }
+
+
+    // })
 
     const franchises = await Restaurant.findAll({
         include: [

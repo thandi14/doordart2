@@ -24,28 +24,68 @@ function RestaurantNav() {
   const { location, item, setItem, count, price, setPrice } = useFilters()
   const [ lMenu, setLMenu ] = useState(false)
   const [ cMenu, setCMenu ] = useState(false)
+  const [ cM, setCM ] = useState(false)
   const [ sc, setSc ] = useState([])
   const [ priceTwo, setPriceTwo ] = useState(0)
   const targetRef = useRef()
+  const targetRefTwo = useRef()
+
   const { setModalContent } = useModal()
   const { setLocation } = useFilters()
   const autocompleteRef = useRef(null);
   const dispatch = useDispatch()
   const [ cartItem, setCartItem ] = useState({})
+  const [timeoutId, setTimeoutId] = useState(null); // For tracking timeout IDs
 
-    useEffect(() => {
+  useEffect(() => {
+      if (Object.values(item).length) {
+          setCMenu(true);
+          setCartItem(item);
+          setItem({});
 
-        if (Object.values(item).length) {
-            setCMenu(true)
-            setCartItem(item)
-            setItem({})
-            setTimeout(() =>{
-                setCMenu(false)
-                setPrice(0)
-            }, 2500)
+          // const id = setTimeout(() => {
+          //     setCMenu(false);
+          //     setPrice(0);
+          // }, 2500);
+
+          // setTimeoutId(id);
+
+          const hideDiv = () => {
+            setCMenu(false);
+            setPrice(0);
+        };
+
+        const startTimeout = () => {
+            const id = setTimeout(hideDiv, 2500);
+            setTimeoutId(id);
+        };
+
+        const stopTimeout = () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+
+        startTimeout();
+
+        const currentDiv = targetRefTwo.current;
+        if (currentDiv) {
+            currentDiv.addEventListener('mouseover', stopTimeout);
+            currentDiv.addEventListener('mouseout', startTimeout);
+
+            return () => {
+                if (currentDiv) {
+                    currentDiv.removeEventListener('mouseover', stopTimeout);
+                    currentDiv.removeEventListener('mouseout', startTimeout);
+                }
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+            };
         }
+    }
 
-    }, [item]);
+}, [item]);
 
     useEffect(() => {
       if (shoppingCart.message) {
@@ -198,7 +238,7 @@ function RestaurantNav() {
           <div style={{ right: "0" }} onClick={((e) => {
             e.stopPropagation()
             setModalContent(<ShoppingCart />)
-            })} id="cart-menu">
+            })} ref={targetRefTwo} id="cart-menu">
             <div style={{ cursor: "default" }} id="c-menu">
                 <div  style={{ padding: "10px", borderBottom: "1px solid rgb(231, 231, 231)" }}>
                 <h1 style={{ fontSize: "18px", marginBottom: "0px", color: "black"}}>{restaurant.name}</h1>

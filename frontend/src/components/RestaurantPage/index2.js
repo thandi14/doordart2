@@ -203,7 +203,7 @@ useEffect(() => {
 
         const scrollToTarget = () => {
             const handleScrollOrNavigate = () => {
-                const targetElement = document.getElementById(`mi-${mark}`);
+                const targetElement = document.getElementById(`mi/${mark}`);
                 if (targetElement && scroll) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                     setScroll(false)
@@ -441,7 +441,6 @@ useEffect(() => {
         }, 2500)
 
     };
-
 
 
   return (
