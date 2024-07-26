@@ -214,7 +214,9 @@ function SideBar({ isLoaded }) {
             <i id="notify" class="fi fi-rr-cowbell"></i>
             <p>Notifications</p>
         </span>
-        <span>
+        <span onClick={((e) => {
+        e.stopPropagation()
+        history.push('/orders')})}>
             <i class="fi fi-rr-receipt"></i>
             <p>Orders</p>
         </span>

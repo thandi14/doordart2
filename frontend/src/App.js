@@ -13,6 +13,7 @@ import ReviewPage from "./components/ReviewPage";
 import { useFilters } from "./context/Filters";
 import SavedPage from "./components/SavedPage";
 import SearchPage from "./components/SearchPage";
+import OrdersPage from "./components/HomePage/Orders";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ function App() {
     </Route>
     <Route exact path="/home">
       <HomePage />
+    </Route>
+    <Route exact path="/orders">
+      <OrdersPage />
     </Route>
     <Route exact path="/restaurant/:id">
       <RestaurantPage />

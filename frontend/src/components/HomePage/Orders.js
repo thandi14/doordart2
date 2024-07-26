@@ -11,7 +11,7 @@ import ReviewFormModal from "../ReviewForm";
 import ReviewFormThreeModal from "../ReviewForm/index3";
 import RestaurantNav from "../RestaurantPage/RestaurantNav";
 import RestaurantFoot from "../RestaurantPage/RestaurantFoot";
-import './ReviewPage.css'
+import '../ReviewPage/ReviewPage.css'
 import Profile from "../HomePage/Profile";
 import HomeNav from "../HomePage/HomeNav";
 import HomeNavTwo from "../HomePage/HomeNavTwo";
@@ -19,7 +19,6 @@ import HomeNavTwo from "../HomePage/HomeNavTwo";
 function OrdersPage({ isLoaded }) {
   const { user } = useSelector((state) => state.session );
   const { restaurant, reviews } = useSelector((state) => state.restaurants);
-  const { id } = useParams();
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1);
   const { setModalContent } = useModal()
@@ -31,18 +30,14 @@ function OrdersPage({ isLoaded }) {
 
   useEffect(() => {
     async function fetchData() {
-           let data = {
-               address: location
-           }
-         await dispatch(restaurantActions.thunkGetRestaurant(id, data))
+
        }
     fetchData()
 
- }, [dispatch, location, id])
+ }, [dispatch, location])
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(restaurantActions.thunkGetReviews(id, 1))
   }, []);
 
   useEffect(() => {
@@ -68,25 +63,9 @@ function OrdersPage({ isLoaded }) {
 
         setCurrentPage(currentPage + 1);
         setThreshold(threshold + 200);
-        dispatch(restaurantActions.thunkGetReviews(id, currentPage))
 
-  };
+    };
   }
-
-  const rating = (reviews) => {
-
-    if (!reviews?.length) return 0
-
-    let sum = 0
-    for (let review of reviews) {
-        sum += review.rating
-    }
-
-    let result = sum / reviews.length
-
-    return result.toFixed(1)
-
-  };
 
 
     function formatTimestamp(timestamp) {
@@ -109,7 +88,7 @@ function OrdersPage({ isLoaded }) {
 { user?.id && <div onClick={(() => window.alert("Feature coming soon"))}  id="side-bar">
     <span onClick={((e) => {
         e.stopPropagation()
-        history.push('/home')})} className="page">
+        history.push('/home')})}>
         <i class="fi fi-rs-house-chimney"></i>
         <p>Home</p>
     </span>
@@ -150,7 +129,7 @@ function OrdersPage({ isLoaded }) {
         <i id="notify" class="fi fi-rr-cowbell"></i>
         <p>Notifications</p>
     </span>
-    <span>
+    <span className="page">
         <i class="fi fi-rr-receipt"></i>
         <p>Orders</p>
     </span>
@@ -169,28 +148,13 @@ function OrdersPage({ isLoaded }) {
         <div className="review-page">
             <div id="review-head">
                 <div style={{ padding: "0px 4%"}} >
-                <div id="ro-one">
-                    <i onClick={(() => history.push(`/restaurant/${restaurant.id}`))} class="fi fi-sr-angle-circle-left"></i>
-                    <div id="ro-name"> <p style={{ margin: "0px", fontSize: "14px", textDecoration: "underline"}}>{restaurant.name}</p> <span style={{ color: "#767676", fontSize: "14px", marginLeft: "5px"}}>/</span></div>
-                </div>
-                <h1 style={{ margin: "15px 0px"}} >Rating & Reviews</h1>
+                <h1 style={{ margin: "15px 0px"}} >Orders</h1>
                 </div>
             </div>
             <div id="rev-page">
             <div id="reviewed-one">
             <div style={{ gap: "10px"}} id="ro-rating">
-            <h1 style={{ margin: "0px"}}>{rating(allReviews)}</h1>
-            <i class="fi fi-sr-star" style={{ width: "30px", height: "30px", fontSize: "30px", color: "gold"}}></i>
-            </div>
-            <p style={{ whiteSpace: "nowrap", lineHeight: '16px', gap: "3px", margin: "0px", color: "rgb(73, 73, 73)", fontSize: "13px",}}>
-                                    {restaurant.Reviews?.length}+
-                                    ratings ratings,
-                                    {/* <i style={{ width: "8px", height: "8px", fontSize: "8px" }} class="fi fi-sr-bullet"></i> */}
-                                     <span> {allReviews?.length}</span> public reviews
-            <p style={{  marginTop: "10px", fontSize: "13px", color: "rgb(118, 118, 118)" }} id="review-what">What are public reviews? <i style={{ display: "flex", width: "18px", height: "18px", fontSize: "18px", color: "rgb(118, 118, 118)"}} class="fi fi-rr-info"></i></p>
-            </p>
-            <div style={{  justifyContent: "flex-start" }} id="add-r">
-            <button onClick={(() => setModalContent(<ReviewFormModal />))}>Add a Review</button>
+            <h1 style={{ margin: "0px"}}>Completed</h1>
             </div>
             </div>
             <div id="reviewed-two">
@@ -199,23 +163,23 @@ function OrdersPage({ isLoaded }) {
                      <div id="reviewing-four">
                     <h1 style={{ margin: "0px", fontSize: "16px" }}>{review.User.firstName} {review.User.lastName[0]}</h1>
                      <div id="rating-three">
+                     {/* {
+                        1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     }
+                    {
+                        2 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)"}}></i>
+                     }
+                    {
+                        3 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     }
+                    {
+                        4 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     }
                      {
-                        review.rating >= 1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                    {
-                        review.rating >= 2 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)"}}></i>
-                     }
-                    {
-                        review.rating >= 3 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                    {
-                        review.rating >= 4 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                     {
-                        review.rating >= 5 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     }
+                        5 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     } */}
                      <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
-                     <p>{formatTimestamp(review.createdAt)}</p>
+                     {/* <p>{formatTimestamp(review.createdAt)}</p> */}
                      <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
                      <p>DoorDart Order</p>
                      </div>
