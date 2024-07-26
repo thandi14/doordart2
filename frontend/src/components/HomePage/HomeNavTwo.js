@@ -107,7 +107,6 @@ function HomeNavTwo({ isLoaded }) {
 
   };
 
-  console.log(search2)
   return (
     <>
     {/* <Profile user={sessionUser} d={true} /> */}
