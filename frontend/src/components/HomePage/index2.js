@@ -216,7 +216,9 @@ function SideBar({ isLoaded }) {
         </span>
         <span onClick={((e) => {
         e.stopPropagation()
-        history.push('/orders')})}>
+        window.alert("feature coming soon")
+        //history.push('/orders')
+      })}>
             <i class="fi fi-rr-receipt"></i>
             <p>Orders</p>
         </span>

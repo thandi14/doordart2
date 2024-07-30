@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_CART = "cart/getCart";
 const GET_ORDERED = "cart/getOrdered";
+const GET_ORDERS = "cart/getOrders";
 const GET_ORDERED_ITEMS = "cart/getOrderedItems";
 const GET_ORDERED_ITEM = "cart/getOrderedItem";
 const GET_DETAILS = "cart/getDetails";
@@ -29,6 +30,13 @@ const getCart = (cart) => {
 const getOrdered = (orders) => {
   return {
     type: GET_ORDERED,
+    orders,
+  };
+};
+
+const getOrders = (orders) => {
+  return {
+    type: GET_ORDERS,
     orders,
   };
 };
@@ -104,6 +112,13 @@ export const thunkGetMostOrdered = (id, data) => async (dispatch) => {
   const response = await csrfFetch(`/api/shoppingcarts/ordered`)
   const data1 = await response.json();
   dispatch(getOrdered(data1));
+  return response;
+};
+
+export const thunkUserOrders = (id, data) => async (dispatch) => {
+  const response = await csrfFetch(`/api/shoppingcarts/orders`)
+  const data1 = await response.json();
+  dispatch(getOrders(data1));
   return response;
 };
 
@@ -233,7 +248,8 @@ let initialState = {
    cartItem: {},
    orderedItem: {},
    cartOrders: {},
-   itemOrders: {}
+   itemOrders: {},
+   userOrders : {}
 
 }
 
@@ -253,6 +269,12 @@ const cartReducer = (state = initialState, action) => {
         (order) => (newState.cartOrders[order.id] = { ...order})
       );
       return newState;
+      case GET_ORDERS:
+        newState = { ...state };
+        if (action.orders.length) action.orders.forEach(
+          (order) => (newState.userOrders[order.id] = { ...order})
+        );
+        return newState;
     case GET_ORDERED_ITEMS:
       newState = { ...state };
       if (action.orders.length) action.orders.forEach(

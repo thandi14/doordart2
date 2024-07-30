@@ -148,13 +148,13 @@ function OrdersPage({ isLoaded }) {
         <div className="review-page">
             <div id="review-head">
                 <div style={{ padding: "0px 4%"}} >
-                <h1 style={{ margin: "15px 0px"}} >Orders</h1>
+                <h1 style={{ fontSize: "24px", margin: "15px 0px"}} >Orders</h1>
                 </div>
             </div>
             <div id="rev-page">
             <div id="reviewed-one">
             <div style={{ gap: "10px"}} id="ro-rating">
-            <h1 style={{ margin: "0px"}}>Completed</h1>
+            <h1 style={{ fontSize: "18px", margin: "0px"}}>Completed</h1>
             </div>
             </div>
             <div id="reviewed-two">
