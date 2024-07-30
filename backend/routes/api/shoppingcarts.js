@@ -133,9 +133,13 @@ router.get('/orders', async (req, res) => {
                             ]
                             }
                         ]
+                },
+                {
+                    model: User
                 }
             ]
     });
+
 
     if (!cart) {
 

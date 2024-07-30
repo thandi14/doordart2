@@ -18,7 +18,7 @@ import HomeNavTwo from "../HomePage/HomeNavTwo";
 
 function OrdersPage({ isLoaded }) {
   const { user } = useSelector((state) => state.session );
-  const { restaurant, reviews } = useSelector((state) => state.restaurants);
+  const { userOrders } = useSelector((state) => state.cart);
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1);
   const { setModalContent } = useModal()
@@ -30,7 +30,7 @@ function OrdersPage({ isLoaded }) {
 
   useEffect(() => {
     async function fetchData() {
-
+        if (user?.id) dispatch(cartActions.thunkUserOrders())
        }
     fetchData()
 
@@ -76,7 +76,9 @@ function OrdersPage({ isLoaded }) {
         return `${month}/${day}/${year}`;
     }
 
-    let allReviews = Object.values(reviews)
+    let allOrders = Object.values(userOrders)
+
+    console.log(allOrders)
 
 
   return (
@@ -159,9 +161,9 @@ function OrdersPage({ isLoaded }) {
             </div>
             <div id="reviewed-two">
 
-                { allReviews.map((review, i) =>
+                { allOrders.map((order, i) =>
                      <div id="reviewing-four">
-                    <h1 style={{ margin: "0px", fontSize: "16px" }}>{review.User.firstName} {review.User.lastName[0]}</h1>
+                    <h1 style={{ margin: "0px", fontSize: "16px" }}>{order.Restaurant.name}</h1>
                      <div id="rating-three">
                      {/* {
                         1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
@@ -179,16 +181,19 @@ function OrdersPage({ isLoaded }) {
                         5 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
                      } */}
                      <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
-                     {/* <p>{formatTimestamp(review.createdAt)}</p> */}
+                     <p>{formatTimestamp(order.createdAt)}</p>
                      <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
-                     <p>DoorDart Order</p>
+                     <p style={{ margin: "0px", fontSize: "16px" }}>${order.price}</p>
+                     <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
+                     <p style={{ margin: "0px", fontSize: "16px" }}>{order.CartItems.length} items</p>
                      </div>
                      <div id="re-two">
-                         <p style={{ margin: "0px", fontSize: "16px" }}>{review.review}</p>
+                         <p style={{ margin: "0px", fontSize: "16px" }}>{order.CartItems.map((item) => item.MenuItem.item).join(', ')}</p>
                      </div>
                      <div style={{ padding: "16px 0px 0px"}}></div>
                      <div>
-                     <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>Helpful</button>
+                     <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>Reorder</button>
+                     <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>View Receipt</button>
                      </div>
              </div>
                 )}
