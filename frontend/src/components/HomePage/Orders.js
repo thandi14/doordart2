@@ -153,7 +153,7 @@ function OrdersPage({ isLoaded }) {
                 <h1 style={{ fontSize: "24px", margin: "15px 0px"}} >Orders</h1>
                 </div>
             </div>
-            <div id="rev-page">
+            <div id="order-page">
             <div id="reviewed-one">
             <div style={{ gap: "10px"}} id="ro-rating">
             <h1 style={{ fontSize: "18px", margin: "0px"}}>Completed</h1>
@@ -162,7 +162,7 @@ function OrdersPage({ isLoaded }) {
             <div id="reviewed-two">
 
                 { allOrders.map((order, i) =>
-                     <div id="reviewing-four">
+                     <div id="order-four">
                     <h1 style={{ margin: "0px", fontSize: "16px" }}>{order.Restaurant.name}</h1>
                      <div id="rating-three">
                      {/* {
@@ -187,13 +187,31 @@ function OrdersPage({ isLoaded }) {
                      <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
                      <p style={{ margin: "0px", fontSize: "16px" }}>{order.CartItems.length} items</p>
                      </div>
-                     <div id="re-two">
+                     <div id="items">
+                     <div id="or-two">
                          <p style={{ margin: "0px", fontSize: "16px" }}>{order.CartItems.map((item) => item.MenuItem.item).join(', ')}</p>
                      </div>
-                     <div style={{ padding: "16px 0px 0px"}}></div>
                      <div>
                      <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>Reorder</button>
                      <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>View Receipt</button>
+                     </div>
+                     </div>
+                     <div id="order-three">
+                     {
+                        1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     }
+                    {
+                        2 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)"}}></i>
+                     }
+                    {
+                        3 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     }
+                    {
+                        4 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     }
+                     {
+                        5 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                     }
                      </div>
              </div>
                 )}
