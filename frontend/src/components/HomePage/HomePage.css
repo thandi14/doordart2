@@ -488,17 +488,29 @@
 
 #or-two {
     width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+#or-two > p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 #order-three {
     width: 30%
 }
 
+#or-restaurant {
+    background-color: #f7f7f7ff;
+}
+
 #order-four {
     border: 1px solid rgb(231, 231, 231);
     padding: 16px;
-    /* width: 622px; */
+    width: 100%;
     background-color: white;
     /* padding: 0px 16px; */
     display: flex;
@@ -507,12 +519,17 @@
     gap: 10px;
 }
 
+#or-button {
+    display: flex;
+    gap: 10px;
+}
+
 #order-page {
-    gap: 8%;
+    gap: 20%;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
-    padding: 0px 4%;
-    width: 110vh;
+    padding: 0px 10%;
+    /* width: 110vh; */
     padding-bottom: 4%;
 }

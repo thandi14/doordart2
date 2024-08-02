@@ -148,22 +148,21 @@ function OrdersPage({ isLoaded }) {
     </div>
     <div style={{ width: "100%"}} >
         <div className="review-page">
-            <div id="review-head">
-                <div style={{ padding: "0px 4%"}} >
-                <h1 style={{ fontSize: "24px", margin: "15px 0px"}} >Orders</h1>
-                </div>
-            </div>
             <div id="order-page">
-            <div id="reviewed-one">
-            <div style={{ gap: "10px"}} id="ro-rating">
-            <h1 style={{ fontSize: "18px", margin: "0px"}}>Completed</h1>
-            </div>
+            <div id="review-head">
+                <div style={{ paddingBottom: "16px"}} >
+                <h1 style={{ fontSize: "24px", margin: "15px 0px"}} >Orders</h1>
+                <h1 style={{ fontSize: "18px", margin: "0px"}}>Completed</h1>
+                </div>
             </div>
             <div id="reviewed-two">
 
                 { allOrders.map((order, i) =>
                      <div id="order-four">
+                        <div id="or-restaurant">
                     <h1 style={{ margin: "0px", fontSize: "16px" }}>{order.Restaurant.name}</h1>
+                    <i class="fi fi-rr-angle-small-right"></i>
+                            </div>
                      <div id="rating-three">
                      {/* {
                         1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
@@ -180,7 +179,6 @@ function OrdersPage({ isLoaded }) {
                      {
                         5 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
                      } */}
-                     <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
                      <p>{formatTimestamp(order.createdAt)}</p>
                      <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
                      <p style={{ margin: "0px", fontSize: "16px" }}>${order.price}</p>
@@ -191,7 +189,7 @@ function OrdersPage({ isLoaded }) {
                      <div id="or-two">
                          <p style={{ margin: "0px", fontSize: "16px" }}>{order.CartItems.map((item) => item.MenuItem.item).join(', ')}</p>
                      </div>
-                     <div>
+                     <div id="or-button">
                      <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>Reorder</button>
                      <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>View Receipt</button>
                      </div>
