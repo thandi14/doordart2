@@ -78,7 +78,41 @@ function OrdersPage({ isLoaded }) {
 
     let allOrders = Object.values(userOrders)
 
-    console.log(allOrders)
+    let reviews = allOrders.flatMap((or) => or.Restaurant.Reviews);
+
+    const renderStars = (rating, hoverRating, onMouseEnter, onMouseLeave, onClick) => {
+        return [...Array(5)].map((_, index) => (
+          <i
+            key={index}
+            className={`fi ${index < (hoverRating || rating) ? 'fi-sr-star' : 'fi-rr-star'}`}
+            style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}
+            onMouseEnter={() => onMouseEnter(index + 1)}
+            onMouseLeave={onMouseLeave}
+            onClick={() => onClick(index + 1)}
+          ></i>
+        ));
+      };
+
+      const StarRating = ({ initialRating, onRatingChange }) => {
+        const [rating, setRating] = useState(initialRating);
+        const [hoverRating, setHoverRating] = useState(null);
+
+        const handleMouseEnter = (rating) => setHoverRating(rating);
+        const handleMouseLeave = () => setHoverRating(null);
+        const handleClick = (rating) => {
+          setRating(rating);
+          if (onRatingChange) onRatingChange(rating);
+        };
+
+        return (
+          <div id="order-three">
+            {renderStars(rating, hoverRating, handleMouseEnter, handleMouseLeave, handleClick)}
+          </div>
+        );
+      };
+    console.log("orders:", allOrders)
+    console.log("reviews:", reviews)
+
 
 
   return (
@@ -131,7 +165,9 @@ function OrdersPage({ isLoaded }) {
         <i id="notify" class="fi fi-rr-cowbell"></i>
         <p>Notifications</p>
     </span>
-    <span className="page">
+    <span onClick={((e) => {
+        e.stopPropagation()
+        })}className="page">
         <i class="fi fi-rr-receipt"></i>
         <p>Orders</p>
     </span>
@@ -159,27 +195,13 @@ function OrdersPage({ isLoaded }) {
 
                 { allOrders.map((order, i) =>
                 <div className="order-four">
-                        <div id="or-restaurant">
+                        <div onClick={((e) => {
+        history.push(`/restaurant/${order.Restaurant.id}`)})}id="or-restaurant">
                     <h1 style={{ margin: "0px", fontSize: "16px" }}>{order.Restaurant.name}</h1>
                     <i class="fi fi-rr-angle-small-right"></i>
                             </div>
                      <div id="order-four">
                      <div id="rating-three">
-                     {/* {
-                        1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                    {
-                        2 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)"}}></i>
-                     }
-                    {
-                        3 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                    {
-                        4 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                     {
-                        5 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
-                     } */}
                      <p>{formatTimestamp(order.createdAt)}</p>
                      <i style={{ color: "#767676", width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
                      <p style={{ margin: "0px", fontSize: "16px" }}>${order.price}</p>
@@ -198,21 +220,7 @@ function OrdersPage({ isLoaded }) {
                      <div className="order-three">
 
                      <div id="order-three">
-                     {
-                        1 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                    {
-                        2 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)"}}></i>
-                     }
-                    {
-                        3 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                    {
-                        4 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
-                     }
-                     {
-                        5 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
-                     }
+                            <StarRating rating={0} />
                      </div>
                      <div id="leave-r">
                      <i style={{ width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>

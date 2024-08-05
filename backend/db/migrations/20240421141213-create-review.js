@@ -5,6 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -31,14 +32,22 @@ module.exports = {
       },
       onDelete: 'cascade'
       },
+      franchiseId: {
+        type: Sequelize.INTEGER
+      },
+      orderId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'ShoppingCarts',
+          key: 'id',
+      },
+      onDelete: 'cascade'
+      },
       review: {
         type: Sequelize.STRING
       },
       rating: {
         type: Sequelize.INTEGER
-      },
-      franchiseId: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -48,7 +57,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }, options);
+    });
   },
   async down(queryInterface, Sequelize) {
     options.tableName = "Reviews";

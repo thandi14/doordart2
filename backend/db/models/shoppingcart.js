@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         models.CartItem,
           { foreignKey: 'cartId', onDelete: 'CASCADE',  hooks: true }
       );
+      ShoppingCart.hasMany(
+        models.Review,
+          { foreignKey: 'orderId', onDelete: 'CASCADE',  hooks: true }
+      );
     }
   }
   ShoppingCart.init({

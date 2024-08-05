@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         models.User,
           { foreignKey: 'userId' }
       );
+      Review.belongsTo(
+        models.ShoppingCart,
+          { foreignKey: 'orderId' }
+      );
       Review.hasMany(
         models.Like,
         { foreignKey: 'reviewId', onDelete: 'CASCADE',  hooks: true }
@@ -27,9 +31,10 @@ module.exports = (sequelize, DataTypes) => {
   Review.init({
     userId: DataTypes.INTEGER,
     restaurantId: DataTypes.INTEGER,
+    franchiseId: DataTypes.INTEGER,
+    orderId: DataTypes.INTEGER,
     review: DataTypes.STRING,
-    rating: DataTypes.INTEGER,
-    franchiseId: DataTypes.INTEGER
+    rating: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Review',

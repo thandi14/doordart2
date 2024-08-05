@@ -519,6 +519,7 @@
 .order-four {
     width: 100%;
     background-color: white;
+    cursor: pointer;
     /* padding: 0px 16px; */
     display: flex;
     flex-direction: column;
@@ -527,6 +528,10 @@
     border: 1px solid rgb(231, 231, 231);
     overflow: hidden;
 
+}
+
+.order-four:hover {
+    background-color: #1919190d;
 }
 
 #or-restaurant {
@@ -561,7 +566,7 @@
 #order-four {
     padding: 0px 16px 12px;
     width: 100%;
-    background-color: white;
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     gap: 10px;
