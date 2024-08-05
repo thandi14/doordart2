@@ -555,6 +555,63 @@
     padding: 8px 0px;
 }
 
+#search-store > div {
+    -webkit-box-align: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: justify;
+    /* justify-content: space-between; */
+}
+
+#search-store {
+    padding: 8px 16px;
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+    padding: 8px 16px;
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+    align-items: center;
+
+}
+
+#search-store > span {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+}
+
+#search-store > span > p {
+    margin: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#search-store:hover {
+    background-color: #f7f7f7ff;
+}
+
+#search-store > div > img {
+    border-radius: 50%;
+    border: 1px solid rgb(231, 231, 231);
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    margin-right: var(--usage-space-small);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
 .order-three {
     width: 100%;
     display: flex;

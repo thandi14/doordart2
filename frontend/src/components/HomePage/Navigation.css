@@ -124,7 +124,7 @@
     right: 0;
     display: flex;
     box-sizing: border-box;
-    height: 400px;
+    max-width: 770px;
     z-index: 12;
     padding: 0px 16px;
     /* transition: ; */
@@ -134,8 +134,9 @@
     background-color: white;
     width: 100%;
     border: 1px solid #f1f1f1;
-    padding: 8px 16px;
+    /* padding: 8px 16px; */
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 #s-menu > div {

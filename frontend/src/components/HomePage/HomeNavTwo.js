@@ -112,9 +112,9 @@ function HomeNavTwo({ isLoaded }) {
 
   };
 
-  let stores = Object.values(stores)
+  let stores = Object.values(restaurants).filter((r) => r.name.toLowerCase().includes(search.toLowerCase()))?.slice(0, 5)
 
-  console.log(restaurants)
+  console.log(stores, search)
 
   return (
     <>
@@ -135,6 +135,7 @@ function HomeNavTwo({ isLoaded }) {
         </div>
         <div className={!searching ? "hidden" : "s-menu"}>
           <div id="s-menu">
+            <div style={{ padding: "8px 16px", boxSizing: "border-box" }}>
         <div style={{ border:  "2px solid black" }}  ref={targetRef3}  id={ !searching ? "hidden" : "searchTwo"}>
             <i class=" fi fi-rr-arrow-small-left"></i>
             <input
@@ -148,9 +149,22 @@ function HomeNavTwo({ isLoaded }) {
                   setSearch2("")
               })} style={{ cursor: "pointer", width: "20px", height: "20px", fontSize: "20px" }} class="fi fi-sr-cross-circle"></i>}
         </div>
+
+            </div>
         <div>
           {/* <h1>Recent Searches</h1> */}
-
+              {stores?.length > 0 && search.length > 0 && stores.map((s) =>
+                  <div onClick={(() => history.push(`restaurant/${s.id}`))} id="search-store">
+                    <div>
+                      <img src={s.RestaurantImage.iconUrl}></img>
+                    </div>
+                    <span>
+                    <p style={{ fontSize: "16px", fontSize: "500"}} >{s.name}</p>
+                    <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.type}</p>
+                    </span>
+                    <i class="fi fi-br-cross-small"></i>
+                    </div>
+              )}
         </div>
           </div>
         </div>
