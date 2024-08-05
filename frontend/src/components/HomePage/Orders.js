@@ -158,11 +158,12 @@ function OrdersPage({ isLoaded }) {
             <div id="reviewed-two">
 
                 { allOrders.map((order, i) =>
-                     <div id="order-four">
+                <div className="order-four">
                         <div id="or-restaurant">
                     <h1 style={{ margin: "0px", fontSize: "16px" }}>{order.Restaurant.name}</h1>
                     <i class="fi fi-rr-angle-small-right"></i>
                             </div>
+                     <div id="order-four">
                      <div id="rating-three">
                      {/* {
                         1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
@@ -190,28 +191,36 @@ function OrdersPage({ isLoaded }) {
                          <p style={{ margin: "0px", fontSize: "16px" }}>{order.CartItems.map((item) => item.MenuItem.item).join(', ')}</p>
                      </div>
                      <div id="or-button">
-                     <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>Reorder</button>
-                     <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-bulb"></i>View Receipt</button>
+                     <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-shopping-cart-add"></i>Reorder</button>
+                     <button onClick={(() =>  window.alert("Feature coming soon!"))} id="helpful"><i class="fi fi-rr-tags"></i>View Receipt</button>
                      </div>
                      </div>
+                     <div className="order-three">
+
                      <div id="order-three">
                      {
-                        1 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                        1 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
                      }
                     {
-                        2 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)"}}></i>
+                        2 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)"}}></i>
                      }
                     {
-                        3 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                        3 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
                      }
                     {
-                        4 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                        4 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
                      }
                      {
-                        5 ? <i className="fi fi-sr-star" style={{ width: "16px", height: "16px", fontSize: "16px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "16px", height: "16px", fontSize: "16px", color: "rgb(73, 73, 73)" }}></i>
+                        5 ? <i className="fi fi-sr-star" style={{ width: "28px", height: "28px", fontSize: "28px",  color: "rgb(73, 73, 73)" }}></i> : <i className="fi fi-rr-star" style={{ width: "28px", height: "28px", fontSize: "28px", color: "rgb(73, 73, 73)" }}></i>
                      }
                      </div>
+                     <div id="leave-r">
+                     <i style={{ width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>
+                        <p>Leave a review</p>
+                        </div>
+                        </div>
              </div>
+                </div>
                 )}
 
             </div>
