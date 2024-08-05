@@ -19,12 +19,15 @@ import Profile from "./Profile";
 function HomeNavTwo({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const { cartItem, shoppingCarts }  = useSelector((state) => state.cart);
+  const { restaurants, saves, orders, wallets } = useSelector((state) => state.restaurants);
   const history = useHistory()
   const [drop, setDrop] = useState(false)
   const { location } = useFilters()
   const [ lMenu, setLMenu ] = useState(false)
+  const [ sMenu, setSMenu ] = useState(false)
   const targetRef = useRef()
   const targetRef2 = useRef()
+  const targetRef3 = useRef()
   const { setModalContent } = useModal()
   const { setLocation } = useFilters()
   const autocompleteRef = useRef(null);
@@ -73,11 +76,13 @@ function HomeNavTwo({ isLoaded }) {
 
             }
 
+            const isClickOutsideTarget2 = targetRef2.current && !targetRef2.current.contains(event.target);
+            const isClickOutsideTarget3 = targetRef3.current && !targetRef3.current.contains(event.target);
 
-        if ((targetRef2.current && !targetRef2.current.contains(event.target))) {
-          setSearching(false)
-        }
-
+            if ((isClickOutsideTarget2 && isClickOutsideTarget3)) {
+              setSearching(false);
+            }
+            console.log("isClickOutsideTarget2:", isClickOutsideTarget2, "isClickOutsideTarget3", isClickOutsideTarget3)
 
         };
 
@@ -107,6 +112,10 @@ function HomeNavTwo({ isLoaded }) {
 
   };
 
+  let stores = Object.values(stores)
+
+  console.log(restaurants)
+
   return (
     <>
     {/* <Profile user={sessionUser} d={true} /> */}
@@ -116,22 +125,37 @@ function HomeNavTwo({ isLoaded }) {
         <img src="https://freepnglogo.com/images/all_img/1706201578doordash-icon-png.png"></img>
           <span>DOORDART</span>
         </div>
-        <div style={{ width: "60%" }} className="navi">
-        <div style={{ border: searching ? "2px solid black" : "2px solid transparent", marginLeft: "16px" }} ref={targetRef2}  id="search">
+        <div style={{ width: "100%", position: "relative" }} className="navi">
+       <div style={{ border: "2px solid transparent", margin: "16px", width: "100%" }} ref={targetRef2} id={ searching ? "hidden" : "search"}>
             <i class="fi fi-rr-search"></i>
+            <input
+            value={search}
+            onClick={((e) => setSearching(!searching))}
+            placeholder="Search DoorDart"></input>
+        </div>
+        <div className={!searching ? "hidden" : "s-menu"}>
+          <div id="s-menu">
+        <div style={{ border:  "2px solid black" }}  ref={targetRef3}  id={ !searching ? "hidden" : "searchTwo"}>
+            <i class=" fi fi-rr-arrow-small-left"></i>
             <input
             value={search}
             onChange={((e) => setSearch(e.target.value))}
             onKeyDown={handleSearch}
-            onClick={((e) => setSearching(!searching))}
             placeholder="Search DoorDart"></input>
              { search && <i onClick={((e) => {
+              e.stopPropagation()
                   setSearch("")
                   setSearch2("")
               })} style={{ cursor: "pointer", width: "20px", height: "20px", fontSize: "20px" }} class="fi fi-sr-cross-circle"></i>}
         </div>
-        <div style={{ position: "relative" }}>
+        <div>
+          {/* <h1>Recent Searches</h1> */}
+
+        </div>
+          </div>
+        </div>
           { lMenu &&
+        <div style={{ position: "relative" }}>
           <div style={{ left: "0" }} onClick={((e) => e.stopPropagation())} id="addy-menu">
             <div id="a-menu" style={{ padding: "16px" }}>
               <h1>Enter Your Address</h1>
@@ -179,8 +203,8 @@ function HomeNavTwo({ isLoaded }) {
             </div>
             </div>
           </div>
-          }
         </div>
+          }
 
         </div>
         <div style={{ width: "40%" }} className="search">
