@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useFilters } from "../../context/Filters";
 import ReviewFormTwoModal from "./index2";
 
-function ReviewFormModal({ itemId }) {
+function ReviewFormModal({ itemId, rev }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.session );
   const { restaurant }  = useSelector((state) => state.restaurants);
@@ -18,7 +18,7 @@ function ReviewFormModal({ itemId }) {
   const history = useHistory()
   const { setItem, setCount } = useFilters()
   const [ data, setData ] = useState({})
-  const [ rating, setRating ] = useState(0)
+  const [ rating, setRating ] = useState(rev ? rev : 0)
   const [ review, setReview ] = useState("")
   const [hoveredIndex, setHoveredIndex] = useState(0);
 

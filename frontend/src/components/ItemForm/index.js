@@ -172,10 +172,6 @@ useEffect(() => {
 
    options = options?.filter((op) => op.ItemSelections.sort((a, b) => b.selection.localeCompare(a.selection)))
 
-console.log(price)
-console.log(cartItem.price)
-
-
   return (
     <div ref={targetRef} className="item-modal">
         <div id="close-item">

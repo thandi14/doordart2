@@ -93,7 +93,7 @@ function OrdersPage({ isLoaded }) {
         ));
       };
 
-      const StarRating = ({ initialRating, onRatingChange }) => {
+      const StarRating = ({ rated, initialRating, onRatingChange }) => {
         const [rating, setRating] = useState(initialRating);
         const [hoverRating, setHoverRating] = useState(null);
 
@@ -102,7 +102,10 @@ function OrdersPage({ isLoaded }) {
         const handleClick = (rating) => {
           setRating(rating);
           if (onRatingChange) onRatingChange(rating);
+          !rated && setModalContent(<ReviewFormModal rev={rating} />)
         };
+
+
 
         return (
           <div id="order-three">
@@ -220,7 +223,7 @@ function OrdersPage({ isLoaded }) {
                      <div className="order-three">
 
                      <div id="order-three">
-                            <StarRating rating={0} />
+                            <StarRating rated={order.Restaurant.Reviews.some((r) => r.orderId == order.id )} rating={ order.Restaurant.Reviews.some((r) => r.orderId == order.id ) ? order.Restaurant.Reviews.find((r) => r.orderId == order.id ) : 0} />
                      </div>
                      <div id="leave-r">
                      <i style={{ width: "8px", height: "8px", fontSize: "8px", display: "flex" }} class="fi fi-sr-bullet"></i>

@@ -134,7 +134,7 @@ function HomeNavTwo({ isLoaded }) {
             placeholder="Search DoorDart"></input>
         </div>
         <div className={!searching ? "hidden" : "s-menu"}>
-          <div id="s-menu">
+          <div style={{ border: !stores.length > 0 ? "1px solid transparent" : "1px solid #f1f1f1" }}  id="s-menu">
             <div style={{ padding: "8px 16px", boxSizing: "border-box" }}>
         <div style={{ border:  "2px solid black" }}  ref={targetRef3}  id={ !searching ? "hidden" : "searchTwo"}>
             <i class=" fi fi-rr-arrow-small-left"></i>
