@@ -137,7 +137,7 @@ function HomeNavTwo({ isLoaded }) {
           <div style={{ border: !stores.length > 0 ? "1px solid transparent" : "1px solid #f1f1f1" }}  id="s-menu">
             <div style={{ padding: "8px 16px", boxSizing: "border-box" }}>
         <div style={{ border:  "2px solid black" }}  ref={targetRef3}  id={ !searching ? "hidden" : "searchTwo"}>
-            <i class=" fi fi-rr-arrow-small-left"></i>
+            <i onClick={(() => setSearching(!searching))} class=" fi fi-rr-arrow-small-left"></i>
             <input
             value={search}
             onChange={((e) => setSearch(e.target.value))}
@@ -162,7 +162,7 @@ function HomeNavTwo({ isLoaded }) {
                     <p style={{ fontSize: "16px", fontSize: "500"}} >{s.name}</p>
                     <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.type}</p>
                     </span>
-                    <i class="fi fi-br-cross-small"></i>
+                    {/* <i class="fi fi-br-cross-small"></i> */}
                     </div>
               )}
         </div>

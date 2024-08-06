@@ -590,6 +590,7 @@
     margin: 0px;
     white-space: nowrap;
     overflow: hidden;
+    font-weight: 500;
     text-overflow: ellipsis;
 }
 

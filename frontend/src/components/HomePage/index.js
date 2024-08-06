@@ -155,7 +155,7 @@ function HomePage({ isLoaded }) {
 
   if (Object.values(orders).length) {
     for (let order of Object.values(orders)) {
-        
+
         if (!set.has(order.Restaurant.name)) {
             ordered.push(order.Restaurant)
             set.add(order.Restaurant.name)
@@ -541,11 +541,11 @@ function HomePage({ isLoaded }) {
     </div>
     <div style={{ padding: "0.4% 3%"}} className="hp">
     { <div className="types">
-    { closest.length > 0 && <Restaurants arr={closest} title={"Fastest near you"} />}
-    { allCarts.length > 0 && <Restaurants arr={allCarts} title={"Most Ordered"} />}
-    { allWallets.length > 0 && <Restaurants arr={allWallets} title={"Wallet friendly"} />}
-    { saved.length > 0 && <Restaurants arr={saved} title={"Saved stores"} />}
-    { ordered.length > 0 && <Restaurants arr={ordered} title={"Order it again"} />}
+    { closest.length > 0 && !category && <Restaurants arr={closest} title={"Fastest near you"} />}
+    { allCarts.length > 0 && !category && <Restaurants arr={allCarts} title={"Most Ordered"} />}
+    { allWallets.length > 0 && !category && <Restaurants arr={allWallets} title={"Wallet friendly"} />}
+    { saved.length > 0 && !category && <Restaurants arr={saved} title={"Saved stores"} />}
+    { ordered.length > 0 && !category && <Restaurants arr={ordered} title={"Order it again"} />}
     </div> }
     {category || Object.values(catTwo).length ? null : <div style={{ width: "100%", fontSize: "30px"}}><h1 style={{fontSize: "30px", marginBottom: "30px"}}>All Stores</h1></div>}
     <RestaurantsTwo category={catOne} filter={catTwo} restaurants={franchises} />

@@ -218,10 +218,11 @@
 }
 
 #searchTwo > i {
-    width: 18px;
-    height: 18px;
-    font-size: 18px;
+    width: 16px;
+    height: 24px;
+    font-size: 24px;
     padding: 0px 2px;
+    cursor: pointer;
 }
 
 .search > i {
