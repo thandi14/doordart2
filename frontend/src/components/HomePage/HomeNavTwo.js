@@ -221,7 +221,7 @@ function HomeNavTwo({ isLoaded }) {
           }
 
         </div>
-        <div style={{ width: "40%" }} className="search">
+        <div style={{ width: "30%" }} className="search">
         <div style={{ position: "relative" }}>
         <div ref={targetRef} onClick={(() => setLMenu(!lMenu))} id="my-address-two">
         <i class="fi fi-rs-marker"></i>

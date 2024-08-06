@@ -121,10 +121,10 @@
     width: 100%;
     position: absolute;
     top: -8px;
-    right: 0;
+    left: 0;
     display: flex;
     box-sizing: border-box;
-    max-width: 770px;
+    /* max-width: 770px; */
     z-index: 12;
     padding: 0px 16px;
     /* transition: ; */
