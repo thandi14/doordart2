@@ -405,6 +405,7 @@
 .side-bar {
     top: 64px;
     left: 0;
+    width: 26%;
     /* width: 100%; */
     position: sticky;
     border-right: 1px solid rgb(231, 231, 231);
