@@ -4,7 +4,7 @@ const { check } = require('express-validator');
 const { Op } = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Save, Restaurant, MenuItem, RestaurantTime, Review, RestaurantImage, Offer, ItemOption, ShoppingCart, CartItem, CartItemNotes, ItemSelection } = require('../../db/models');
+const { Search, User, Save, Restaurant, MenuItem, RestaurantTime, Review, RestaurantImage, Offer, ItemOption, ShoppingCart, CartItem, CartItemNotes, ItemSelection } = require('../../db/models');
 const axios = require('axios');
 const geolib = require('geolib'); //
 
@@ -181,7 +181,45 @@ router.get('/search', async (req, res) => {
 
 })
 
+router.get('/searches', async (req, res) => {
 
+    let Searches = []
+
+    Searches = await Search.findAll({
+        order: [['createdAt', 'DESC']]
+    })
+
+    res.json( Searches )
+
+})
+
+router.get('/recent/searches', async (req, res) => {
+    const { userId, query } = req.body;
+
+    let Searches = []
+
+    Searches = await Search.findAll({
+        where: { userId: userId },
+        order: [['createdAt', 'DESC']]
+    })
+
+    res.json( Searches )
+
+})
+
+router.post('/searches', async (req, res) => {
+    const { userId, query } = req.body;
+
+    let Searches = []
+
+    Searches = await Search.create({
+        userId,
+        query,
+    })
+
+    res.json( Searches )
+
+})
 
 router.get('/wallets', async (req, res) => {
 
