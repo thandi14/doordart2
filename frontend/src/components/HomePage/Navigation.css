@@ -387,7 +387,7 @@
     font-size: 14px;
     position: sticky;
     box-sizing: border-box;
-    width: 220px;
+    /* min-width: 220px; */
 
 }
 
@@ -405,7 +405,7 @@
 .side-bar {
     top: 64px;
     left: 0;
-    width: 26%;
+    max-width: 26%;
     /* width: 100%; */
     position: sticky;
     border-right: 1px solid rgb(231, 231, 231);

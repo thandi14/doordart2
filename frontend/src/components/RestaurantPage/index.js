@@ -277,7 +277,7 @@ if (menu?.length) {
             <i class="fi fi-rr-user"></i>
         </span>
     </div>}
-    { bar && <div  onClick={(() => window.alert("Feature coming soon!"))} style={{ position: "absolute", backgroundColor:"white", height: "100vh", top: "0", boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.2) " }} id="side-bar">
+    { bar && <div  onClick={(() => window.alert("Feature coming soon!"))} style={{ minWidth: "220px", position: "absolute", backgroundColor:"white", height: "100vh", top: "0", boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.2) " }} id="side-bar">
         <span onClick={((e) => {
             e.stopPropagation()
             history.push('/home')})} className="page">

@@ -652,11 +652,11 @@
     flex-direction: column;
     position: sticky;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex: 1 1;
     flex-direction: column;
     box-sizing: border-box;
-    width: 94%;
+    width: 84%;
     /* width: 110vh; */
 }
 

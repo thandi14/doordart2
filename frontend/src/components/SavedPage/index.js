@@ -78,7 +78,7 @@ function SavedPage({ isLoaded }) {
     <div style={{ position: "relative"}}>
     {user ? <HomeNavTwo /> : <HomeNav /> }
     <div style={{ display: "flex"}}>
-    <div className="side-bar" style={{ position: "sticky", height: "100vh", top: "64px", zIndex: 10}}>
+    <div className="side-bar" style={{ minWidth: "220px", position: "sticky", height: "100vh", top: "64px", zIndex: 10}}>
 
 { user?.id && <div onClick={(() => window.alert("Feature coming soon"))} id="side-bar">
     <span onClick={((e) => {

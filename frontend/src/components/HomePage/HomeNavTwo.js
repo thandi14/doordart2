@@ -19,7 +19,7 @@ import Profile from "./Profile";
 function HomeNavTwo({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const { cartItem, shoppingCarts }  = useSelector((state) => state.cart);
-  const { restaurants, saves, orders, wallets } = useSelector((state) => state.restaurants);
+  const { restaurants, recents, } = useSelector((state) => state.restaurants);
   const history = useHistory()
   const [drop, setDrop] = useState(false)
   const { location } = useFilters()
@@ -39,6 +39,13 @@ function HomeNavTwo({ isLoaded }) {
   const [ search2, setSearch2 ] = useState("")
   const currentPage = locations.pathname;
 
+  useEffect(() => {
+    async function fetchData() {
+      await dispatch(restaurantActions.thunkGetRecents());
+    }
+    fetchData()
+
+ }, [dispatch, recents])
 
   const handlePlaceChanged = () => {
     const autocomplete = autocompleteRef.current;
@@ -97,6 +104,7 @@ function HomeNavTwo({ isLoaded }) {
     let data = []
       if (event.key === 'Enter') {
         data = await dispatch(restaurantActions.thunkGetSearch(search));
+        await dispatch(restaurantActions.thunkCreateRecent({ query: search }));
 
         if (!currentPage.includes("search")) {
           if (data.length == 1) {
@@ -112,12 +120,31 @@ function HomeNavTwo({ isLoaded }) {
 
   };
 
+  const handleSearchings = async (event) => {
+    let data = []
+    console.log(search)
+      data = await dispatch(restaurantActions.thunkGetSearch(search));
+      await dispatch(restaurantActions.thunkCreateRecent({ query: search }));
+
+      if (!currentPage.includes("search")) {
+        if (data.length == 1) {
+          history.push(`/restaurant/${data[0].id}`)
+        }
+        else {
+          history.push(`/restaurants/search`)
+
+        }
+    }
+  }
+
+
   let stores = Object.values(restaurants).filter((r) => r.name.toLowerCase().includes(search.toLowerCase()))?.slice(0, 5)
   let Alltypes = Object.values(restaurants).map((r) => r.type)
   Alltypes = [...new Set(Alltypes)];
   let types = Alltypes.filter((t) => t.toLowerCase().includes(search.toLowerCase()))?.slice(0, 5)
+  let rs = Object.values(recents)
 
-  console.log(types, search)
+  // console.log(types, search)
 
   return (
     <>
@@ -156,8 +183,12 @@ function HomeNavTwo({ isLoaded }) {
             </div>
         <div>
           {/* <h1>Recent Searches</h1> */}
+
               {stores?.length > 0 && search.length > 0 && stores.map((s) =>
-                  <div onClick={(() => history.push(`restaurant/${s.id}`))} id="search-store">
+                  <div onClick={() => {
+                    setSearch(s.name)
+                    handleSearchings()
+                    }} id="search-store">
                     <div>
                       <img src={s.RestaurantImage.iconUrl}></img>
                     </div>
@@ -169,7 +200,10 @@ function HomeNavTwo({ isLoaded }) {
                     </div>
               )}
               {types?.length > 0 && search.length > 0 && types.map((t) =>
-                  <div onClick={(() => history.push(`/restaurants/search`))} id="search-store">
+                  <div onClick={() => {
+                    setSearch(t)
+                    handleSearchings()
+                    }} id="search-store">
                     <i class="fi fi-rr-search"></i>
                     <span>
                     <p style={{ fontSize: "16px", fontSize: "500"}} >{t}</p>
