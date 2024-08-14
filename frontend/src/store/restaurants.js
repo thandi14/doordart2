@@ -2,6 +2,8 @@ import { csrfFetch } from "./csrf";
 
 const GET_RESTAURANTS = "restaurant/getRestaurants";
 const GET_RESTAURANT = "restaurant/getRestaurant";
+const GET_SEARCHINGS = "restaurant/getSearchings";
+const GET_RECENTS = "restaurant/getRecents";
 const GET_REVIEW = "restaurant/getReview";
 const GET_REVIEWS = "restaurant/getReviews";
 const GET_REVIEW_DETAILS = "restaurant/getReviewDetails";
@@ -64,7 +66,12 @@ const getSearch = (searchs) => {
   };
 };
 
-
+const getSearching = (searchs) => {
+  return {
+    type: GET_SEARCHINGS,
+    searchs,
+  };
+};
 
 const getSaveDetails = (details) => {
   return {
@@ -85,6 +92,13 @@ const getReviews = (reviews) => {
   return {
     type: GET_REVIEWS,
     reviews,
+  };
+};
+
+const getRecents = (searches) => {
+  return {
+    type: GET_RECENTS,
+    searches,
   };
 };
 
@@ -173,14 +187,26 @@ export const thunkGetOrders = (id) => async (dispatch) => {
 };
 
 export const thunkGetSearch = (search) => async (dispatch) => {
-  console.log("hello!", search)
   const response = await csrfFetch(`/api/restaurants/search?search=${search}`)
   const data1 = await response.json();
   dispatch(getSearch(data1));
   return data1;
 };
 
+export const thunkGetSearchings = (search) => async (dispatch) => {
+  console.log("hello!", search)
+  const response = await csrfFetch(`/api/restaurants/searches`)
+  const data1 = await response.json();
+  dispatch(getSearching(data1));
+  return data1;
+};
 
+export const thunkGetRecents = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/restaurants/recents/searches`)
+  const data1 = await response.json();
+  dispatch(getRecents(data1));
+  return data1;
+};
 
 export const thunkGetReviews = (id, page) => async (dispatch) => {
   const response = await csrfFetch(`/api/restaurants/${id}/reviews?page=${page}`)
@@ -188,6 +214,19 @@ export const thunkGetReviews = (id, page) => async (dispatch) => {
   dispatch(getReviews(data1));
   return data1;
 
+};
+
+export const thunkCreateRecent = (id, data) => async (dispatch) => {
+  const response = await csrfFetch(`/api/restaurants/searches`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const data1 = await response.json();
+ // dispatch(getReviewDetails(data1));
+  return data1;
 };
 
 
@@ -258,15 +297,16 @@ export const thunkDeleteSave = (id, restaurantId) => async (dispatch) => {
 };
 
 let initialState = {
-   restaurants: {},
-   restaurant: {},
-   reviews: {},
-   review: {},
-   saves: {},
-   wallets: {},
-   orders: {},
-   searchs: {}
-
+  restaurants: {},
+  restaurant: {},
+  reviews: {},
+  review: {},
+  saves: {},
+  wallets: {},
+  orders: {},
+  searchs: {},
+  searchings: {},
+  recents: {}
 }
 
 
@@ -326,6 +366,18 @@ const restaurantReducer = (state = initialState, action) => {
       newState = { ...state };
       if (action.searchs?.length) action.searchs?.forEach(
         (search) => (newState.searchs[search.id] = { ...search })
+      );
+    return newState;
+    case GET_SEARCHINGS:
+      newState = { ...state };
+      if (action.searchs?.length) action.searchs?.forEach(
+        (search) => (newState.searchings[search.id] = { ...search })
+      );
+    return newState;
+    case GET_RECENTS:
+      newState = { ...state };
+      if (action.searchs?.length) action.searchs?.forEach(
+        (search) => (newState.recents[search.id] = { ...search })
       );
     return newState;
     case GET_SAVE_DETAILS:
