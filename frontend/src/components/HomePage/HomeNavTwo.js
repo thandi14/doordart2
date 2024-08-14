@@ -113,8 +113,11 @@ function HomeNavTwo({ isLoaded }) {
   };
 
   let stores = Object.values(restaurants).filter((r) => r.name.toLowerCase().includes(search.toLowerCase()))?.slice(0, 5)
+  let Alltypes = Object.values(restaurants).map((r) => r.type)
+  Alltypes = [...new Set(Alltypes)];
+  let types = Alltypes.filter((t) => t.toLowerCase().includes(search.toLowerCase()))?.slice(0, 5)
 
-  console.log(stores, search)
+  console.log(types, search)
 
   return (
     <>
@@ -161,6 +164,15 @@ function HomeNavTwo({ isLoaded }) {
                     <span>
                     <p style={{ fontSize: "16px", fontSize: "500"}} >{s.name}</p>
                     <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.type}</p>
+                    </span>
+                    {/* <i class="fi fi-br-cross-small"></i> */}
+                    </div>
+              )}
+              {types?.length > 0 && search.length > 0 && types.map((t) =>
+                  <div onClick={(() => history.push(`/restaurants/search`))} id="search-store">
+                    <i class="fi fi-rr-search"></i>
+                    <span>
+                    <p style={{ fontSize: "16px", fontSize: "500"}} >{t}</p>
                     </span>
                     {/* <i class="fi fi-br-cross-small"></i> */}
                     </div>

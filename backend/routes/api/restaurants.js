@@ -181,17 +181,17 @@ router.get('/search', async (req, res) => {
 
 })
 
-router.get('/searches', async (req, res) => {
+// router.get('/searches', async (req, res) => {
 
-    let Searches = []
+//     let Searches = []
 
-    Searches = await Search.findAll({
-        order: [['createdAt', 'DESC']]
-    })
+//     Searches = await Search.findAll({
+//         order: [['createdAt', 'DESC']]
+//     })
 
-    res.json( Searches )
+//     res.json( Searches )
 
-})
+// })
 
 router.get('/recent/searches', async (req, res) => {
     const { userId, query } = req.body;

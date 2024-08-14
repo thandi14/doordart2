@@ -412,6 +412,15 @@
     /* height: 100%; */
 }
 
+#search-store > i {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    justify-content: center;
+}
+
 #side-bar > span {
     display: flex;
     align-items: center;
