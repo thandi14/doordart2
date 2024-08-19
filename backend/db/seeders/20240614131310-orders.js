@@ -16,25 +16,31 @@ module.exports = {
       {
         restaurantId: 3,
         userId: 1,
-        price: 14,
+        price: 36.47,
         status: "Ordered",
       },
       {
         restaurantId: 1,
         userId: 2,
-        price: 8,
+        price: 13.88,
         status: "Ordered",
       },
       {
         restaurantId: 6,
         userId: 1,
-        price: 8,
+        price: 21.18,
+        status: "Ordered",
+      },
+      {
+        restaurantId: 3,
+        userId: 1,
+        price: 99.44,
         status: "Ordered",
       },
       {
         restaurantId: 3,
         userId: 2,
-        price: 14,
+        price: 34.84,
         status: "Ordered",
       },
     ])

@@ -30,7 +30,7 @@ function OrdersPage({ isLoaded }) {
 
   useEffect(() => {
     async function fetchData() {
-        if (user?.id) dispatch(cartActions.thunkUserOrders())
+         dispatch(cartActions.thunkUserOrders())
        }
     fetchData()
 
