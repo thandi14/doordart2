@@ -98,7 +98,7 @@ function RestaurantNav() {
   }, [shoppingCart]);
 
   useEffect(() => {
-    if (sc.length) {
+    if (sc?.length) {
       let selections = shoppingCart.CartItems.map((item) => {
         let totalPrice = item.CartItemNotes?.reduce((total, note) => {
             return total + (note.ItemSelection?.price || 0); // Ensure price exists and add to total

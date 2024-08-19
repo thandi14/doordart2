@@ -27,7 +27,7 @@ function HomeNav({ isLoaded }) {
   const targetRef2 = useRef()
   const targetRef3 = useRef()
   const { setModalContent } = useModal()
-  const { setLocation } = useFilters()
+  const { setLocation, setQuery } = useFilters()
   const autocompleteRef = useRef(null);
   const dispatch = useDispatch()
   const [dropTwo, setDropTwo] = useState(false)
@@ -51,6 +51,13 @@ function HomeNav({ isLoaded }) {
     fetchData()
 
  }, [dispatch, location])
+
+ useEffect(() => {
+  async function fetchData() {
+      setQuery(search)
+     }
+  fetchData()
+}, [dispatch, search])
 
 
   const handlePlaceChanged = () => {

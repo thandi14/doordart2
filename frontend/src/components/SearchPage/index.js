@@ -32,7 +32,7 @@ function SearchPage({ isLoaded }) {
   const dispatch = useDispatch()
   const [ filter, setFilter ] = useState({})
   const [ hide, setHide ] = useState(false)
-  const { location, setProfile, profile, setLocation, results } = useFilters()
+  const { location, setProfile, profile, query, setQuery } = useFilters()
   const history = useHistory()
   const targetRef = useRef()
   const targetRef2 = useRef(null)
@@ -91,6 +91,26 @@ function SearchPage({ isLoaded }) {
         }
 
         searched = filteredFranchises
+
+        const sortBySearchQuery = (array, query) => {
+            return array.sort((a, b) => {
+              const aIndex = a.name.toLowerCase().indexOf(query.toLowerCase());
+              const bIndex = b.name.toLowerCase().indexOf(query.toLowerCase());
+
+              if (aIndex === -1 && bIndex === -1) {
+                return 0;
+              }
+              if (aIndex === -1) {
+                return 1;
+              }
+              if (bIndex === -1) {
+                return -1;
+              }
+              return aIndex - bIndex;
+            });
+          };
+
+          sortBySearchQuery(searched, query)
 
 
 

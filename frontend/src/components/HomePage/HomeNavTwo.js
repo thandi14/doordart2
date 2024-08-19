@@ -29,7 +29,7 @@ function HomeNavTwo({ isLoaded }) {
   const targetRef2 = useRef()
   const targetRef3 = useRef()
   const { setModalContent } = useModal()
-  const { setLocation } = useFilters()
+  const { setLocation, setQuery } = useFilters()
   const autocompleteRef = useRef(null);
   const dispatch = useDispatch()
   const [dropTwo, setDropTwo] = useState(false)
@@ -74,6 +74,13 @@ function HomeNavTwo({ isLoaded }) {
 
   };
 
+  useEffect(() => {
+    async function fetchData() {
+        setQuery(search)
+       }
+    fetchData()
+  }, [dispatch, search])
+
 
   useEffect(() => {
 
@@ -107,7 +114,7 @@ function HomeNavTwo({ isLoaded }) {
         await dispatch(restaurantActions.thunkCreateRecent({ query: search }));
 
         if (!currentPage.includes("search")) {
-          if (data.length == 1) {
+          if (data.length == 1 && data[0].name.toLowerCase() == search.toLowerCase()) {
             history.push(`/restaurant/${data[0].id}`)
           }
           else {

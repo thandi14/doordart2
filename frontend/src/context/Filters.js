@@ -14,11 +14,13 @@ export function FiltersProvider({ children }) {
     const [results, setResults] = useState(1);
     const [selections, setSelections] = useState({});
     const [validation, setValidation] = useState([]);
+    const [query, setQuery] = useState([]);
+
 
 
 
   return (
-    <FiltersContext.Provider value={{ price, setPrice, validation, setValidation, selections, setSelections, results, setResults, profile, setProfile, recentId, setRecentId, filter, setFilter, location, setLocation, item, setItem, count, setCount }}>
+    <FiltersContext.Provider value={{ query, setQuery, price, setPrice, validation, setValidation, selections, setSelections, results, setResults, profile, setProfile, recentId, setRecentId, filter, setFilter, location, setLocation, item, setItem, count, setCount }}>
       {children}
     </FiltersContext.Provider>
   );
