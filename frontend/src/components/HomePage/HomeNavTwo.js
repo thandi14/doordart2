@@ -137,11 +137,32 @@ function HomeNavTwo({ isLoaded }) {
     }
   }
 
+  const highlightText = (text) => {
+    if (!search) return text;
 
-  let stores = Object.values(restaurants).filter((r) => r.name.toLowerCase().includes(search.toLowerCase()))?.slice(0, 5)
+    const lowerSearch = search.toLowerCase();
+    const lowerText = text.toLowerCase();
+    let highlightedText = '';
+    let searchIndex = 0;
+
+    for (let i = 0; i < lowerText.length; i++) {
+      if (searchIndex < lowerSearch.length && lowerText[i] === lowerSearch[searchIndex]) {
+        highlightedText += `<span style="font-weight: 300; color: #1e1e1e;">${text[i]}</span>`;
+        searchIndex++;
+      } else {
+        highlightedText += `<span style="font-weight: 500;">${text[i]}</span>`;
+      }
+    }
+
+    return searchIndex === lowerSearch.length ? highlightedText : text;
+  };
+
+
+
+  let stores = Object.values(restaurants).filter((r) => r.name.toLowerCase().startsWith(search.toLowerCase()))?.slice(0, 5)
   let Alltypes = Object.values(restaurants).map((r) => r.type)
   Alltypes = [...new Set(Alltypes)];
-  let types = Alltypes.filter((t) => t.toLowerCase().includes(search.toLowerCase()))?.slice(0, 5)
+  let types = Alltypes.filter((t) => t.toLowerCase().startsWith(search.toLowerCase()))?.slice(0, 5)
   let rs = Object.values(recents)
 
   // console.log(types, search)
@@ -184,7 +205,7 @@ function HomeNavTwo({ isLoaded }) {
         <div>
           {/* <h1>Recent Searches</h1> */}
 
-              {stores?.length > 0 && search.length > 0 && stores.map((s) =>
+              {stores?.length > 0 && search.length > 0 && stores.map((s, id) =>
                   <div onClick={() => {
                     setSearch(s.name)
                     handleSearchings()
@@ -193,7 +214,11 @@ function HomeNavTwo({ isLoaded }) {
                       <img src={s.RestaurantImage.iconUrl}></img>
                     </div>
                     <span>
-                    <p style={{ fontSize: "16px", fontSize: "500"}} >{s.name}</p>
+                    <p
+                    style={{ fontSize: '16px' }}
+                    dangerouslySetInnerHTML={{ __html: highlightText(s.name) }}
+                    />
+                    {/* <p style={{ fontSize: "16px", fontSize: "500"}} >{s.name}</p> */}
                     <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.type}</p>
                     </span>
                     {/* <i class="fi fi-br-cross-small"></i> */}
@@ -206,7 +231,11 @@ function HomeNavTwo({ isLoaded }) {
                     }} id="search-store">
                     <i class="fi fi-rr-search"></i>
                     <span>
-                    <p style={{ fontSize: "16px", fontSize: "500"}} >{t}</p>
+                    <p
+                    style={{ fontSize: '16px' }}
+                    dangerouslySetInnerHTML={{ __html: highlightText(t) }}
+                    />
+                    {/* <p style={{ fontSize: "16px", fontSize: "500"}} >{t}</p> */}
                     </span>
                     {/* <i class="fi fi-br-cross-small"></i> */}
                     </div>
