@@ -127,11 +127,11 @@ function HomeNavTwo({ isLoaded }) {
 
   };
 
-  const handleSearchings = async (event) => {
+  const handleSearchings = async (query) => {
     let data = []
     console.log(search)
       data = await dispatch(restaurantActions.thunkGetSearch(search));
-      await dispatch(restaurantActions.thunkCreateRecent({ query: search }));
+      await dispatch(restaurantActions.thunkCreateRecent({ query }));
 
       if (!currentPage.includes("search")) {
         if (data.length == 1) {
@@ -215,7 +215,7 @@ function HomeNavTwo({ isLoaded }) {
               {stores?.length > 0 && search.length > 0 && stores.map((s, id) =>
                   <div onClick={() => {
                     setSearch(s.name)
-                    handleSearchings()
+                    handleSearchings(s.name)
                     }} id="search-store">
                     <div>
                       <img src={s.RestaurantImage.iconUrl}></img>
@@ -234,7 +234,7 @@ function HomeNavTwo({ isLoaded }) {
               {types?.length > 0 && search.length > 0 && types.map((t) =>
                   <div onClick={() => {
                     setSearch(t)
-                    handleSearchings()
+                    handleSearchings(t)
                     }} id="search-store">
                     <i class="fi fi-rr-search"></i>
                     <span>

@@ -194,7 +194,8 @@ router.get('/search', async (req, res) => {
 // })
 
 router.get('/recent/searches', async (req, res) => {
-    const { userId, query } = req.body;
+    const { user } = req
+    const userId = user?.dataValues.id
 
     let Searches = []
 
