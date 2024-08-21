@@ -202,6 +202,10 @@ router.get('/recent/searches', async (req, res) => {
     Searches = await Search.findAll({
         where: { userId: userId },
         order: [['createdAt', 'DESC']],
+        include: [
+            { model: Restaurant },
+            { model: RestaurantImage },
+        ]
     })
 
     res.json( Searches )

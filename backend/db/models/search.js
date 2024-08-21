@@ -14,9 +14,14 @@ module.exports = (sequelize, DataTypes) => {
         models.User,
           { foreignKey: 'userId' }
       );
+      Search.belongsTo(
+        models.Restaurant,
+          { foreignKey: 'restaurantId' }
+      );
     }
   }
   Search.init({
+    restaurantId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     query: DataTypes.TEXT
   }, {

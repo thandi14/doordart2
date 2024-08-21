@@ -26,6 +26,14 @@ module.exports = {
         userId: 1,
         query: "breakfast",
       },
+      {
+        userId: 1,
+        restaurantId: 3,
+      },
+      {
+        userId: 1,
+        restaurantId: 1,
+      },
     ])
   },
 

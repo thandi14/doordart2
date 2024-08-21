@@ -210,7 +210,26 @@ function HomeNavTwo({ isLoaded }) {
 
             </div>
         <div>
-          {/* <h1>Recent Searches</h1> */}
+          {/* { search.length == 0 && <h1>Recent Searches</h1>} */}
+          {/* {recents?.length > 0 && search.length == 0 && recents.map((recent, id) =>
+                  <div onClick={() => {
+                    setSearch(s.name)
+                    handleSearchings(s.name)
+                    }} id="search-store">
+                    <div>
+                      <img src={s.RestaurantImage.iconUrl}></img>
+                    </div>
+                    <span>
+                    <p
+                    style={{ fontSize: '16px' }}
+                    dangerouslySetInnerHTML={{ __html: highlightText(recent) }}
+                    />
+                    <p style={{ fontSize: "16px", fontSize: "500"}} >{s.name}</p>
+                    <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.type}</p>
+                    </span>
+                    <i class="fi fi-br-cross-small"></i>
+                    </div>
+              )} */}
 
               {stores?.length > 0 && search.length > 0 && stores.map((s, id) =>
                   <div onClick={() => {

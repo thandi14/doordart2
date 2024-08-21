@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
         models.MenuItem,
           { foreignKey: 'restaurantId', onDelete: 'CASCADE',  hooks: true }
       );
+      Restaurant.hasMany(
+        models.Search,
+          { foreignKey: 'restaurantId', onDelete: 'CASCADE',  hooks: true }
+      );
     }
   }
   Restaurant.init({

@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         models.Like,
           { foreignKey: 'userId', onDelete: 'CASCADE',  hooks: true }
       );
+      User.hasMany(
+        models.Search,
+          { foreignKey: 'userId', onDelete: 'CASCADE',  hooks: true }
+      );
     }
   }
   User.init({
