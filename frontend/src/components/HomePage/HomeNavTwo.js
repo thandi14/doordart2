@@ -232,6 +232,7 @@ function HomeNavTwo({ isLoaded }) {
                     setSearch(q.query)
                     handleSearchings(q.query)
                     }} id="search-store">
+                      <i style={{ fontSize: "20px"}} id="ri" class="fi fi-rr-clock-three"></i>
                     <span>
                     <p style={{ fontSize: "16px", fontSize: "500"}} >{q.query}</p>
                     {/* <p style={{ color: "#606060ff", fontSize: "14px"}}>{q.type}</p> */}

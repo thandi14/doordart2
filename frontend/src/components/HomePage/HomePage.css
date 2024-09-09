@@ -615,6 +615,20 @@
     overflow: hidden;
 }
 
+#ri {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    margin-right: var(--usage-space-small);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
 .order-three {
     width: 100%;
     display: flex;
