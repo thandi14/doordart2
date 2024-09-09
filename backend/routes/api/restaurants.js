@@ -82,8 +82,6 @@ router.get('/', async (req, res) => {
             location = places[0].formatted_address;
         }
 
-        console.log(places[0])
-
 
         let franchise = await Restaurant.findOne({
             where: {
@@ -200,13 +198,18 @@ router.get('/recent/searches', async (req, res) => {
     let Searches = []
 
     Searches = await Search.findAll({
-        where: { userId: userId },
+        // where: { userId: userId },
         order: [['createdAt', 'DESC']],
         include: [
-            { model: Restaurant },
-            { model: RestaurantImage },
+            {
+                model: Restaurant,
+                include: [
+                    { model: RestaurantImage },
+                ]
+             },
         ]
     })
+    console.log("HELOOOOOOOOOOOOOOOOO", Searches, userId)
 
     res.json( Searches )
 

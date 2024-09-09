@@ -45,7 +45,7 @@ function HomeNavTwo({ isLoaded }) {
     }
     fetchData()
 
- }, [dispatch, recents])
+ }, [dispatch])
 
   const handlePlaceChanged = () => {
     const autocomplete = autocompleteRef.current;
@@ -172,7 +172,7 @@ function HomeNavTwo({ isLoaded }) {
   let types = Alltypes.filter((t) => t.toLowerCase().startsWith(search.toLowerCase()))?.slice(0, 5)
   let rs = Object.values(recents)
 
-  console.log(recents)
+  console.log(rs)
 
   return (
     <>

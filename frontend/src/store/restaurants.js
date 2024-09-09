@@ -95,10 +95,10 @@ const getReviews = (reviews) => {
   };
 };
 
-const getRecents = (searches) => {
+const getRecents = (searchs) => {
   return {
     type: GET_RECENTS,
-    searches,
+    searchs,
   };
 };
 
