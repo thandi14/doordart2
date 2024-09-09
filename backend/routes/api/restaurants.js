@@ -214,6 +214,17 @@ router.get('/recent/searches', async (req, res) => {
 
 })
 
+router.delete('/:id/recent/searches', async (req, res) => {
+    let searchId = req.params.id;
+    let searchExsits = await Restaurant.findByPk(searchId);
+
+    searchExsits.destroy()
+
+
+    res.json( "message: deleted succesfully" )
+
+})
+
 router.post('/searches', async (req, res) => {
     const { userId, query } = req.body;
 

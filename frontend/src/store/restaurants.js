@@ -4,6 +4,7 @@ const GET_RESTAURANTS = "restaurant/getRestaurants";
 const GET_RESTAURANT = "restaurant/getRestaurant";
 const GET_SEARCHINGS = "restaurant/getSearchings";
 const GET_RECENTS = "restaurant/getRecents";
+const DELETE_RECENTS = "restaurant/deleteRecents";
 const GET_REVIEW = "restaurant/getReview";
 const GET_REVIEWS = "restaurant/getReviews";
 const GET_REVIEW_DETAILS = "restaurant/getReviewDetails";
@@ -99,6 +100,13 @@ const getRecents = (searchs) => {
   return {
     type: GET_RECENTS,
     searchs,
+  };
+};
+
+const deleteRecents = (id) => {
+  return {
+    type: DELETE_RECENTS,
+    id,
   };
 };
 
@@ -212,6 +220,18 @@ export const thunkGetReviews = (id, page) => async (dispatch) => {
   dispatch(getReviews(data1));
   return data1;
 
+};
+
+export const thunkDeleteRecent = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/restaurants/${id}/recent/searches`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  const data = await response.json();
+  dispatch(deleteRecents(id));
+  return response;
 };
 
 export const thunkCreateRecent = (id, data) => async (dispatch) => {
@@ -411,6 +431,11 @@ const restaurantReducer = (state = initialState, action) => {
       }
       newState.restaurants[restaurantId].Saves = newState.restaurants[restaurantId].Saves.filter((save) => save.id !== saveId);
     return newState;
+    case DELETE_RECENTS:
+      newState = { ...state };
+      const searchId = action.id;
+      newState.recents = newState.recents.filter((i) => i.id != searchId);
+      return newState;
     default:
       return state;
   }
