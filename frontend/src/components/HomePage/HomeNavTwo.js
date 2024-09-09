@@ -170,9 +170,10 @@ function HomeNavTwo({ isLoaded }) {
   let Alltypes = Object.values(restaurants).map((r) => r.type)
   Alltypes = [...new Set(Alltypes)];
   let types = Alltypes.filter((t) => t.toLowerCase().startsWith(search.toLowerCase()))?.slice(0, 5)
-  let rs = Object.values(recents)
+  let rs = Object.values(recents).filter((r) => !r.query)
+  let rq = Object.values(recents).filter((r) => r.query)
 
-  console.log(rs)
+  console.log(rs, rq)
 
   return (
     <>
@@ -211,42 +212,33 @@ function HomeNavTwo({ isLoaded }) {
             </div>
         <div>
           { search.length == 0 && <h1>Recent Searches</h1>}
-          {recents?.length > 0 && search.length == 0 && recents.map((recent, id) =>
+          {rs?.length > 0 && search.length == 0 && rs.map((s, id) =>
+              <div onClick={() => {
+                setSearch(s.Restaurant.name)
+                handleSearchings(s.Restaurant.name)
+                }} id="search-store">
+                <div>
+                  <img src={s.Restaurant.RestaurantImage.iconUrl}></img>
+                </div>
+                <span>
+                <p style={{ fontSize: "16px", fontSize: "500"}} >{s.Restaurant.name}</p>
+                <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.Restaurant.type}</p>
+                </span>
+                <i class="fi fi-br-cross-small"></i>
+                </div>
+          )}
+          {rq?.length > 0 && search.length == 0 && rq.map((q, id) =>
                   <div onClick={() => {
-                    setSearch(recent.name)
-                    handleSearchings(recent.name)
+                    setSearch(q.query)
+                    handleSearchings(q.query)
                     }} id="search-store">
                     <span>
-                    <p
-                    style={{ fontSize: '16px' }}
-                    dangerouslySetInnerHTML={{ __html: highlightText(recent) }}
-                    />
-                    <p style={{ fontSize: "16px", fontSize: "500"}} >{recent.query}</p>
-                    <p style={{ color: "#606060ff", fontSize: "14px"}}>{recent.type}</p>
+                    <p style={{ fontSize: "16px", fontSize: "500"}} >{q.query}</p>
+                    {/* <p style={{ color: "#606060ff", fontSize: "14px"}}>{q.type}</p> */}
                     </span>
                     <i class="fi fi-br-cross-small"></i>
                     </div>
               )}
-              {/* {recents?.length > 0 && search.length == 0 && recents.map((recent, id) =>
-                  <div onClick={() => {
-                    setSearch(recent.name)
-                    handleSearchings(recent.name)
-                    }} id="search-store">
-                    <div>
-                      <img src={recent.RestaurantImage.iconUrl}></img>
-                    </div>
-                    <span>
-                    <p
-                    style={{ fontSize: '16px' }}
-                    dangerouslySetInnerHTML={{ __html: highlightText(recent) }}
-                    />
-                    <p style={{ fontSize: "16px", fontSize: "500"}} >{recent.name}</p>
-                    <p style={{ color: "#606060ff", fontSize: "14px"}}>{recent.type}</p>
-                    </span>
-                    <i class="fi fi-br-cross-small"></i>
-                    </div>
-              )} */}
-
               {stores?.length > 0 && search.length > 0 && stores.map((s, id) =>
                   <div onClick={() => {
                     setSearch(s.name)

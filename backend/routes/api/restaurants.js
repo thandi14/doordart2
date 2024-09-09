@@ -198,7 +198,7 @@ router.get('/recent/searches', async (req, res) => {
     let Searches = []
 
     Searches = await Search.findAll({
-        // where: { userId: userId },
+        where: { userId: userId },
         order: [['createdAt', 'DESC']],
         include: [
             {
@@ -209,7 +209,6 @@ router.get('/recent/searches', async (req, res) => {
              },
         ]
     })
-    console.log("HELOOOOOOOOOOOOOOOOO", Searches, userId)
 
     res.json( Searches )
 
