@@ -36,8 +36,6 @@ function RestaurantsTwo({ filter, category, restaurants }) {
     if (!category && !Object.values(filter).length) setFranchises(restaurants)
     }, [restaurants, category, filter])
 
-    console.log(restaurants)
-
   useEffect(() => {
     const place = localStorage.getItem('place');
     if (place) {

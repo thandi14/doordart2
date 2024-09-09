@@ -172,7 +172,7 @@ function HomeNavTwo({ isLoaded }) {
   let types = Alltypes.filter((t) => t.toLowerCase().startsWith(search.toLowerCase()))?.slice(0, 5)
   let rs = Object.values(recents)
 
-  // console.log(types, search)
+  console.log(recents)
 
   return (
     <>
@@ -210,22 +210,38 @@ function HomeNavTwo({ isLoaded }) {
 
             </div>
         <div>
-          {/* { search.length == 0 && <h1>Recent Searches</h1>} */}
-          {/* {recents?.length > 0 && search.length == 0 && recents.map((recent, id) =>
+          { search.length == 0 && <h1>Recent Searches</h1>}
+          {recents?.length > 0 && search.length == 0 && recents.map((recent, id) =>
                   <div onClick={() => {
-                    setSearch(s.name)
-                    handleSearchings(s.name)
+                    setSearch(recent.name)
+                    handleSearchings(recent.name)
+                    }} id="search-store">
+                    <span>
+                    <p
+                    style={{ fontSize: '16px' }}
+                    dangerouslySetInnerHTML={{ __html: highlightText(recent) }}
+                    />
+                    <p style={{ fontSize: "16px", fontSize: "500"}} >{recent.query}</p>
+                    <p style={{ color: "#606060ff", fontSize: "14px"}}>{recent.type}</p>
+                    </span>
+                    <i class="fi fi-br-cross-small"></i>
+                    </div>
+              )}
+              {/* {recents?.length > 0 && search.length == 0 && recents.map((recent, id) =>
+                  <div onClick={() => {
+                    setSearch(recent.name)
+                    handleSearchings(recent.name)
                     }} id="search-store">
                     <div>
-                      <img src={s.RestaurantImage.iconUrl}></img>
+                      <img src={recent.RestaurantImage.iconUrl}></img>
                     </div>
                     <span>
                     <p
                     style={{ fontSize: '16px' }}
                     dangerouslySetInnerHTML={{ __html: highlightText(recent) }}
                     />
-                    <p style={{ fontSize: "16px", fontSize: "500"}} >{s.name}</p>
-                    <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.type}</p>
+                    <p style={{ fontSize: "16px", fontSize: "500"}} >{recent.name}</p>
+                    <p style={{ color: "#606060ff", fontSize: "14px"}}>{recent.type}</p>
                     </span>
                     <i class="fi fi-br-cross-small"></i>
                     </div>

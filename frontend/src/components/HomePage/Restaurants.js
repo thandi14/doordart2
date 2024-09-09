@@ -103,8 +103,6 @@ function Restaurants({ arr, title }) {
 
 
 
-  console.log(start, arr.length)
-
   return (
 
     <div className="types">

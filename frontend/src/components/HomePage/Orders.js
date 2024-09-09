@@ -113,8 +113,7 @@ function OrdersPage({ isLoaded }) {
           </div>
         );
       };
-    console.log("orders:", allOrders)
-    console.log("reviews:", reviews)
+
 
 
 

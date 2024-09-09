@@ -192,7 +192,6 @@ function HomePage({ isLoaded }) {
     }
   });
 
-  console.log(wallets)
 
   return (
     <div style={{ position: "relative"}}>

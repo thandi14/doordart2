@@ -145,7 +145,6 @@ export const thunkGetRestaurants = (data) => async (dispatch) => {
 };
 
 export const thunkGetRestaurant = (id, data) => async (dispatch) => {
-  console.log(data)
   const response = await csrfFetch(`/api/restaurants/${id}`, {
     method: 'POST',
     headers: {
@@ -194,7 +193,6 @@ export const thunkGetSearch = (search) => async (dispatch) => {
 };
 
 export const thunkGetSearchings = (search) => async (dispatch) => {
-  console.log("hello!", search)
   const response = await csrfFetch(`/api/restaurants/searches`)
   const data1 = await response.json();
   dispatch(getSearching(data1));
@@ -202,7 +200,7 @@ export const thunkGetSearchings = (search) => async (dispatch) => {
 };
 
 export const thunkGetRecents = () => async (dispatch) => {
-  const response = await csrfFetch(`/api/restaurants/recents/searches`)
+  const response = await csrfFetch(`/api/restaurants/recent/searches`)
   const data1 = await response.json();
   dispatch(getRecents(data1));
   return data1;
