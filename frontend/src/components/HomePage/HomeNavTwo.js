@@ -211,7 +211,7 @@ function HomeNavTwo({ isLoaded }) {
 
             </div>
         <div>
-          { search.length == 0 && <h1>Recent Searches</h1>}
+          { search.length == 0 && <h1 class="recents">Recent Searches</h1>}
           {rs?.length > 0 && search.length == 0 && rs.map((s, id) =>
               <div onClick={() => {
                 setSearch(s.Restaurant.name)

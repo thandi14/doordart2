@@ -615,6 +615,12 @@
     overflow: hidden;
 }
 
+.recents {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 8px 16px;
+}
+
 #ri {
     border-radius: 50%;
     height: 40px;
