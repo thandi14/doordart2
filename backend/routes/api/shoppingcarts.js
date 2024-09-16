@@ -7,6 +7,34 @@ const { User, Save, Offer, Restaurant, ShoppingCart, MenuItem, CartItem, CartIte
 
 const router = express.Router();
 
+router.get('/discounts', async (req, res) => {
+
+    const discounts = await Offer.findAll({
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    })
+
+    res.json( discounts )
+
+})
+
+router.get('/:id/discount', async (req, res) => {
+    let discountId = req.params.id;
+    let discountExist = await Restaurant.findByPk(discountId);
+
+    if (!discountExist) {
+
+        res.status(404).json({"message": "Discount couldn't be found"});
+
+    }
+    const discount = await Offer.findByPk(discountId)
+
+    res.json( discount )
+
+})
+
+
 router.post('/', async (req, res) => {
     const { user } = req
     let { sessionId } = req.body
@@ -572,6 +600,8 @@ router.delete('/:id/item', async (req, res) => {
     res.json( {message: "Cart Item sucessfully deleted"} )
 
 })
+
+
 
 
 module.exports = router;
