@@ -158,7 +158,7 @@ useEffect(() => {
             let data = {
                 address: location
             }
-          await dispatch(restaurantActions.thunkGetRestaurant(id, data))
+          if (id) await dispatch(restaurantActions.thunkGetRestaurant(id, data))
         }
      fetchData()
 
@@ -435,7 +435,7 @@ useEffect(() => {
             let data1 = await dispatch(cartActions.thunkCreateCart(restaurant.id, requestBody))
             if (data1) await dispatch(cartActions.thunkCreateCartItem(data1.id, data))
         }
-        if (shoppingCart?.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
+        if (shoppingCart && shoppingCart.id) await dispatch(cartActions.thunkCreateCartItem(shoppingCart.id, data))
         setTimeout(() =>{
             setPrice(0)
         }, 2500)

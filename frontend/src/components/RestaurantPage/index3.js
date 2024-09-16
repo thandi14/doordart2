@@ -182,7 +182,7 @@ useEffect(() => {
             let data = {
                 address: location
             }
-          await dispatch(restaurantActions.thunkGetRestaurant(id, data))
+          if (id) await dispatch(restaurantActions.thunkGetRestaurant(id, data))
         }
      fetchData()
 

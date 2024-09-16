@@ -450,103 +450,79 @@ router.post('/', async (req, res) => {
 router.post('/:id/cart', async (req, res) => {
     let restaurantId = req.params.id;
     let restaurantExist = await Restaurant.findByPk(restaurantId);
-    const { user } = req
-    const { sessionId } = req.body
+    const { user } = req;
+    const { sessionId } = req.body;
 
-    const userId = user?.dataValues.id
+    const userId = user?.dataValues.id;
 
-
+    // If restaurant doesn't exist, respond and return early
     if (!restaurantExist) {
-
-        res.json({"message": "Restaurant couldn't be found"});
-
+        return res.json({ "message": "Restaurant couldn't be found" });
     }
 
     if (!userId && sessionId) {
+        let cart = await ShoppingCart.findOne({
+            where: {
+                sessionId,
+                restaurantId,
+                status: "Ordering"
+            },
+            include: [
+                {
+                    model: CartItem,
+                    include: [
+                        { model: MenuItem },
+                        {
+                            model: CartItemNotes,
+                            include: [{ model: ItemSelection }]
+                        }
+                    ]
+                },
+                { model: Restaurant }
+            ]
+        });
 
-         let cart = await ShoppingCart.findOne({
-        where : {
-            sessionId,
-            restaurantId,
-            status: "Ordering"
-        },
-        include : [
-            {
-                model: CartItem,
-                include : [
-                    {
-                        model: MenuItem,
-                    },
-                    {
-                        model: CartItemNotes,
-                        include : [
-                            {
-                                model: ItemSelection,
-                            }
-                        ]
-                    }
-                ]
-             },
-            { model: Restaurant }
-        ]
-    });
+        if (!cart) {
+            return res.json({ "message": "Shopping Cart couldn't be found" });
+        }
 
-
-    if (!cart) {
-
-        res.json({"message": "Shopping Cart couldn't be found"});
-
-    }
-
-    res.json( cart )
-
+        return res.json(cart);
     }
     else if (userId) {
-
-
-            let cart = await ShoppingCart.findOne({
-                where : {
-                    userId,
-                    restaurantId,
-                    status: "Ordering"
+        let cart = await ShoppingCart.findOne({
+            where: {
+                userId,
+                restaurantId,
+                status: "Ordering"
+            },
+            include: [
+                {
+                    model: CartItem,
+                    include: [
+                        { model: MenuItem },
+                        {
+                            model: CartItemNotes,
+                            include: [{ model: ItemSelection }]
+                        }
+                    ]
                 },
-                include : [
-                    {
-                        model: CartItem,
-                        include : [
-                            {
-                                model: MenuItem,
-                            },
-                            {
-                                model: CartItemNotes,
-                                include : [
-                                    {
-                                        model: ItemSelection,
-                                    }
-                                ]
-                            }
-                        ]
-                     },
-                    { model: User },
-                    { model: Restaurant }
-                ]
-            });
+                { model: User },
+                { model: Restaurant }
+            ]
+        });
 
+        if (!cart) {
+            return res.json({ "message": "Shopping Cart couldn't be found" });
+        }
 
-            if (!cart) {
-
-                res.json({"message": "Shopping Cart couldn't be found"});
-
-            }
-
-            res.json( cart )
+        return res.json(cart);
     }
     else {
-        res.json({"message": "Please try again later" });
-
+        return res.json({ "message": "Please try again later" });
     }
+});
 
-})
+
 
 router.get('/:id/reviews', async (req, res) => {
     let restaurantId = req.params.id;

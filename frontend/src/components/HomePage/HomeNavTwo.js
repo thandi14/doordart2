@@ -247,7 +247,7 @@ function HomeNavTwo({ isLoaded }) {
                     </div>
               )}
               {stores?.length > 0 && search.length > 0 && stores.map((s, id) =>
-                  <div onClick={() => {
+                  <div onClick={(e) => {
                     setSearch(s.name)
                     handleSearchings(s.name)
                     }} id="search-store">

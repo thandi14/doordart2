@@ -152,74 +152,72 @@ router.get('/orders', async (req, res) => {
 })
 
 router.get('/ordered', async (req, res) => {
-    const { user } = req
-    const userId = user?.dataValues.id
+    try {
+        const { user } = req;
+        const userId = user?.dataValues?.id;
 
-    if (!userId) {
+        if (!userId) {
+            return res.status(401).json({ message: "Please login" });
+        }
 
-        return res.json({"message": "Please login"});
-
-    }
-
-    let cart = await ShoppingCart.findAll({
-        where : {
-            status: "Ordered"
-        },
-        include : [
-               { model: Restaurant,
-                include: [
-                    { model: MenuItem },
-                    { model: RestaurantTime },
-                    { model: Review },
-                    { model: Offer },
-                    { model: RestaurantImage },
-                    { model: Save }
+        let cart = await ShoppingCart.findAll({
+            where: { status: "Ordered" },
+            include: [
+                {
+                    model: Restaurant,
+                    include: [
+                        { model: MenuItem },
+                        { model: RestaurantTime },
+                        { model: Review },
+                        { model: Offer },
+                        { model: RestaurantImage },
+                        { model: Save }
                     ]
                 },
-                { model: CartItem,
+                {
+                    model: CartItem,
                     include: [
-                        // { model: User },
                         { model: MenuItem },
-                        { model: CartItemNotes,
-                            include : [
-                                {
-                                    model: ItemSelection,
-                                }
+                        {
+                            model: CartItemNotes,
+                            include: [
+                                { model: ItemSelection }
                             ]
-                            }
-                        ]
+                        }
+                    ]
                 }
             ]
-    });
+        });
 
-    const restaurantOrdersCount = cart.reduce((acc, cartItem) => {
-        const restaurantId = cartItem.Restaurant.id;
-        acc[restaurantId] = (acc[restaurantId] || 0) + 1;
-        return acc;
-    }, {});
+        if (!cart || cart.length === 0) {
+            return res.status(404).json({ message: "Shopping Cart couldn't be found" });
+        }
 
-    cart.sort((a, b) => restaurantOrdersCount[b.Restaurant.id] - restaurantOrdersCount[a.Restaurant.id]);
+        const restaurantOrdersCount = cart.reduce((acc, cartItem) => {
+            const restaurantId = cartItem.Restaurant.id;
+            acc[restaurantId] = (acc[restaurantId] || 0) + 1;
+            return acc;
+        }, {});
 
-    const uniqueRestaurantIds = new Set();
+        cart.sort((a, b) => restaurantOrdersCount[b.Restaurant.id] - restaurantOrdersCount[a.Restaurant.id]);
 
-    const uniqueCart = cart.filter(cartItem => {
-    const restaurantId = cartItem.Restaurant.id;
-    if (uniqueRestaurantIds.has(restaurantId)) {
-        return false;
+        const uniqueRestaurantIds = new Set();
+        const uniqueCart = cart.filter(cartItem => {
+            const restaurantId = cartItem.Restaurant.id;
+            if (uniqueRestaurantIds.has(restaurantId)) {
+                return false;
+            }
+            uniqueRestaurantIds.add(restaurantId);
+            return true;
+        });
+
+        return res.json(uniqueCart);
+    } catch (error) {
+        console.error("Error fetching ordered cart: ", error);
+        return res.status(500).json({ message: "Internal server error" });
     }
-    uniqueRestaurantIds.add(restaurantId);
-    return true;
-    });
+});
 
-    if (!cart) {
-
-        res.json({"message": "Shopping Cart couldn't be found"});
-
-    }
-
-    res.json( uniqueCart )
-
-})
 
 router.get('/:id/ordered', async (req, res) => {
     const { user } = req
@@ -266,17 +264,17 @@ router.get('/:id/ordered', async (req, res) => {
     });
 
 
-    const menuOrdersCount = items.ShoppingCarts.reduce((acc, order) => {
+    const menuOrdersCount = items?.ShoppingCarts.reduce((acc, order) => {
         const orderId = order.id;
         acc[orderId] = (acc[orderId] || 0) + 1;
         return acc;
     }, {});
 
-    items.ShoppingCarts.sort((a, b) => menuOrdersCount[b.id] - menuOrdersCount[a.id]);
+    items?.ShoppingCarts.sort((a, b) => menuOrdersCount[b.id] - menuOrdersCount[a.id]);
 
     const uniqueMenuItemIds = new Set();
 
-    const uniqueItems = items.ShoppingCarts.filter(order => {
+    const uniqueItems = items?.ShoppingCarts.filter(order => {
         const orderId = order.id;
     if (uniqueMenuItemIds.has(orderId)) {
         return false;
