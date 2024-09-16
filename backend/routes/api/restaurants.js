@@ -216,7 +216,7 @@ router.get('/recent/searches', async (req, res) => {
 
 router.delete('/:id/recent/searches', async (req, res) => {
     let searchId = req.params.id;
-    let searchExsits = await Restaurant.findByPk(searchId);
+    let searchExsits = await Search.findByPk(searchId);
 
     searchExsits.destroy()
 

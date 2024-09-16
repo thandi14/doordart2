@@ -224,7 +224,10 @@ function HomeNavTwo({ isLoaded }) {
                 <p style={{ fontSize: "16px", fontSize: "500"}} >{s.Restaurant.name}</p>
                 <p style={{ color: "#606060ff", fontSize: "14px"}}>{s.Restaurant.type}</p>
                 </span>
-                <i onClick={(() => dispatch(restaurantActions.thunkDeleteRecent))} class="fi fi-br-cross-small"></i>
+                <i onClick={((e) => {
+                  e.stopPropagation()
+                  dispatch(restaurantActions.thunkDeleteRecent(s.id))
+                  })} class="fi fi-br-cross-small"></i>
                 </div>
           )}
           {rq?.length > 0 && search.length == 0 && rq.map((q, id) =>
@@ -237,7 +240,10 @@ function HomeNavTwo({ isLoaded }) {
                     <p style={{ fontSize: "16px", fontSize: "500"}} >{q.query}</p>
                     {/* <p style={{ color: "#606060ff", fontSize: "14px"}}>{q.type}</p> */}
                     </span>
-                    <i onClick={(() => dispatch(restaurantActions.thunkDeleteRecent))} class="fi fi-br-cross-small"></i>
+                    <i onClick={((e) => {
+                      e.stopPropagation()
+                      dispatch(restaurantActions.thunkDeleteRecent(q.id))
+                  })} class="fi fi-br-cross-small"></i>
                     </div>
               )}
               {stores?.length > 0 && search.length > 0 && stores.map((s, id) =>

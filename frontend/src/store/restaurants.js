@@ -434,7 +434,7 @@ const restaurantReducer = (state = initialState, action) => {
     case DELETE_RECENTS:
       newState = { ...state };
       const searchId = action.id;
-      newState.recents = newState.recents.filter((i) => i.id != searchId);
+      delete newState.recents[searchId];
       return newState;
     default:
       return state;
