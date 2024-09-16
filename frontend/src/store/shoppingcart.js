@@ -6,6 +6,8 @@ const GET_ORDERS = "cart/getOrders";
 const GET_ORDERED_ITEMS = "cart/getOrderedItems";
 const GET_ORDERED_ITEM = "cart/getOrderedItem";
 const GET_DETAILS = "cart/getDetails";
+const GET_DISCOUNTS = "cart/getDiscounts";
+const GET_DISCOUNT = "cart/getDiscount";
 const GET_UPDATES = "cart/getUpdates";
 const GET_CARTS = "cart/getCarts";
 const GET_ITEM = "cart/getItem";
@@ -62,6 +64,20 @@ const getDetails = (details) => {
   };
 };
 
+const getDiscounts = (discounts) => {
+  return {
+    type: GET_DISCOUNTS,
+    discounts,
+  };
+};
+
+const getDiscount = (discount) => {
+  return {
+    type: GET_DISCOUNT,
+    discount,
+  };
+};
+
 const getUpdates = (updates) => {
   return {
     type: GET_UPDATES,
@@ -112,6 +128,21 @@ export const thunkGetMostOrdered = (id, data) => async (dispatch) => {
   const response = await csrfFetch(`/api/shoppingcarts/ordered`)
   const data1 = await response.json();
   dispatch(getOrdered(data1));
+  return response;
+};
+
+export const thunkGetDiscounts = (id, data) => async (dispatch) => {
+
+  const response = await csrfFetch(`/api/shoppingcarts/discounts`)
+  const data1 = await response.json();
+  dispatch(getDiscounts(data1));
+  return response;
+};
+
+export const thunkGetDiscount = (id, data) => async (dispatch) => {
+  const response = await csrfFetch(`/api/shoppingcarts/${id}/discount`)
+  const data1 = await response.json();
+  dispatch(getDiscount(data1));
   return response;
 };
 
@@ -249,7 +280,9 @@ let initialState = {
    orderedItem: {},
    cartOrders: {},
    itemOrders: {},
-   userOrders : {}
+   userOrders : {},
+   discounts: {},
+   discount: {}
 
 }
 
@@ -303,11 +336,17 @@ const cartReducer = (state = initialState, action) => {
 
       }
       return newState;
-      case GET_ORDERED_ITEM:
+      case GET_DISCOUNTS:
         newState = { ...state };
-        const cartItem = action.item;
-        newState.orderedItem = cartItem
+        if (action.discounts.length) action.discounts.forEach(
+          (discount) => (newState.discounts[discount.id] = { ...discount})
+        );
         return newState;
+    case GET_DISCOUNT:
+      newState = { ...state };
+      const discount = action.discount;
+      newState.discount = { ...discount };
+      return newState;
     case GET_UPDATES:
       newState = { ...state };
       const updates = action.updates;
