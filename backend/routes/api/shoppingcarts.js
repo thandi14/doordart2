@@ -12,6 +12,9 @@ router.get('/discounts', async (req, res) => {
     const discounts = await Offer.findAll({
         order: [
             ['createdAt', 'DESC']
+        ],
+        include: [
+            { model: Restaurant }
         ]
     })
 
