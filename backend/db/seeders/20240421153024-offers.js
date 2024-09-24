@@ -13,19 +13,19 @@ module.exports = {
   async up (queryInterface, Sequelize) {
       await Offer.bulkCreate([
         {
-          restaurantId: 9,
+          restaurantId: 1,
           offer: "$0 delivery fee",
           discount: 0,
           type: "$",
         },
         {
-          restaurantId: 2,
+          restaurantId: 5,
           offer: "20% off, up to $5",
           discount: 20,
           type: "%",
         },
         {
-          restaurantId: 10,
+          restaurantId: 6,
           offer: "Spend $35, save $5",
           discount: 35,
           type: "$",
