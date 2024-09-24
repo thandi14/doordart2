@@ -33,6 +33,7 @@ import Profile from "./Profile";
 import Restaurants from "./Restaurants";
 import SideBar from "./index2";
 import RestaurantsTwo from "./RestaurantsTwo";
+import Discounts from "./Discounts";
 
 
 function HomePage({ isLoaded }) {
@@ -540,6 +541,7 @@ function HomePage({ isLoaded }) {
     </div>
     <div style={{ padding: "0.4% 3%"}} className="hp">
     { <div className="types">
+    {/* {<Discounts title={"Offers"} />} */}
     { closest.length > 0 && !category && <Restaurants arr={closest} title={"Fastest near you"} />}
     { allCarts.length > 0 && !category && <Restaurants arr={allCarts} title={"Most Ordered"} />}
     { allWallets.length > 0 && !category && <Restaurants arr={allWallets} title={"Wallet friendly"} />}

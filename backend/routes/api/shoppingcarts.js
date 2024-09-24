@@ -14,7 +14,16 @@ router.get('/discounts', async (req, res) => {
             ['createdAt', 'DESC']
         ],
         include: [
+<<<<<<< HEAD
             { model: Restaurant }
+=======
+            {
+                model: Restaurant,
+                include: [
+                    { model: RestaurantImage }
+                ]
+            }
+>>>>>>> 2df32728dea87182558354d2228ab5262e67ec2e
         ]
     })
 

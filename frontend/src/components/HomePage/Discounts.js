@@ -7,9 +7,9 @@ import * as cartActions from "../../store/shoppingcart";
 import { useFilters } from "../../context/Filters";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-function Discounts({ arr, title }) {
+function Discounts({ title }) {
   const { user } = useSelector((state) => state.session );
-  const { restaurants, saves, orders } = useSelector((state) => state.restaurants);
+  const { discounts } = useSelector((state) => state.cart);
   const [ start, setStart ] = useState(0)
   // const [ stop, setStop ] = useState(2)
   const [ lengthTwo, setLengthTwo ] = useState(0)
@@ -20,11 +20,7 @@ function Discounts({ arr, title }) {
 
  useEffect(() => {
      async function fetchData() {
-         if ( !location && user?.id ) await dispatch(restaurantActions.thunkGetUserRestaurants())
-         dispatch(cartActions.thunkGetCarts())
-         if (user?.id) dispatch(restaurantActions.thunkGetSaves())
-         console.log('hello?')
-         if (user?.id) dispatch(restaurantActions.thunkGetOrders())
+          dispatch(cartActions.thunkGetDiscounts())
         }
      fetchData()
 
@@ -56,6 +52,9 @@ function Discounts({ arr, title }) {
         }
     };
 
+    let arr = Object.values(discounts)
+
+
   const sliderStyleTwo = {
     maxWidth: "100%",
     display: "flex",
@@ -65,41 +64,13 @@ function Discounts({ arr, title }) {
   };
 
 
-  const saveRestaurant = (id) => {
-    dispatch(restaurantActions.thunkCreateSave(id))
-
-  };
-
-  const deleteSave = (saves, restaurantId) => {
-    let save = saves.find((s) => s.userId == user.id)
-    dispatch(restaurantActions.thunkDeleteSave(save.id, restaurantId))
-  };
-
-  let franchises = Object.values(restaurants).sort((a, b) => a.miles - b.miles)
-
-  if (category) {
-    franchises = franchises.filter((f) => f.type.includes(category))
-  }
-
-  const reviews = (reviews) => {
-
-    if (!reviews.length) return 0
-
-    let sum = 0
-    for (let review of reviews) {
-        sum += review.rating
-    }
-
-    let result = sum / reviews.length
-
-    return result.toFixed(1)
-
-  };
-
   const handleClick = (id) => {
     const newTab = window.open(`/restaurant/${id}`, '_blank');
     newTab.focus();
   };
+
+
+  console.log(arr)
 
 
 
@@ -139,15 +110,15 @@ function Discounts({ arr, title }) {
                     { user && f.Saves?.some((s) => s.userId == user?.id && s.restaurantId == f.id) ?
                     <i onClick={((e) => {
                         e.stopPropagation()
-                        deleteSave(f.Saves, f.id)})} style={{ color: "red", fontSize: "16px", margin: "4px"}} class="fi fi-ss-heart"></i> :
+                    })} style={{ color: "red", fontSize: "16px", margin: "4px"}} class="fi fi-ss-heart"></i> :
                     <i onClick={((e) => {
                         e.stopPropagation()
-                        saveRestaurant(f.id)})} style={{ color: "#767676", fontSize: "16px", margin: "4px"}} class="fi fi-rs-heart"></i>
+                    })} style={{ color: "#767676", fontSize: "16px", margin: "4px"}} class="fi fi-rs-heart"></i>
                     }
                 </div>
                 <div id="r-info">
                     <h1 style={{ fontSize: "12px"}}>
-                    <span style={{ color: "black"}}>{reviews(f.Reviews)}</span>
+                    <span style={{ color: "black"}}>{0}</span>
                     <i class="fi fi-sr-star" style={{ fontSize: "12px", color: "#e4e404" }}></i>
                     ({f.Reviews?.length})
                     <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
