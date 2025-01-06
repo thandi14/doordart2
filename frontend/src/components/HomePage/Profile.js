@@ -66,7 +66,9 @@ function Profile({ user, d }) {
         <p>Offers</p>
         </span>
         <div id="line-three"></div>
-        <span>
+        <span onClick={((e) => {
+            e.stopPropagation()
+            history.push('/orders')})}>
         <i class="fi fi-rr-receipt"></i>
         <p>Orders</p>
         </span>
