@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 const GET_CART = "cart/getCart";
+const GET_DISCOUNTS = "cart/getDiscounts";
 const GET_ORDERED = "cart/getOrdered";
 const GET_ORDERS = "cart/getOrders";
 const GET_ORDERED_ITEMS = "cart/getOrderedItems";
@@ -24,6 +25,13 @@ const getCart = (cart) => {
   return {
     type: GET_CART,
     cart,
+  };
+};
+
+const getDiscounts = (discounts) => {
+  return {
+    type: GET_DISCOUNTS,
+    discounts,
   };
 };
 
@@ -102,6 +110,14 @@ export const thunkGetCart = (id, data) => async (dispatch) => {
     },
     body: JSON.stringify(data)
   })
+  const data1 = await response.json();
+  dispatch(getCart(data1));
+  return response;
+};
+
+export const thunkGetDiscounts = (id, data) => async (dispatch) => {
+
+  const response = await csrfFetch(`/api/shoppingcarts/discounts`)
   const data1 = await response.json();
   dispatch(getCart(data1));
   return response;
@@ -246,6 +262,7 @@ let initialState = {
    shoppingCarts: {},
    shoppingCart: {},
    cartItem: {},
+   discounts: {},
    orderedItem: {},
    cartOrders: {},
    itemOrders: {},
@@ -267,6 +284,12 @@ const cartReducer = (state = initialState, action) => {
       newState = { ...state };
       if (action.orders.length) action.orders.forEach(
         (order) => (newState.cartOrders[order.id] = { ...order})
+      );
+      return newState;
+      case GET_DISCOUNTS:
+      newState = { ...state };
+      if (action.discounts.length) action.discounts.forEach(
+        (discount) => (newState.discounts[discount.id] = { ...discount})
       );
       return newState;
       case GET_ORDERS:

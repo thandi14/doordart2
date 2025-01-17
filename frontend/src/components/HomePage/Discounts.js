@@ -20,7 +20,7 @@ function Discounts({ title }) {
 
  useEffect(() => {
      async function fetchData() {
-          // dispatch(cartActions.thunkGetDiscounts())
+          dispatch(cartActions.thunkGetDiscounts())
         }
      fetchData()
 
