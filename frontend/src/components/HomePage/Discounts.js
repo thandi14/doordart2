@@ -7,7 +7,7 @@ import * as cartActions from "../../store/shoppingcart";
 import { useFilters } from "../../context/Filters";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-function Discounts({ title }) {
+function Discounts({ title, stores }) {
   const { user } = useSelector((state) => state.session );
   const { discounts } = useSelector((state) => state.cart);
   const [ start, setStart ] = useState(0)
@@ -70,7 +70,7 @@ function Discounts({ title }) {
   };
 
 
-  console.log(arr)
+  console.log(stores, arr)
 
 
 
@@ -97,17 +97,17 @@ function Discounts({ title }) {
     </div>
     <div style={{ overflow: "hidden", width: `${Math.max(arr.length, 3) * 33.3}%`}}>
     <div style={sliderStyleTwo} id="saves">
-    {arr.map(((f, id) =>
+    {arr.map(((d, id) =>
        <>
         { <div key={id} style={{
             height: "100%",
             width: "33%"
           }}
-          onClick={(() => handleClick(f.id))} className="restaurant" id={`r-${id}`}>
-                <img style={{ marginBottom: "6px"}}src={f.RestaurantImage?.thumbnailUrl}></img>
+          onClick={(() => handleClick(d.Restaurant.id))} className="restaurant" id={`r-${id}`}>
+                <img style={{ marginBottom: "6px"}}src={d.Restaurant.RestaurantImage?.thumbnailUrl}></img>
                 <div id="r-name">
-                    <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{f.name} </h1>
-                    { user && f.Saves?.some((s) => s.userId == user?.id && s.restaurantId == f.id) ?
+                    <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{d.Restaurant.name} </h1>
+                    { user && d.Saves?.some((s) => s.userId == user?.id && s.restaurantId == d.id) ?
                     <i onClick={((e) => {
                         e.stopPropagation()
                     })} style={{ color: "red", fontSize: "16px", margin: "4px"}} class="fi fi-ss-heart"></i> :
@@ -120,14 +120,14 @@ function Discounts({ title }) {
                     <h1 style={{ fontSize: "12px"}}>
                     <span style={{ color: "black"}}>{0}</span>
                     <i class="fi fi-sr-star" style={{ fontSize: "12px", color: "#e4e404" }}></i>
-                    ({f.Reviews?.length})
+                    ({d.Restaurant.Reviews?.length})
                     <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
-                    {f.miles ? f.miles : 0} mi
+                    {d.Restaurant.miles ? d.Restaurant.miles : 0} mi
                     <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
-                    {f.mins + 10} mins
+                    {d.Restaurant.mins + 10} mins
                     </h1>
                 </div>
-                <h1 style={{ fontSize: "12px", color: "#767676"}}>${f.deliveryFee} Delivery Fee</h1>
+                <h1 style={{ fontSize: "12px", color: "#767676"}}>${d.Restaurant.deliveryFee} Delivery Fee</h1>
             </div>}
         </>
         ))}
