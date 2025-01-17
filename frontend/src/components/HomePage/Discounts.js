@@ -52,7 +52,25 @@ function Discounts({ title, stores }) {
         }
     };
 
+    const reviews = (reviews) => {
+
+      if (!reviews.length) return 0
+
+      let sum = 0
+      for (let review of reviews) {
+          sum += review.rating
+      }
+
+      let result = sum / reviews.length
+
+      return result.toFixed(1)
+
+    };
+
     let arr = Object.values(discounts)
+    let discounted = stores.filter((store) =>
+    arr.some((dis) => dis?.restaurantId === store?.id )
+   );
 
 
   const sliderStyleTwo = {
@@ -70,7 +88,7 @@ function Discounts({ title, stores }) {
   };
 
 
-  console.log(stores, arr)
+  console.log(discounted, arr)
 
 
 
@@ -97,16 +115,16 @@ function Discounts({ title, stores }) {
     </div>
     <div style={{ overflow: "hidden", width: `${Math.max(arr.length, 3) * 33.3}%`}}>
     <div style={sliderStyleTwo} id="saves">
-    {arr.map(((d, id) =>
+    {discounted.map(((d, id) =>
        <>
         { <div key={id} style={{
             height: "100%",
             width: "33%"
           }}
-          onClick={(() => handleClick(d.Restaurant.id))} className="restaurant" id={`r-${id}`}>
-                <img style={{ marginBottom: "6px"}}src={d.Restaurant.RestaurantImage?.thumbnailUrl}></img>
+          onClick={(() => handleClick(d.id))} className="restaurant" id={`r-${id}`}>
+                <img style={{ marginBottom: "6px"}}src={d.RestaurantImage?.thumbnailUrl}></img>
                 <div id="r-name">
-                    <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{d.Restaurant.name} </h1>
+                    <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{d.name} </h1>
                     { user && d.Saves?.some((s) => s.userId == user?.id && s.restaurantId == d.id) ?
                     <i onClick={((e) => {
                         e.stopPropagation()
@@ -118,16 +136,16 @@ function Discounts({ title, stores }) {
                 </div>
                 <div id="r-info">
                     <h1 style={{ fontSize: "12px"}}>
-                    <span style={{ color: "black"}}>{0}</span>
+                    <span style={{ color: "black"}}>{reviews(d.Reviews)}</span>
                     <i class="fi fi-sr-star" style={{ fontSize: "12px", color: "#e4e404" }}></i>
-                    ({d.Restaurant.Reviews?.length})
-                    <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
-                    {d.Restaurant.miles ? d.Restaurant.miles : 0} mi
-                    <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i>
-                    {d.Restaurant.mins + 10} mins
+                    ({d.Reviews?.length})
+                    <i style={{ width: "5px", height: "5px" }} class="fi fi-sr-bullet"></i>
+                    {/* {d.miles ? d.miles : 0} mi */}
+                    {/* <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i> */}
+                    {d.mins + 10} mins
                     </h1>
                 </div>
-                <h1 style={{ fontSize: "12px", color: "#767676"}}>${d.Restaurant.deliveryFee} Delivery Fee</h1>
+                <h1 style={{ fontSize: "12px", color: "#767676"}}>${d.deliveryFee} Delivery Fee</h1>
             </div>}
         </>
         ))}
