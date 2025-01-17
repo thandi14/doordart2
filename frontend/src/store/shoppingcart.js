@@ -119,7 +119,7 @@ export const thunkGetDiscounts = (id, data) => async (dispatch) => {
 
   const response = await csrfFetch(`/api/shoppingcarts/discounts`)
   const data1 = await response.json();
-  dispatch(getCart(data1));
+  dispatch(getDiscounts(data1));
   return response;
 };
 
