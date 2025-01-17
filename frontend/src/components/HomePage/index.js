@@ -541,7 +541,7 @@ function HomePage({ isLoaded }) {
     </div>
     <div style={{ padding: "0.4% 3%"}} className="hp">
     { <div className="types">
-    {<Discounts title={"Offers"} stores={franchises} />}
+    {/* {<Discounts title={"Weekly Deals"} stores={franchises} />} */}
     { closest.length > 0 && !category && <Restaurants arr={closest} title={"Fastest near you"} />}
     { allCarts.length > 0 && !category && <Restaurants arr={allCarts} title={"Most Ordered"} />}
     { allWallets.length > 0 && !category && <Restaurants arr={allWallets} title={"Wallet friendly"} />}

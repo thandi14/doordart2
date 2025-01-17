@@ -139,7 +139,7 @@ function Discounts({ title, stores }) {
                     <span style={{ color: "black"}}>{reviews(d.Reviews)}</span>
                     <i class="fi fi-sr-star" style={{ fontSize: "12px", color: "#e4e404" }}></i>
                     ({d.Reviews?.length})
-                    <i style={{ width: "5px", height: "5px" }} class="fi fi-sr-bullet"></i>
+                    <i style={{ width: "8px", height: "8px", fontSize: "8px" }} class="fi fi-sr-bullet"></i>
                     {/* {d.miles ? d.miles : 0} mi */}
                     {/* <i style={{ width: "10px", height: "10px" }} class="fi fi-sr-bullet"></i> */}
                     {d.mins + 10} mins
