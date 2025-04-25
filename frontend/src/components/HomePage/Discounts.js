@@ -121,7 +121,7 @@ function Discounts({ title, stores }) {
             height: "100%",
             width: "33%"
           }}
-          onClick={(() => handleClick(d.id))} className="restaurant" id={`r-${id}`}>
+          onClick={(() => handleClick(d.id))} className="discount" id={`r-${id}`}>
                 <img style={{ marginBottom: "6px"}}src={d.RestaurantImage?.thumbnailUrl}></img>
                 <div id="r-name">
                     <h1 style={{ fontSize: "16px", margin: "2px 0px"}} >{d.name} </h1>

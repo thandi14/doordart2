@@ -668,3 +668,21 @@
     /* width: 110vh; */
     padding-bottom: 4%;
 }
+
+.dp {
+    background-color: #fff0ed;
+}
+
+.discount {
+    flex-basis: calc(16.66% - 16px);
+    cursor: pointer;
+    background-color: white;
+    padding: 1.5%;
+    border-radius: 16px;
+
+}
+.discount > img {
+    width: 100%;
+    border-radius: 16px;
+    height: 174px;
+}
