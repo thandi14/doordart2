@@ -97,9 +97,14 @@ function Discounts({ title, stores }) {
     <div className="types">
     { arr.length > 0 && !category && <div style={{ overflow: "hidden" }} className="saved">
     <div style={{ boxSizing: "border-box", padding: "0px 4px",}} id="saved">
-    <h1 style={{ fontSize: "26px", margin: "0px"}}>{title}</h1>
+    <div className="wd">
+    <h1 style={{ color: "#eb1700", fontSize: "30px", margin: "0px", fontWeight: "900" }}>{title}</h1>
+      <span id="wd"><p>At select resturants</p>
+      <i style={{ width: "8px", height: "8px", fontSize: "8px" }} class="fi fi-sr-bullet"></i>
+      <p>Orders $12+</p></span>
+      </div>
         <div style={{ display: "flex", gap: "18px", alignItems: "center", fontSize: "14px", fontWeight: "600"}}>
-            <p>See All</p>
+            <div id="dp-see" ><p>See All</p></div>
             <span style={{ display: "flex", gap: "10px", boxSizing: "border-box"}}>
                 { <i id="gotobutt-two" style={{ cursor: lengthTwo == 0 && "not-allowed", left: "0", color: lengthTwo == 0 && "rgb(247, 247, 247)", backgroundColor: lengthTwo == 0 && "rgb(178, 178, 178)" }} onClick={((e) => {
                   if (lengthTwo > 0) {
