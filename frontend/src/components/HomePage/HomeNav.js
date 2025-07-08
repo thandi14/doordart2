@@ -140,7 +140,12 @@ function HomeNav({ isLoaded }) {
     {/* <Profile user={sessionUser} d={true} /> */}
     <ShoppingCarts user={sessionUser} d={dropTwo} />
     <div id="nav-two">
-        <div style={{ padding: "0% 2%" }} id="icon">
+        <div  onClick={(e) => {
+    e.stopPropagation(); // prevent parent click handler
+    history.push(`/home`)
+    window.location.reload();
+  }}
+  style={{ padding: "0% 2%" }} id="icon">
         <img src="https://freepnglogo.com/images/all_img/1706201578doordash-icon-png.png"></img>
           <span>DOORDART</span>
         </div>

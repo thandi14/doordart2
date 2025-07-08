@@ -173,7 +173,11 @@ function SideBar({ isLoaded }) {
     <div className="side-bar" style={{ minWidth: "220px", position: "sticky", height: "100vh", top: "64px", zIndex: 14}}>
 
     { user?.id && <div onClick={(() => window.alert("Feature coming soon!"))} id="side-bar">
-        <span onClick={((e) => e.stopPropagation())} className="page">
+        <span  onClick={(e) => {
+          e.stopPropagation();
+         window.location.reload();
+         history.push(`/`)
+          }} className="page">
             <i class="fi fi-rs-house-chimney"></i>
             <p>Home</p>
         </span>
