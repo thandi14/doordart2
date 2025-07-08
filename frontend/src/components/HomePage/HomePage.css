@@ -720,3 +720,8 @@
     margin-bottom: 10px;
 }
 
+#discounted {
+    width: fit-content;
+    padding: 4px;
+    border-radius: 8%;
+}

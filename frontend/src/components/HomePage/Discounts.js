@@ -150,8 +150,8 @@ function Discounts({ title, stores }) {
                     {d.mins + 10} mins
                     </h1>
                 </div>
-                <h1 style={{ fontSize: "12px", color: "#767676"}}>$0 Delivery Fee</h1>
-                <h1 style={{ fontSize: "12px", color: "#767676"}}>{arr[id].offer}</h1>
+              { arr[id].deliveryFee == false ? <h1 style={{ fontSize: "12px", color: "#eb1700"}}>$0 Delivery Fee</h1> : <h1></h1>}
+              <h1 id="discounted" style={{ fontSize: "12px", color: "#eb1700", backgroundColor: "#fff0ed"}}>+ {arr[id].offer}</h1>
             </div>}
         </>
         ))}
