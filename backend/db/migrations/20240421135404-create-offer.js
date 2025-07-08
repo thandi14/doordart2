@@ -1,4 +1,5 @@
 'use strict';
+/** @type {import('sequelize-cli').Migration} */
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -16,18 +17,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       restaurantId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Restaurants',
-          key: 'id',
-      },
-      onDelete: 'cascade'
+        type: Sequelize.INTEGER
       },
       offer: {
         type: Sequelize.STRING
       },
       discount: {
         type: Sequelize.INTEGER
+      },
+      deliveryFee: {
+        type: Sequelize.BOOLEAN
       },
       type: {
         type: Sequelize.STRING
