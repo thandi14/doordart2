@@ -123,7 +123,7 @@ function Discounts({ title, stores }) {
     {discounted.map(((d, id) =>
        <>
         { <div key={id} style={{
-            height: "100%",
+            // height: "100%",
             width: "33%"
           }}
           onClick={(() => handleClick(d.id))} className="discount" id={`r-${id}`}>

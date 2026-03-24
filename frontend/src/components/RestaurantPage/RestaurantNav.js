@@ -14,6 +14,9 @@ import * as restaurantActions from "../../store/restaurants"
 import ProfileButton from "../HomePage/ProfileButton";
 import ShoppingCart from "./ShoppingCart";
 
+
+
+
 function RestaurantNav() {
   const sessionUser = useSelector((state) => state.session.user);
   const { restaurant } = useSelector((state) => state.restaurants);
@@ -168,7 +171,9 @@ function RestaurantNav() {
         <button style={{ left: "2%" }}  onClick={(() => setDrop(!drop))} id ="menu">
         <i class="fi fi-br-menu-burger"></i>
          </button>
-        <div id="icon">
+        <div id="icon"onClick={(e) => {
+          e.stopPropagation()
+          history.push('/home')}}>
         <img src="https://freepnglogo.com/images/all_img/1706201578doordash-icon-png.png"></img>
           <span>DOORDART</span>
         </div>

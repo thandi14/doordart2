@@ -784,7 +784,7 @@
     flex-shrink: 0;
 }
 
-#most-one {
+.most-one {
     display: flex;
     width: 100%;
     flex-direction: column;

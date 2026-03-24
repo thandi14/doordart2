@@ -34,7 +34,7 @@ function Franchise({ isLoaded }) {
   const [ length, setLength ] = useState(0)
   const [ lengthTwo, setLengthTwo ] = useState(0)
   const [ selection, setSelection ] = useState("Reviews")
-  const [ mark, setMark ] = useState(-2)
+  const [ mark, setMark ] = useState()
   const [ hide, setHide ] = useState(true)
   const [ searching, setSearching ] = useState(false)
   const [ searching2, setSearching2 ] = useState(false)
@@ -116,41 +116,33 @@ function Franchise({ isLoaded }) {
 
 
   const checkPassedTop = (id) => {
-    if (divRefs.current[id]) {
-        const element = divRefs.current[id];
-        const rect = element.getBoundingClientRect();
-        const elementBottom = rect.top;
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const el = divRefs.current[id];
+    if (!el) return;
 
-        if (elementBottom <= (viewportHeight / 2)) { // Check if any part of the div is above the viewport
-            const numericPart = id.split('mi/')[1];
-            const number = parseInt(numericPart);
-
-            if (!isNaN(number)) {
-                setMark(number)
-            }
-            else {
-                setMark(-2);
-            }
-        }
+    const rect = el.getBoundingClientRect();
+    const threshold = window.innerHeight * 0.3; // top 30% of viewport
+    if (rect.top >= 0 && rect.top <= threshold) {
+      const numericPart = id.split('mi/')[1];
+      const number = parseInt(numericPart);
+      if (!isNaN(number)) setMark(number);
     }
-};
+  };
 
 useEffect(() => {
     // Attach scroll event listener when component mounts
     const handleScroll = () => {
-        // Loop through each div ref and check if it's passed the top
+        if (isManualScroll.current) return; // ignore scroll during manual navigation
         Object.keys(divRefs.current).forEach(id => {
-            checkPassedTop(id);
+          checkPassedTop(id);
         });
-    };
+      };
 
     window.addEventListener('scroll', handleScroll);
 
     return () => {
         window.removeEventListener('scroll', handleScroll);
     };
-}, [mark, divRefs.current]);
+}, []);
 
 
    useEffect(() => {
@@ -199,27 +191,58 @@ useEffect(() => {
     }, []);
 
 
+
+    // useEffect(() => {
+
+    //     const scrollToTarget = () => {
+    //         const handleScrollOrNavigate = () => {
+    //             const targetElement = document.getElementById(`mi/${mark}`);
+    //             if (targetElement && scroll) {
+    //                 targetElement.scrollIntoView({ behavior: 'smooth' });
+    //                 setScroll(false)
+    //             }
+    //         };
+
+    //         if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    //             handleScrollOrNavigate();
+    //         } else {
+    //             document.addEventListener('DOMContentLoaded', handleScrollOrNavigate);
+    //         }
+    //     };
+
+    //     scrollToTarget();
+
+    // }, [scroll]);
+
     useEffect(() => {
+        const timeout = setTimeout(() => {
+          const el = document.getElementById(`mi/${mark}`);
+          console.log("Documents", el)
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 0);
 
-        const scrollToTarget = () => {
-            const handleScrollOrNavigate = () => {
-                const targetElement = document.getElementById(`mi/${mark}`);
-                if (targetElement && scroll) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                    setScroll(false)
-                }
-            };
+        return () => clearTimeout(timeout);
+      }, [mark]);
 
-            if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                handleScrollOrNavigate();
-            } else {
-                document.addEventListener('DOMContentLoaded', handleScrollOrNavigate);
-            }
-        };
+      const isManualScroll = useRef(false);
 
-        scrollToTarget();
+      const handleClick = (e, value) => {
+        e.stopPropagation();
+        isManualScroll.current = true; // disable auto mark update
+        setMark(value);
 
-    }, [scroll]);
+        const el = document.getElementById(`mi/${value}`);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        // Re-enable auto update after scrolling finishes (~duration of smooth scroll)
+        setTimeout(() => {
+            isManualScroll.current = false;
+        }, 500); // 500ms matches smooth scroll duration
+      };
 
 
   const goToNext = (e) => {
@@ -358,7 +381,7 @@ useEffect(() => {
 
     for (let o of arr) {
         for ( let ci of o) {
-            console.log(ci)
+            // console.log(ci)
             ordered.push(ci)
 
         }
@@ -442,6 +465,18 @@ useEffect(() => {
 
     };
 
+    console.log("Mark", mark)
+    console.log("scroll", scroll)
+
+    const itemsK = [
+        { label: "Reviews", value: -2 },
+        { label: "Most Ordered", value: -1 },
+        ...keys.map((category, i) => ({
+          label: category,
+          value: i,
+        })),
+      ];
+      console.log("EACH KEY", keys)
 
   return (
 
@@ -538,7 +573,7 @@ useEffect(() => {
                                 <div id={mark == -4 ? "mark" : "hidden"}></div>
                                 <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>Item Deals</p>
                             </p> */}
-                            <p onClick={((e) => {
+                            {/* <p onClick={((e) => {
                                 e.stopPropagation()
                                 setScroll(true)
                                 setMark(-2)
@@ -556,6 +591,7 @@ useEffect(() => {
                             </p>
                             {keys.map((category, i) =>
                             <p onClick={((e) => {
+                                console.log("INDEX", i.id)
                                 e.stopPropagation()
                                 setScroll(true)
                                 setMark(i)
@@ -563,7 +599,25 @@ useEffect(() => {
                                 <div id={mark == i ? "mark" : "hidden"}></div>
                                 <p style={{ color: mark == i ? "black" : "rgb(73, 73, 73)", marginLeft: "16px"}}>{category}</p>
                             </p>
-                            )}
+                            )} */}
+                             {itemsK.map((item) => (
+                            <p
+                                key={item.value}
+                                onClick={(e) => handleClick(e, item.value)}
+                                style={{ position: "relative", cursor: "pointer" }}
+                            >
+                                <div id={mark === item.value ? "mark" : "hidden"}></div>
+
+                                <span
+                                style={{
+                                    color: mark === item.value ? "black" : "rgb(73, 73, 73)",
+                                    marginLeft: "16px",
+                                }}
+                                >
+                                {item.label}
+                                </span>
+                            </p>
+                            ))}
                             </span>
                     </div>
                 </div>
@@ -645,10 +699,10 @@ useEffect(() => {
                             )}
                         </div>
                     </div>}
-                    <div className="review">
+                    <div id="mi/-2" className="review">
                         <div id="review-one">
                             <div>
-                                <div ref={el => divRefs.current[`mi/${-2}`] = el} >
+                                <div id="mi/-2" style={{ scrollMarginTop: "100px" }} ref={el => divRefs.current[`mi/${-2}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Reviews</h1>
                                 </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
@@ -713,9 +767,9 @@ useEffect(() => {
                         </p>
                     </div>}
                    { items.length > 0 && <div className="review">
-                        <div id="most-one">
+                        <div id="mi/-1" style={{ scrollMarginTop: "100px" }} className="most-one">
                             <div>
-                                <div ref={el => divRefs.current[`mi/${-1}`] = el} >
+                                <div id="mi/-1" ref={el => divRefs.current[`mi/${-1}`] = el} >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "10px 0px 5px"}}>Most Ordered</h1>
                                 </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
@@ -767,7 +821,7 @@ useEffect(() => {
                         :
                         <>
                     { keys.map((key, i) =>
-                    <div style={{ margin: "20px 0px" }} id={`mi/${i}`} className="menu">
+                    <div style={{ margin: "20px 0px", scrollMarginTop: "100px" }} id={`mi/${i}`} className="menu">
                         <div ref={el => divRefs.current[`mi/${i}`] = el} >
                         <h1 style={{ fontSize: "24px", whiteSpace: "nowrap" }}>{key}</h1>
                         </div>
