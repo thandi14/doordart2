@@ -34,13 +34,14 @@ function Franchise({ isLoaded }) {
   const [ length, setLength ] = useState(0)
   const [ lengthTwo, setLengthTwo ] = useState(0)
   const [ selection, setSelection ] = useState("Reviews")
-  const [ mark, setMark ] = useState()
+  const [ mark, setMark ] = useState(-2)
   const [ hide, setHide ] = useState(true)
   const [ searching, setSearching ] = useState(false)
   const [ searching2, setSearching2 ] = useState(false)
   const [ search, setSearch ] = useState("")
   const [ search2, setSearch2 ] = useState("")
-  const [ scroll, setScroll ] = useState(false)
+  const targetMarkRef = useRef(null);
+//   const [ scroll, setScroll ] = useState(false)
   const dispatch = useDispatch()
   const { location, setRecentId, profile, setProfile, setPrice, setItem, setSelections, } = useFilters()
   const { setModalContent } = useModal()
@@ -48,6 +49,8 @@ function Franchise({ isLoaded }) {
   const targetRef2 = useRef()
   const divRefs = useRef({});
   const history = useHistory()
+  const isManualScroll = useRef(false);
+  const manualScrollTimeout = useRef(null);
   const [categories, setCategories] = useState({});
   const [unfilteredCategories, setUnfilteredCategories] = useState({});
   const [menu, setMenu] = useState([]);
@@ -115,34 +118,104 @@ function Franchise({ isLoaded }) {
   };
 
 
-  const checkPassedTop = (id) => {
-    const el = divRefs.current[id];
-    if (!el) return;
+//   const checkPassedTop = (id) => {
+//     const el = divRefs.current[id];
+//     if (!el) return;
 
-    const rect = el.getBoundingClientRect();
-    const threshold = window.innerHeight * 0.3; // top 30% of viewport
-    if (rect.top >= 0 && rect.top <= threshold) {
-      const numericPart = id.split('mi/')[1];
-      const number = parseInt(numericPart);
-      if (!isNaN(number)) setMark(number);
+//     const rect = el.getBoundingClientRect();
+//     const threshold = window.innerHeight * 0.3; // top 30% of viewport
+//     if (rect.top >= 0 && rect.top <= threshold) {
+//       const numericPart = id.split('mi/')[1];
+//       const number = parseInt(numericPart);
+//       if (!isNaN(number)) setMark(number);
+//     }
+//   };
+
+  const updateMarkFromScroll = () => {
+  const threshold = window.innerHeight * 0.3;
+  let nextMark = -2;
+
+  const entries = Object.entries(divRefs.current)
+    .map(([id, el]) => {
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      const value = parseInt(id.split("mi/")[1], 10);
+      if (isNaN(value)) return null;
+      return { id, el, rect, value };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.rect.top - b.rect.top);
+
+  if (!entries.length) return;
+
+  if (isManualScroll.current) {
+    const targetValue = targetMarkRef.current;
+    const targetEntry = entries.find((entry) => entry.value === targetValue);
+
+    if (targetEntry) {
+      const reachedTarget = Math.abs(targetEntry.rect.top - threshold) < 20;
+
+      if (reachedTarget) {
+        isManualScroll.current = false;
+        targetMarkRef.current = null;
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
+  }
+
+  for (const entry of entries) {
+    if (entry.rect.top <= threshold) {
+      nextMark = entry.value;
+    } else {
+      break;
+    }
+  }
+
+  setMark((prev) => (prev !== nextMark ? nextMark : prev));
+};
+
+
+useEffect(() => {
+  let ticking = false;
+
+  const handleScroll = () => {
+    setHide(window.scrollY <= 550);
+
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateMarkFromScroll();
+        ticking = false;
+      });
+      ticking = true;
     }
   };
 
-useEffect(() => {
-    // Attach scroll event listener when component mounts
-    const handleScroll = () => {
-        if (isManualScroll.current) return; // ignore scroll during manual navigation
-        Object.keys(divRefs.current).forEach(id => {
-          checkPassedTop(id);
-        });
-      };
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    };
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
 }, []);
+
+// useEffect(() => {
+//     // Attach scroll event listener when component mounts
+//     const handleScroll = () => {
+//         if (isManualScroll.current) return; // ignore scroll during manual navigation
+//         Object.keys(divRefs.current).forEach(id => {
+//           checkPassedTop(id);
+//         });
+//       };
+
+//     window.addEventListener('scroll', handleScroll);
+
+//     return () => {
+//         window.removeEventListener('scroll', handleScroll);
+//     };
+// }, []);
 
 
    useEffect(() => {
@@ -157,16 +230,16 @@ useEffect(() => {
   }, [dispatch, location, id])
 
 
-  window.addEventListener('scroll', function() {
-    const element = document.getElementById('head-nav-two');
-    const scrollAmount = 550;
+//   window.addEventListener('scroll', function() {
+//     const element = document.getElementById('head-nav-two');
+//     const scrollAmount = 550;
 
-    if (window.scrollY > scrollAmount) {
-        setHide(false);
-    } else {
-        setHide(true);
-    }
-  });
+//     if (window.scrollY > scrollAmount) {
+//         setHide(false);
+//     } else {
+//         setHide(true);
+//     }
+//   });
 
 
     useEffect(() => {
@@ -214,35 +287,31 @@ useEffect(() => {
 
     // }, [scroll]);
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-          const el = document.getElementById(`mi/${mark}`);
-          console.log("Documents", el)
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }, 0);
+    // useEffect(() => {
+    //     const timeout = setTimeout(() => {
+    //       const el = document.getElementById(`mi/${mark}`);
+    //       console.log("Documents", el)
+    //       if (el) {
+    //         el.scrollIntoView({ behavior: "smooth", block: "start" });
+    //       }
+    //     }, 0);
 
-        return () => clearTimeout(timeout);
-      }, [mark]);
+    //     return () => clearTimeout(timeout);
+    //   }, [mark]);
 
-      const isManualScroll = useRef(false);
 
-      const handleClick = (e, value) => {
-        e.stopPropagation();
-        isManualScroll.current = true; // disable auto mark update
-        setMark(value);
+  const handleClick = (e, value) => {
+  e.stopPropagation();
 
-        const el = document.getElementById(`mi/${value}`);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+  isManualScroll.current = true;
+  targetMarkRef.current = value;
+  setMark(value);
 
-        // Re-enable auto update after scrolling finishes (~duration of smooth scroll)
-        setTimeout(() => {
-            isManualScroll.current = false;
-        }, 500); // 500ms matches smooth scroll duration
-      };
+  const el = document.getElementById(`mi/${value}`);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
 
 
   const goToNext = (e) => {
@@ -466,7 +535,6 @@ useEffect(() => {
     };
 
     console.log("Mark", mark)
-    console.log("scroll", scroll)
 
     const itemsK = [
         { label: "Reviews", value: -2 },
@@ -699,10 +767,10 @@ useEffect(() => {
                             )}
                         </div>
                     </div>}
-                    <div id="mi/-2" className="review">
+                    <div id="mi/-2" ref={el => divRefs.current[`mi/${-2}`] = el} style={{ scrollMarginTop: "150px" }} className="review">
                         <div id="review-one">
                             <div>
-                                <div id="mi/-2" style={{ scrollMarginTop: "100px" }} ref={el => divRefs.current[`mi/${-2}`] = el} >
+                                <div >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Reviews</h1>
                                 </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
@@ -767,9 +835,9 @@ useEffect(() => {
                         </p>
                     </div>}
                    { items.length > 0 && <div className="review">
-                        <div id="mi/-1" style={{ scrollMarginTop: "100px" }} className="most-one">
+                        <div id="mi/-1" ref={el => divRefs.current[`mi/${-1}`] = el} style={{ scrollMarginTop: "150px" }} className="most-one">
                             <div>
-                                <div id="mi/-1" ref={el => divRefs.current[`mi/${-1}`] = el} >
+                                <div >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "10px 0px 5px"}}>Most Ordered</h1>
                                 </div>
                                 <p style={{ gap: "3px", margin: "0px", color: "#767676", fontSize: "13px", display: "flex", alignItems: "center"}}>
@@ -821,8 +889,8 @@ useEffect(() => {
                         :
                         <>
                     { keys.map((key, i) =>
-                    <div style={{ margin: "20px 0px", scrollMarginTop: "100px" }} id={`mi/${i}`} className="menu">
-                        <div ref={el => divRefs.current[`mi/${i}`] = el} >
+                    <div ref={el => divRefs.current[`mi/${i}`] = el}  style={{ margin: "20px 0px", scrollMarginTop: "150px" }} id={`mi/${i}`} className="menu">
+                        <div>
                         <h1 style={{ fontSize: "24px", whiteSpace: "nowrap" }}>{key}</h1>
                         </div>
                         <div className="item">

@@ -14,6 +14,7 @@ import * as restaurantActions from "../../store/restaurants"
 import ShoppingCart from "../RestaurantPage/ShoppingCart";
 import ShoppingCarts from "../RestaurantPage/ShoppingCarts";
 import ProfileButton from "../HomePage/ProfileButton";
+import * as sessionActions from "../../store/session";
 
 function RestaurantNavTwo({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -106,6 +107,13 @@ useEffect(() => {
 
   };
 
+    const handleLogout = async () => {
+    await dispatch(sessionActions.logout()); // or logout()
+  
+    localStorage.removeItem("sessionId"); // if you're using this
+  
+    history.push("/"); // redirect to homepage
+  };
 
   const handleSearch = async (event) => {
     let data = []
@@ -200,10 +208,10 @@ useEffect(() => {
             </LoadScript>
               {/* <input placeholder="Address" id="location-two"></input> */}
               </div>
-              <button onClick={(() => {
+              {!sessionUser ? <button onClick={(() => {
                 setModalContent(<SignupFormModal />)
-              })} ><i class="fi fi-br-user"></i> Sign in for saved address</button>
-            </div>
+              })} ><i class="fi fi-br-user"></i> Sign in for saved address</button> : <button onClick={() => handleLogout()}>Logout</button>}
+            </div> 
             <div id="divider"></div>
             <div style={{ padding: "16px" }} id="a-recent">
             <i class="fi fi-bs-dot-circle"></i>

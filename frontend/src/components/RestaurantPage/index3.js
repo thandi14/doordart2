@@ -62,8 +62,9 @@ function FranchiseTwo({ isLoaded }) {
   const [ selection, setSelection ] = useState("Reviews")
   const [ mark, setMark ] = useState(-1)
   const [ hide, setHide ] = useState(true)
+  const isManualScroll = useRef(false);
+  const targetMarkRef = useRef(null);
   const [ bar, setBar ] = useState(false)
-  const [ scroll, setScroll ] = useState(false)
   const [ roll, setRoll ] = useState(false)
   const [ searching, setSearching ] = useState(false)
   const [ searching2, setSearching2 ] = useState(false)
@@ -141,41 +142,81 @@ function FranchiseTwo({ isLoaded }) {
   }, []);
 
 
-  const checkPassedTop = (id) => {
-    if (divRefs.current[id]) {
-        const element = divRefs.current[id];
-        const rect = element.getBoundingClientRect();
-        const elementBottom = rect.top;
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        const scrollHeight = window.scrollY;
+  const updateMarkFromScroll = () => {
+  const threshold = window.innerHeight * 0.3;
+  let nextMark = -1;
+  let closestDistance = Infinity;
 
-        if (elementBottom <= (viewportHeight / 2)) { // Check if any part of the div is above the viewport
-            const number = parseInt(id.split('-')[1]);
-            if (number || number == 0) {
-                setMark(number)
-            }
-            else {
-                setMark(-1);
-            }
-        }
+  Object.keys(divRefs.current).forEach((id) => {
+    const el = divRefs.current[id];
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const value = parseInt(id.split("mi-")[1], 10);
+    if (isNaN(value)) return;
+
+    const distance = Math.abs(rect.top - threshold);
+
+    if (rect.top <= threshold && distance < closestDistance) {
+      closestDistance = distance;
+      nextMark = value;
     }
+  });
+
+  if (isManualScroll.current) {
+    const targetEl = divRefs.current[`mi-${targetMarkRef.current}`];
+    if (!targetEl) return;
+
+    const targetRect = targetEl.getBoundingClientRect();
+    const reachedTarget = Math.abs(targetRect.top - threshold) < 20;
+
+    if (!reachedTarget) return;
+
+    isManualScroll.current = false;
+    targetMarkRef.current = null;
+  }
+
+  setMark((prev) => (prev !== nextMark ? nextMark : prev));
 };
 
 useEffect(() => {
-    // Attach scroll event listener when component mounts
-    const handleScroll = () => {
-        // Loop through each div ref and check if it's passed the top
-        Object.keys(divRefs.current).forEach(id => {
-            checkPassedTop(id);
-        });
-    };
+  let ticking = false;
 
-    window.addEventListener('scroll', handleScroll);
+  const handleScroll = () => {
+    setHide(window.scrollY <= 550);
 
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    };
-}, [mark, divRefs.current]);
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateMarkFromScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
+// useEffect(() => {
+//     // Attach scroll event listener when component mounts
+//     const handleScroll = () => {
+//         // Loop through each div ref and check if it's passed the top
+//         Object.keys(divRefs.current).forEach(id => {
+//             checkPassedTop(id);
+//         });
+//     };
+
+//     window.addEventListener('scroll', handleScroll);
+
+//     return () => {
+//         window.removeEventListener('scroll', handleScroll);
+//     };
+// }, [mark, divRefs.current]);
 
    useEffect(() => {
      async function fetchData() {
@@ -200,29 +241,18 @@ useEffect(() => {
     }
   });
 
-    useEffect(() => {
+   
 
-        const scrollToTarget = () => {
-            const handleScrollOrNavigate = () => {
-                const targetElement = document.getElementById(`mi-${mark}`);
-                if (targetElement && scroll) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                    setScroll(false)
-                }
-            };
+    const handleSectionClick = (value) => {
+  isManualScroll.current = true;
+  targetMarkRef.current = value;
+  setMark(value);
 
-            if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                handleScrollOrNavigate();
-            } else {
-                document.addEventListener('DOMContentLoaded', handleScrollOrNavigate);
-            }
-        };
-
-        scrollToTarget();
-
-    }, [scroll]);
-
-
+  const el = document.getElementById(`mi-${value}`);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
 
   const goToNext = (e) => {
       e.stopPropagation()
@@ -423,7 +453,7 @@ useEffect(() => {
                                 <p style={{ padding: "2px 0px" }}>Most Ordered</p>
                             </p> */}
                             <p onClick={(() => {
-                                setScroll(true)
+                                // setScroll(true)
                                 setMark(-1)
                                 })}  style={{ position: "relative",  overflow: "hidden", margin: "0px" }}>
                                 <div id={mark == -1 ? "mark-two" : "hidden"}></div>
@@ -431,7 +461,7 @@ useEffect(() => {
                             </p>
                             {keys.map((category, i) =>
                             <p onClick={(() => {
-                                setScroll(true)
+                                // setScroll(true)
                                 setMark(i)
                                 })}  style={{ position: "relative",  overflow: "hidden", margin: "0px"  }}>
                                 <div id={mark == i ? "mark-two" : "hidden"}></div>
@@ -482,9 +512,13 @@ useEffect(() => {
                         </p>
                         <p style={{ fontSize: "13px", color: "#767676", display: "flex", gap: "5px", alignItems: "center" }}>Pricing & Fees<i style={{ width: "10px", height: "10px", fontSize: "10px" }}  class="fi fi-rr-circle-i"></i></p>
                     </div>
-                    <div className="review">
+                    <div id={`mi-${-1}`}
+  style={{ scrollMarginTop: "200px" }}
+  ref={(el) => {
+    if (el) divRefs.current[`mi-${-1}`] = el;
+  }} className="review">
                         <div id="review-one">
-                            <div ref={el => divRefs.current[`mi-${-1}`] = el} >
+                            <div >
                                 <h1 style={{ fontSize: "24px", whiteSpace: "nowrap", margin: "0px" }}>Ratings & Reviews</h1>
                             </div>
                         </div>
@@ -698,18 +732,12 @@ useEffect(() => {
                                 <div id={mark == -2 ? "mark-two" : "hidden"}></div>
                                 <p style={{ padding: "2px 0px" }}>Most Ordered</p>
                             </p> */}
-                            <p onClick={(() => {
-                                setScroll(true)
-                                setMark(-1)
-                                })}  style={{ position: "relative",  overflow: "hidden", margin: "0px" }}>
+                            <p onClick={() => handleSectionClick(-1)} style={{ position: "relative",  overflow: "hidden", margin: "0px" }}>
                                 <div id={mark == -1 ? "mark-two" : "hidden"}></div>
                                 <p style={{ color: mark == -1 ? "black" : "rgb(73, 73, 73)",  padding: "2px 0px" }}>Reviews</p>
                             </p>
                             {keys.map((category, i) =>
-                            <p onClick={(() => {
-                                setScroll(true)
-                                setMark(i)
-                                })}  style={{ position: "relative",  overflow: "hidden", margin: "0px"  }}>
+                            <p onClick={() => handleSectionClick(i)} style={{ position: "relative",  overflow: "hidden", margin: "0px"  }}>
                                 <div id={mark == i ? "mark-two" : "hidden"}></div>
                                 <p style={{ color: mark == i ? "black" : "rgb(73, 73, 73)",  padding: "2px 0px" }}>{category}</p>
                             </p>
@@ -735,7 +763,7 @@ useEffect(() => {
                             </>
                         : <>
                     { keys.map((key, i) =>
-                    <div style={{ margin: "20px 0px" }} id={`mi-${i}`} className="menu">
+                    <div style={{ margin: "20px 0px", scrollMarginTop: "200px" }} id={`mi-${i}`} className="menu">
                         <div ref={el => divRefs.current[`mi-${i}`] = el}>
                         <h1 style={{ fontSize: "24px", whiteSpace: "nowrap" }}>{key}</h1>
                         </div>

@@ -13,7 +13,7 @@ import { GoogleMap, LoadScript, Autocomplete } from '@react-google-maps/api';
 import * as restaurantActions from "../../store/restaurants"
 import ProfileButton from "../HomePage/ProfileButton";
 import ShoppingCart from "./ShoppingCart";
-
+import * as sessionActions from "../../store/session";
 
 
 
@@ -162,6 +162,15 @@ function RestaurantNav() {
 
   }, []);
 
+  const handleLogout = async () => {
+  await dispatch(sessionActions.logout()); // or logout()
+
+  localStorage.removeItem("sessionId"); // if you're using this
+
+  history.push("/"); // redirect to homepage
+};
+
+
   return (
     <>
     {/* <ProfileButton user={sessionUser} d={drop} /> */}
@@ -214,10 +223,10 @@ function RestaurantNav() {
             </LoadScript>
               {/* <input placeholder="Address" id="location-two"></input> */}
               </div>
-              <button onClick={(() => {
+              {!sessionUser ? <button onClick={(() => {
                 setModalContent(<SignupFormModal />)
-              })} ><i class="fi fi-br-user"></i> Sign in for saved address</button>
-            </div>
+              })} ><i class="fi fi-br-user"></i> Sign in for saved address</button> : <button onClick={() => handleLogout()}>Logout</button>}
+            </div> 
             <div id="divider"></div>
             <div style={{ padding: "16px" }} id="a-recent">
             <i class="fi fi-bs-dot-circle"></i>
